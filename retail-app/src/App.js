@@ -1,24 +1,66 @@
 import logo from './logo.svg';
 import './App.css';
+import MESSAGELST from './message'
+import ADDAMOUNT from './shop-owner/credit-debitadd';
+import CUSTOMERLST from './shop-owner/cus-list';
+import DEBITLST from './shop-owner/debit';
+import LOGINSO from './shop-owner/login-SO';
+import SALOGIN from './super-admin/login-SA';
+import SAREG from './super-admin/reg-SO';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+
 
 function App() {
+
+
+  const router = createBrowserRouter([
+    {
+      path: "/msg",
+      element: <MESSAGELST/>
+    },
+    {
+      path: "/creditordebit",
+      element: <ADDAMOUNT/>
+    },
+    {
+      path: "/customerlist",
+      element: <CUSTOMERLST/>
+    },
+    {
+      path: "/debitlist",
+      element: <DEBITLST/>
+    },
+    {
+      path: "/shopownerlogin",
+      element: <LOGINSO/>
+    },
+    {
+      path: "/superadminlogin",
+      element: < SALOGIN />
+    },
+    {
+      path: "/superadminregister",
+      element: < SAREG />
+    },
+
+    
+
+    
+
+
+
+  ]);
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <RouterProvider router={router}/>
+    
+    </>
   );
 }
 
