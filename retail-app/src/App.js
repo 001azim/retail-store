@@ -19,6 +19,10 @@ function App() {
 
   const router = createBrowserRouter([
     {
+      path: "/",
+      
+    },
+    {
       path: "/msg",
       element: <MESSAGELST/>
     },
@@ -49,15 +53,14 @@ function App() {
 
     
 
-    
-
-
 
   ]);
   
 
   return (
     <>
+
+    <h1>app page</h1>
     <RouterProvider router={router}/>
     
     </>
