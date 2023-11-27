@@ -11,9 +11,8 @@ function SALOGIN(){
         axios({
             method:'POST',
             url:
-            'https://5b4ca264-2f6f-487f-8fa9-f0d342e0454c.mock.pstmn.io/users',
+            'https://7cde2117-f3f4-4d6e-8ac5-3164b20deee1.mock.pstmn.io/soregister',
             data:{userId:4,title:'fghjkl',body:'xcfghjkl;'}
-            
 
         }).then(function(response){
             console.log(response)
