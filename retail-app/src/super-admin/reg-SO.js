@@ -1,11 +1,11 @@
 
-function SAREG(){
+function SO_REG(){
 
 return(
-<h1>superadmin register page </h1>
+<h1>shopowner register page </h1>
 
 )
 
 
 }
-export default SAREG
+export default SO_REG

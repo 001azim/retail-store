@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -6,7 +6,7 @@ import CUSTOMERLST from './shop-owner/cus-list';
 import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
-import SAREG from './super-admin/reg-SO';
+import SO_REG from './super-admin/reg-SO';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -47,8 +47,8 @@ function App() {
       element: < SALOGIN />
     },
     {
-      path: "/superadminregister",
-      element: < SAREG />
+      path: "/shopownerregister",
+      element: < SO_REG />
     },
 
     
