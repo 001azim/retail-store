@@ -45,10 +45,10 @@ function SO_REG(){
                 
           }}).then(function(response){
             // console.log("Success",response)     
-            navigate("/shopownerlogin");
+            seterror(Validation(data))  
            } ) 
-            
-           seterror(Validation(data))  
+           navigate("/shopownerlogin"); 
+          
     }
 return(
     <>
