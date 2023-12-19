@@ -8,4 +8,7 @@ customer:customerSlice,
 shopOwerLogin:shopOwnerLoginSlice
 
   },
+  reducer: {
+    register:registerSlice,
+    },
 })   
