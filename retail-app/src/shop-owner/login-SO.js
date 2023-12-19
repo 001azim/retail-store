@@ -1,14 +1,19 @@
 import axios from "axios"
 import {useState} from 'react'
 import { useNavigate } from "react-router"
+import { useDispatch ,useSelector} from "react-redux"
+import { setUserLogin } from "../slices/shopOwnerLoginSlice"
+// import "../css/login-SO.css"
 
 
 function LOGINSO(){ 
     const navigate=useNavigate() 
-let [userDel,setUserDel]=useState({
-    username:"",
-    password:""
-})
+    const dispatch=useDispatch()
+    const {userLogin}=useSelector((state)=>state.shopOwerLogin)
+// let [userLogin,setUserLogin]=useState({
+//     username:"",
+//     password:""
+// })
 
     function alldata(){
         axios({
@@ -17,12 +22,10 @@ let [userDel,setUserDel]=useState({
         }).then(function(response){
             console.log(response.data)
             let allDatas=response.data;
-            let filterval=allDatas.filter((e)=>e.username==userDel.username && e.password==userDel.password)
-            // if (userDel.username==allDatas.username && userDel.password==allDatas.password){
-            //     navigate("/customerlist")
-            // }
-            console.log(filterval)
-            
+            let filterval=allDatas.filter((e)=>e.username==userLogin.username && e.password==userLogin.password)
+            if (userLogin.username==allDatas.username && userLogin.password==allDatas.password){
+                navigate("/customerlist")
+            }            
         })
     }
     
@@ -34,17 +37,17 @@ let [userDel,setUserDel]=useState({
                 <h3>Sign In</h3>
                 <div className='mb-2'>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" placeholder="Enter the name" className='form-control' onKeyUp={(e)=>setUserDel({
-            ...userDel,
+                    <input type="text" placeholder="Enter the name" className='form-control' onKeyUp={(e)=>dispatch(setUserLogin({
+            ...userLogin,
             username : e.target.value
-        })}/>
+        }))}/>
                 </div>
                 <div className='mb-2'>
                     <label htmlFor="password">password:</label>
-                    <input type="password" placeholder="Enter the password" className='form-control' onKeyUp={(e)=>setUserDel({
-            ...userDel,
-            password : e.target.value
-        })}/>
+                    <input type="password" placeholder="Enter the password" className='form-control' onKeyUp={(e)=>dispatch(setUserLogin({
+            ...userLogin,
+            password: e.target.value
+        }))}/>
                 </div>
                 <div className='mb-2'>
                     <input type="checkbox" className='custom-control custom-checkbox' id="check"/>
@@ -61,7 +64,7 @@ let [userDel,setUserDel]=useState({
             </form>
         </div>
        </div>
-       {console.log(userDel)}
+       {console.log(userLogin)}
        </>
     )
 
