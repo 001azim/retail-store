@@ -7,6 +7,7 @@ import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -60,7 +61,7 @@ function App() {
   return (
     <>
 
-    <h1>app page</h1>
+    
     <RouterProvider router={router}/>
     
     </>
