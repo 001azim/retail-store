@@ -49,7 +49,7 @@ function DEBITLST() {
         })
     }
 
-    useEffect(debtlist, [])
+    // useEffect(debtlist, [])
 
 
 
