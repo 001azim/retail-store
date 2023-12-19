@@ -4,5 +4,6 @@ export default configureStore({
   reducer: {
 
 customer:customerSlice
+
   },
 })   
