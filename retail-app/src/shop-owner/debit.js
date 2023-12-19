@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react"
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import moment from "moment"
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ function DEBITLST() {
     return (
         <>
 
-            < table class="table table-dark table-hover" >
+            < table class="table table-dark ">
                 <thead>
                     <tr>
                         <th>Customer ID</th>
