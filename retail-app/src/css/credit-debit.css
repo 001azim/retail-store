@@ -3,6 +3,7 @@ html {
   font-size: 16px;
 }
 
+<<<<<<< HEAD
 
 h1{
 
@@ -16,6 +17,9 @@ background-color: rgb(45, 45, 216);
 background-color: aquamarine;
 
 }
+=======
+
+>>>>>>> 4e1bd253806641199ed5d7d28c159a22e7916a86
 
 
 
@@ -31,7 +35,13 @@ body {
 
 #root {
   flex-grow: 1;
+<<<<<<< HEAD
  
+=======
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+>>>>>>> 4e1bd253806641199ed5d7d28c159a22e7916a86
 } 
 
 .App {
