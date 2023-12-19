@@ -3,38 +3,36 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "bootstrap";
 import moment from 'moment'
 import '../css/credit-debit.css'
-
+import { useDispatch, useSelector } from "react-redux";
+import  {setdetails}  from "../slices/customerSlice.js";
 
 function ADDAMOUNT() {
 
+    const dispatch=useDispatch()
 
+let cdetails=useSelector((state)=>state.customer.details)
 
+console.log(cdetails.due_date)
 
+const setduedate =()=>{
 
-    let [details, setdetails] = useState({
-        customer_name: "",
-        mobile: "",
-        Address: "",
-        Last_purchase_date: "",
-        due_amount: "",
-        due_date: ""
+    if (cdetails.due_amount <= 4999) {
+        dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
+ 
+     }
+     else {
+         dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
+     }
+}
+    
 
-    })
-
-
-    if (details.due_amount <= 4999) {
-        details.due_date = moment(details.Last_purchase_date).add(90, "day").format('LL')
-
-    }
-    else {
-        details.due_date = moment(details.Last_purchase_date).add(7, "day").format('LL')
-    }
-
-
+useEffect(()=>{
+    setduedate()
+},[])
 
     //    post details to API
 
@@ -54,14 +52,12 @@ function ADDAMOUNT() {
     }
 
 
-
-
     return (
 
         <>
 
-
             <Container>
+            {JSON.stringify(cdetails)}
 
                 <h1>Add credit or debit page </h1>
 
@@ -69,10 +65,10 @@ function ADDAMOUNT() {
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1" >Customer Name</InputGroup.Text>
                     <Form.Control
-
+required
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onKeyUp={(e) => setdetails({ ...details, customer_name: e.target.value })}
+                        onKeyUp={(e) => dispatch(setdetails({ ...cdetails, customer_name: e.target.value }))}
                     />
                 </InputGroup>
                 {/* mobile no input */}
@@ -80,9 +76,10 @@ function ADDAMOUNT() {
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Mobile</InputGroup.Text>
                     <Form.Control
+                    required
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onKeyUp={(e) => setdetails({ ...details, mobile: e.target.value })}
+                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, mobile: e.target.value }))}
                     />
                 </InputGroup>
 
@@ -90,9 +87,10 @@ function ADDAMOUNT() {
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Address</InputGroup.Text>
                     <Form.Control
+                    required
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onKeyUp={(e) => setdetails({ ...details, Address: e.target.value })}
+                        onKeyUp={(e) =>  dispatch(setdetails({ ...cdetails, Address: e.target.value }))}
                     />
                 </InputGroup>
 
@@ -100,10 +98,11 @@ function ADDAMOUNT() {
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Date of last purchase</InputGroup.Text>
                     <Form.Control
+                    required
                         type="date"
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onChange={(e) => setdetails({ ...details, Last_purchase_date: e.target.value })} />
+                        onChange={(e) => dispatch( setdetails({ ...cdetails, Last_purchase_date: e.target.value }))} />
 
 
                 </InputGroup>
@@ -116,9 +115,10 @@ function ADDAMOUNT() {
 
                     <Form.Control
                         type="number"
+                        required
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onKeyUp={(e) => setdetails({ ...details, due_amount: e.target.value })} />
+                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, due_amount: e.target.value }))} />
 
 
                 </InputGroup>
@@ -132,7 +132,7 @@ function ADDAMOUNT() {
 
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1">Due Date</InputGroup.Text>
-                        <Form.Label htmlFor="disabledTextInput">{details.due_date}</Form.Label>
+                        <Form.Label htmlFor="disabledTextInput">{cdetails.due_date}</Form.Label>
 
                     </InputGroup>
 
@@ -141,7 +141,7 @@ function ADDAMOUNT() {
                 </Form>
             </Container>
 
-            {console.log('cus_details', details)}
+            {console.log('cus_details', cdetails)}
 
         </>
 
