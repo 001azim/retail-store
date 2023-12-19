@@ -1,4 +1,3 @@
-
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -58,7 +57,9 @@ function App() {
 
   return (
 
+
     <Provider store={store}>
+
     <RouterProvider router={router}/>
     </Provider>
     

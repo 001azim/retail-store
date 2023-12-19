@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-
 html {
   font-size: 16px;
 }
+
 
 h1{
 
@@ -18,6 +17,22 @@ background-color: aquamarine;
 
 }
 
+
+
+
+body {
+  min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  background-color: #efefef;
+}
+
+#root {
+  flex-grow: 1;
+ 
+} 
 
 .App {
   width: 100%;
