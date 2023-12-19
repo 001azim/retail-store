@@ -26,28 +26,42 @@ function SO_REG(){
         
       };
       //   console.log(data)
-      const [error,seterror]=useState({})
+      let [error,seterror]=useState({})
     //   const errorValidation=(e)=>{
     //     seterror(Validation(data))
     //   }
       
     const register=()=>{
-        // if(error){
-        //     seterror(Validation(data))  
-        // }
-        
-        axios({
+        if(error){
+            seterror(Validation(data))  
+        }
+        if(!error){
+            axios({
           
-            method: 'POST',
-            url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
-            data: {
-                data
+                method: 'POST',
+                url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
+                data: {
+                    data
+                    
+              }}).then(function(response){
+                // console.log("Success",response)     
+                // seterror(Validation(data))
+               } ) 
+               navigate("/shopownerlogin"); 
+        }
+        
+        // axios({
+          
+        //     method: 'POST',
+        //     url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
+        //     data: {
+        //         data
                 
-          }}).then(function(response){
-            // console.log("Success",response)     
-            seterror(Validation(data))
-           } ) 
-           navigate("/shopownerlogin");
+        //   }}).then(function(response){
+        //     // console.log("Success",response)     
+        //     seterror(Validation(data))
+        //    } ) 
+        //    navigate("/shopownerlogin");
              
     }
 return(
