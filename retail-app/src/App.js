@@ -11,9 +11,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-// import Common from './common';
-// import store from './app/store'
-// import { Provider } from 'react-redux';
+
 
 
 function App() {
@@ -60,16 +58,12 @@ function App() {
   
 
   return (
-    // <Provider store={store}>
     <>
 
-    {/* <h1>app page</h1> */}
-    
+    <h1>app page</h1>
     <RouterProvider router={router}/>
     
-   
     </>
-      // </Provider>
   );
 }
 
