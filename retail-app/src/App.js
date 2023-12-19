@@ -1,4 +1,4 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -11,7 +11,9 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-
+// import Common from './common';
+// import store from './app/store'
+// import { Provider } from 'react-redux';
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      
+      element: <LOGINSO />
     },
     {
       path: "/msg",
@@ -58,12 +60,16 @@ function App() {
   
 
   return (
+    // <Provider store={store}>
     <>
 
-    <h1>app page</h1>
+    {/* <h1>app page</h1> */}
+    
     <RouterProvider router={router}/>
     
+   
     </>
+      // </Provider>
   );
 }
 

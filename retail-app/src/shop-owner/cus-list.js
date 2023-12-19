@@ -5,54 +5,72 @@ import axios from 'axios';
 import icon1 from '../debit.png'
 import icon2 from '../credit.png'
 import "../css/cus-list.css"
-// import Common from '../common';
+import { useState,useEffect } from 'react';
 
-// import Common from '../common.js';
 
 
 function CUSTOMERLST() {
 
-  // const navigate= useNavigate()
+  let [apidata,setapidata] = useState({})
 
+  // const navigate= useNavigate()
   // const home = () =>navigate("/")
-  const back = ()=>window.history.back()
+  // const back = ()=>window.history.back()
   // const forward = () => window.history.forward
 
   const add = ()=>{
     alert("sucess")
   }
-
+  
+ 
+   
+  
+   
+useEffect(()=>{
   axios({
     method: 'get',
-    url: 'https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/debtlist',
+    url: 'https://jsonplaceholder.typicode.com/users',
     
   })
-    .then(async function (response) {
-      // console.log(response.data)
-      let data = response.data;
-      let htmll='';
-      // let custm= data.map((s)=>{
-      //   htmll=htmll+
-      // })
-      for (let i=0;i<data.length;i++){
-      //  console.log(data[i].phone_number)
-       htmll= htmll+`<tr>
-        <td>${data[i].id}</td>
-        <td>${data[i].customer_name}</td>
-        <td>${data[i].phone_number}</td>
-        <td>${data[i].date_of_last_purchase}</td>
-        <td>${data[i].debt_amount}</td>
-        <td>${data[i].due_date}</td>
-        <td><Button variant="success" onClick={}>Success</Button></td>
-      </tr>`
+    .then(function(res){
+      setapidata(res.data)
+    })
+
+},[])
+
+console.log(apidata)
+  // axios({
+  //   method: 'get',
+  //   url: 'https://jsonplaceholder.typicode.com/users',
+    
+  // })
+  //   .then(async function (response) {
+  //     // console.log(response.data)
+  //     let data = response.data;
+  //     let htmll='';
+  //     // let custm= data.map((s)=>{
+  //     //   htmll=htmll+
+  //     // })
+  //     for (let i=0;i<data.length;i++){
+  //     //  console.log(data[i].phone_number)
+  //      htmll= htmll+`<tr>
+  //       <td>${data[i].id}</td>
+  //       <td>${data[i].customer_name}</td>
+  //       <td>${data[i].phone_number}</td>
+  //       <td>${data[i].date_of_last_purchase}</td>
+  //       <td>${data[i].debt_amount}</td>
+  //       <td>${data[i].due_date}</td>
+  //       <td><Button variant="success" onClick={}>Success</Button></td>
+  //     </tr>`
      
-      }
-      document.getElementById("listdata").innerHTML= htmll
-    });
+  //     }
+  //     document.getElementById("listdata").innerHTML= htmll
+  //   });
     
 
   return (
     <>
+    
     <Table striped bordered hover variant="dark">
       <thead>
         <tr>
@@ -65,15 +83,25 @@ function CUSTOMERLST() {
           <th>Send Notification</th>
         </tr>
       </thead>
-      <tbody id='listdata' >
+      <tbody >
         
-        
+          {apidata.map((s)=>{
+            return(
+              <tr>
+                <td>{s.id}</td>
+                <td>{s.name}</td>
+                <td>{s.id}</td>
+                <td>{s.id}</td>
+              </tr>
+            )
+})}
+       
       </tbody>
     </Table>
     <Button onClick={()=>add()} variant="success" > Success</Button>
     <div className='menubox' style={{position:'fixed',bottom:0,left:'50%',transform: 'translateX(-50%)'}} >
     
-    <button onClick={back} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
+    <button onClick={()=>window.history.back()} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
   
     <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
     <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
