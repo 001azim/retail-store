@@ -4,8 +4,7 @@ import registerSlice from './slices/registerSlice'
 export default configureStore({
   reducer: {
   customer:customerSlice,
+  register:registerSlice,
   },
-  reducer: {
-    register:registerSlice,
-    },
+ 
 })   
