@@ -7,10 +7,9 @@ import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+import store from './store'; 
+import { Provider } from 'react-redux'
 
 
 
@@ -58,12 +57,11 @@ function App() {
   
 
   return (
-    <>
 
-    <h1>app page</h1>
+    <Provider store={store}>
     <RouterProvider router={router}/>
+    </Provider>
     
-    </>
   );
 }
 

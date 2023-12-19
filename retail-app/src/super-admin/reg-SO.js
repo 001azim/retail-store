@@ -4,25 +4,29 @@ import Row from 'react-bootstrap/Row';
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import axios from "axios";
+import {useSelector,useDispatch} from 'react-redux'
+import { updateDetails } from '../slices/registerSlice';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import Validation from './validation';
 function SO_REG(){
     const navigate = useNavigate();
-    const [data, setData] = useState({
-        Username:"",
-        Shopname:"",
-        email: "",
-        password: "",
-        mobileno:"",
-        address:""
-      });
+    const dispatch=useDispatch();
+    let {ownerDetails}=useSelector((state) => state.register);
+    // const [data, setData] = useState({
+    //     Username:"",
+    //     Shopname:"",
+    //     email: "",
+    //     password: "",
+    //     mobileno:"",
+    //     address:""
+    //   });
       const Change = (e) => {
         const value = e.target.value;
-        setData({
-          ...data,
+        dispatch(updateDetails({
+          ...ownerDetails,
           [e.target.name]: value
-        });
+        }));
         
       };
       //   console.log(data)
@@ -32,44 +36,43 @@ function SO_REG(){
     //   }
       
     const register=()=>{
-        if(error){
-            seterror(Validation(data))  
-        }
-        if(!error){
-            axios({
+        // if(error){
+        //     seterror(Validation(ownerDetails))  
+        // }
+        // if(!error){
+        //     axios({
           
-                method: 'POST',
-                url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
-                data: {
-                    data
+        //         method: 'POST',
+        //         url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
+        //         data: {
+        //             ownerDetails
                     
-              }}).then(function(response){
-                // console.log("Success",response)     
-                // seterror(Validation(data))
-               } ) 
-               navigate("/shopownerlogin"); 
-        }
+        //       }}).then(function(response){
         
-        // axios({
+        //         console.log("Success",response)     
+        //         // seterror(Validation(data))
+        //        } ) 
+        //        navigate("/shopownerlogin"); 
+        // }
+        
+        axios({
           
-        //     method: 'POST',
-        //     url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
-        //     data: {
-        //         data
+            method: 'POST',
+            url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
+            data: {
+                ownerDetails
                 
-        //   }}).then(function(response){
-        //     // console.log("Success",response)     
-        //     seterror(Validation(data))
-        //    } ) 
-        //    navigate("/shopownerlogin");
+          }}).then(function(response){
+            // console.log("Success",response)     
+            seterror(Validation(ownerDetails))
+           } ) 
+           navigate("/shopownerlogin");
              
     }
 return(
     <>
-    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info
-'>
-        <div className='40-w p-5 rounded bg-white
-'>
+    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
+        <div className='40-w p-5 rounded bg-white'>
             <Form>
             <h1>shopowner register page </h1>
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -113,6 +116,15 @@ return(
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                 <Form.Label column sm="2">
+                Aadhar
+                </Form.Label>
+                <Col sm="10">
+                <Form.Control type="text" name='aadhar' placeholder="Aadhar" onChange={Change}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                <Form.Label column sm="2">
                 Mobile No
                 </Form.Label>
                 <Col sm="10">
@@ -129,6 +141,23 @@ return(
                 </Col>
             </Form.Group>
 
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                <Form.Label column sm="2">
+                City
+                </Form.Label>
+                <Col sm="10">
+                <Form.Control type="text" name='city' placeholder="city" onChange={Change}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                <Form.Label column sm="2">
+                Pincode
+                </Form.Label>
+                <Col sm="10">
+                <Form.Control type="text" name='pin' placeholder="pincode" onChange={Change}/>
+                </Col>
+            </Form.Group>
             <div className='d-grid'>
                     <button className='btn btn-primary' type='button' onClick={()=>register()}>Register</button>
           
