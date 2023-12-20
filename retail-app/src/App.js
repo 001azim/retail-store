@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -9,8 +8,12 @@ import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
 import {
   createBrowserRouter,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
+import store from './store'
+import { Provider } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 
 
@@ -58,12 +61,11 @@ function App() {
   
 
   return (
-    <>
 
-    <h1>app page</h1>
+    <Provider store={store}>
     <RouterProvider router={router}/>
     
-    </>
+    </Provider>
   );
 }
 

@@ -83,7 +83,7 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
               </Offcanvas.Body>
             </Navbar.Offcanvas>
             
-          </Container><button onclick="myFunction()">Toggle dark mode</button>
+          </Container>
         </Navbar>
       
    

@@ -11,7 +11,7 @@ import { useState,useEffect } from 'react';
 
 function CUSTOMERLST() {
 
-  let [apidata,setapidata] = useState({})
+  let [apidata,setapidata] = useState([])
 
   // const navigate= useNavigate()
   // const home = () =>navigate("/")
@@ -37,6 +37,7 @@ useEffect(()=>{
     })
 
 },[])
+
 
 console.log(apidata)
   // axios({
@@ -86,14 +87,15 @@ console.log(apidata)
       <tbody >
         
           {apidata.map((s)=>{
-            return(
+           return(
               <tr>
                 <td>{s.id}</td>
                 <td>{s.name}</td>
-                <td>{s.id}</td>
-                <td>{s.id}</td>
+                <td>{s.username}</td>
+                <td>{s.gcgh}</td>
+                <td><button>delete</button></td>
               </tr>
-            )
+          )
 })}
        
       </tbody>
