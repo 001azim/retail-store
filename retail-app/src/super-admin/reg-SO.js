@@ -13,14 +13,6 @@ function SO_REG(){
     const navigate = useNavigate();
     const dispatch=useDispatch();
     let {ownerDetails}=useSelector((state) => state.register);
-    // const [data, setData] = useState({
-    //     Username:"",
-    //     Shopname:"",
-    //     email: "",
-    //     password: "",
-    //     mobileno:"",
-    //     address:""
-    //   });
       const Change = (e) => {
         const value = e.target.value;
         dispatch(updateDetails({
@@ -29,7 +21,7 @@ function SO_REG(){
         }));
         
       };
-      //   console.log(data)
+         console.log(ownerDetails)
       let [error,seterror]=useState({})
     //   const errorValidation=(e)=>{
     //     seterror(Validation(data))
