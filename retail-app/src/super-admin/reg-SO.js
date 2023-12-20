@@ -13,14 +13,7 @@ function SO_REG(){
     const navigate = useNavigate();
     const dispatch=useDispatch();
     let {ownerDetails}=useSelector((state) => state.register);
-    // const [data, setData] = useState({
-    //     Username:"",
-    //     Shopname:"",
-    //     email: "",
-    //     password: "",
-    //     mobileno:"",
-    //     address:""
-    //   });
+   
       const Change = (e) => {
         const value = e.target.value;
         dispatch(updateDetails({
@@ -29,31 +22,10 @@ function SO_REG(){
         }));
         
       };
-      //   console.log(data)
+
       let [error,seterror]=useState({})
-    //   const errorValidation=(e)=>{
-    //     seterror(Validation(data))
-    //   }
-      
+   
     const register=()=>{
-        // if(error){
-        //     seterror(Validation(ownerDetails))  
-        // }
-        // if(!error){
-        //     axios({
-          
-        //         method: 'POST',
-        //         url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
-        //         data: {
-        //             ownerDetails
-                    
-        //       }}).then(function(response){
-        
-        //         console.log("Success",response)     
-        //         // seterror(Validation(data))
-        //        } ) 
-        //        navigate("/shopownerlogin"); 
-        // }
         
         axios({
           

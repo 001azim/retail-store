@@ -1,3 +1,4 @@
+
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch ,useSelector} from "react-redux"
@@ -26,7 +27,24 @@ function LOGINSO(){
                 }   
         })
     }
-    
+
+    let [userlogin,setuserlogin]= useState({
+        username: "",
+        password: ""
+    })
+
+    const sendata= ()=>{
+        axios.get('https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/sownerlogin').then((res)=>{
+            let data=res.data
+            for(let i=0;i<data.length;i++){
+                console.log(data[i].password)
+                if (data[i].username===userlogin.username || data[i].password===userlogin.password){
+                    navigate('/customerlist')
+                }}
+                
+           
+        })
+    }
 
     return(
        <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
@@ -64,8 +82,10 @@ function LOGINSO(){
        </div>
        {console.log(userLogin)}
        </>
-    )
 
+
+
+   
 
 
 

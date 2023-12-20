@@ -11,8 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
 import Button from 'react-bootstrap/Button';
 
+import Common from "../common"
+// credit/debit list of customers
+
 
 function ADDAMOUNT() {
+
 
     const dispatch=useDispatch()
 
@@ -59,7 +63,7 @@ useEffect(()=>{
     return (
 
         <>
-
+   <Common/>
             <Container >
           
                 <h1>Add credit or debit page </h1>
