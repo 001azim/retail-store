@@ -1,66 +1,31 @@
-// this page has history of messages sent to customers
-import Common from "./common"
+import React from 'react';
+import emailjs from 'emailjs-com';
+import Common from './common';
 
-import React, { useState } from 'react'
+export default function MESSAGELST() {
 
-function MESSAGELST() {
+  function sendEmail(e) {
+    e.preventDefault();
 
-    const [formState, setFormState] = useState([])
-    const changeHandler = (event) => {
-        setFormState({ ...formState, [event.target.name]: event.target.value });
-    };
-    const submitHandler = (event) => {
-        event.preventDefault();
-
-        const config = {
-            
-            SecureToken: "8962c73c-bdc8-420d-b827-94840798cb3a ",
-            To: 'vickymeenu023@gmail.com',
-            From: formState.email,
-            Subject: "This is the subject",
-            Body: `${formState.name} connect to you over email`
-
-        }
-        if (window.Email) {
-            window.Email.send(config).then(() => alert("Email Sent Successfully"))
-            console.log(JSON.stringify(config))
-
-        }
-        else {
-            alert("no")
-        }
-
-    }
-    return (
-        <div>
-            <Common/>
-            <form className="flex flex-col justify-center items-center" onSubmit={submitHandler}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formState.name || ""}
-                    onChange={changeHandler}
-                    className="border border-blue-900"
-                />
-                < input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formState.email || ""}
-                    onChange={changeHandler}
-                    className="border border-blue-900"
-                />
-                {console.log(formState)}
-                <input type="submit" value="Send Email" />
-            </form>
-
-        </div>
-    )
-
-
-
-
+    emailjs.sendForm('service_27vc988', 'template_86u9j8m', e.target, 'ljpE_38wT_cNJoG_E')
+      .then((result) => {
+          console.log(result);
+      }, (error) => {
+          console.log("error",error);
+      });
+  }
+  
+  return (
+    <form className="contact-form" onSubmit={sendEmail}>
+        <Common/>
+      <input type="hidden" name="contact_number" />
+      <label>Name</label>
+      <input type="text" name="user_name" />
+      <label>Email</label>
+      <input type="email" name="user_email" />
+      <label>Message</label>
+      <textarea name="message"  />
+      <input type="submit" value="Send" />
+    </form>
+  );
 }
-
-export default MESSAGELST
