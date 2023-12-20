@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react"
-import Common from "../common"
+import Common from "../components/common"
 import moment from "moment"
 import React from "react";
 import { useNavigate } from "react-router-dom";
