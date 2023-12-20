@@ -4,13 +4,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Form from 'react-bootstrap/Form';
 import {useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import { checklogin } from "../reducers/userSlice";
-import useSelector from "react-redux";
+import { checklogin } from "../slices/userSlice";
+import  {useSelector, useDispatch } from "react-redux";
+
 
 
 function SALOGIN(){
 const login=useSelector((state)=>state.user.loginValue)
-console.log(loginValue)
+console.log(login)
+const Navigate=useNavigate()
+const dispatch=useDispatch
     const getdata=()=>{
 
         axios({
@@ -21,10 +24,11 @@ console.log(loginValue)
         }).then(function(response){
             console.log(response)
             
-                if(loginValue.name=="admin" && loginValue.password==12345678){
+                if(response.data.status=="success"){
 
                 alert("success")
-                // Navigate=useNavigate()
+                localStorage.setItem("loginstatus",true)
+                Navigate("/ownerlists")
             }
             else{
                 alert("wrong username/password")
@@ -40,9 +44,9 @@ return(
 <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
          <Form.Label>user name</Form.Label>
-         <Form.Control type="name" placeholder="Enter name" id="name" onKeyUp={(e)=>ckecklogin({
-    ...loginValue,
-    name:e.target.value})}/>
+         <Form.Control type="name" placeholder="Enter name" id="name" onKeyUp={(e)=>dispatch(checklogin({
+    ...login,
+    name:e.target.value}))}/>
          <Form.Text className="text-muted">
           We'll never share your email with anyone else.
          </Form.Text>
@@ -50,10 +54,10 @@ return(
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
          <Form.Label>Password</Form.Label>
-         <Form.Control type="password" placeholder="Password" id="password"  onKeyUp={(e)=>checklogin({
-            ...loginValue,
+         <Form.Control type="password" placeholder="Password" id="password"  onKeyUp={(e)=>dispatch(checklogin({
+            ...login,
             password:e.target.value
-        })}/>
+        }))}/>
        </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
       
