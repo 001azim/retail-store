@@ -1,19 +1,13 @@
 import axios from "axios"
-import {useState} from 'react'
 import { useNavigate } from "react-router"
 import { useDispatch ,useSelector} from "react-redux"
-import { setUserLogin } from "../slices/shopOwnerLoginSlice"
-// import "../css/login-SO.css"
+import { setUserLogin,setStatus } from "../slices/shopOwnerLoginSlice"
 
 
 function LOGINSO(){ 
     const navigate=useNavigate() 
     const dispatch=useDispatch()
     const {userLogin}=useSelector((state)=>state.shopOwerLogin)
-// let [userLogin,setUserLogin]=useState({
-//     username:"",
-//     password:""
-// })
 
     function alldata(){
         axios({
@@ -21,11 +15,15 @@ function LOGINSO(){
             url:"https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/sownerlogin",
         }).then(function(response){
             console.log(response.data)
-            let allDatas=response.data;
-            let filterval=allDatas.filter((e)=>e.username==userLogin.username && e.password==userLogin.password)
-            if (userLogin.username==allDatas.username && userLogin.password==allDatas.password){
-                navigate("/customerlist")
-            }            
+            // let allDatas=response.data;
+            // let filterval=allDatas.filter((e)=>e.username==userLogin.username && e.password==userLogin.password)
+            // if (userLogin.username==allDatas.username && userLogin.password==allDatas.password){
+            //     navigate("/customerlist")
+            // }     
+                if(response.data.status=="success"){
+                    dispatch(setStatus(true))
+                    navigate("/customerlist")
+                }   
         })
     }
     

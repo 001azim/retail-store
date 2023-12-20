@@ -10,4 +10,5 @@ shopOwerLogin:shopOwnerLoginSlice,
 register:registerSlice
 
   },
+  
 })   
