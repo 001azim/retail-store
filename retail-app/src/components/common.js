@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import icon1 from './debit.png'
-import icon2 from './credit.png'
-import "./css/common.css"
+import icon1 from '../debit.png'
+import icon2 from '../credit.png'
+import "../css/cus-list.css"
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -83,7 +83,7 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
               </Offcanvas.Body>
             </Navbar.Offcanvas>
             
-          </Container>
+          </Container><button onclick="myFunction()">Toggle dark mode</button>
         </Navbar>
       
    
@@ -97,7 +97,8 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
   
     <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
     <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
-    <Link to={`/customerlist`}><i class="fa-solid fa-house"></i></Link>
+
+    <Link to={`/`}><i class="fa-solid fa-house"></i></Link>
     <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
 
     <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
@@ -110,4 +111,3 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
     </>
   )
 }
-

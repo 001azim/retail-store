@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react"
-
+import Common from "../components/common"
 import moment from "moment"
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import Common from "../common";
 function DEBITLST() {
 
     const navigate = useNavigate()
+
 
     const home = () => navigate("/")
     const back = () => window.history.back()
@@ -56,7 +57,8 @@ function DEBITLST() {
 
     return (
         <>
-            <Common/>
+         <Common />
+
             < table class="table table-dark ">
                 <thead>
                     <tr>
@@ -71,18 +73,7 @@ function DEBITLST() {
                 </tbody>
             </table >
 
-            <div style={{ position: 'fixed', bottom: 0, left: '30%' }} >
-                <button variant="primary" size="lg" onClick={() => navigate("/creditordebit")} >
-                    Go To debit
-                </button>
-                <button onClick={back} style={{ backgroundColor: 'red' }} ><i class="fa-solid fa-arrow-left"></i></button>
-                <button onClick={home} style={{ backgroundColor: 'green' }}><i class="fa-solid fa-house"></i></button>
-                <button onClick={forward} style={{ backgroundColor: 'red' }}><i class="fa-solid fa-arrow-right"></i></button>
-                <button variant="primary" size="lg" onClick={() => navigate("/customerlist")}>
-                    Go To customer list
-                </button>
-            </div>
-
+         
 
         </>
     )

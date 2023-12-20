@@ -1,45 +1,38 @@
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-
+import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-// import { Button } from "bootstrap";
+import { Button } from "bootstrap";
 import moment from 'moment'
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
-import Button from 'react-bootstrap/Button';
-import Common from "../common.js";
-
 
 function ADDAMOUNT() {
 
-    const navigate = useNavigate()
     const dispatch=useDispatch()
 
 let cdetails=useSelector((state)=>state.customer.details)
 
+console.log(cdetails.due_date)
 
 const setduedate =()=>{
 
     if (cdetails.due_amount <= 4999) {
-        dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
- console.log(cdetails.due_amount)
-
+        dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
+ 
      }
      else {
-         dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
-         console.log(cdetails.due_amount)
-      
-        }
+         dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
+     }
 }
     
 
 useEffect(()=>{
     setduedate()
-},[cdetails.due_amount])
+},[])
 
     //    post details to API
 
@@ -53,7 +46,6 @@ useEffect(()=>{
         }).then(function (response) {
             alert('ok')
             console.log(response)
-            navigate(`/customerlist`)
 
 
         })
@@ -64,11 +56,13 @@ useEffect(()=>{
 
         <>
 
-                <Common/>
+            <Container>
+            {JSON.stringify(cdetails)}
+
                 <h1>Add credit or debit page </h1>
 
                 {/* customer name input */}
-                <InputGroup  className="mb-3">
+                <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1" >Customer Name</InputGroup.Text>
                     <Form.Control
 required
@@ -142,10 +136,10 @@ required
 
                     </InputGroup>
 
-                    <Button Class="submit" variant="primary"  onClick={Sent}>submit</Button>
-           
+                    {/* <Button variant="outline-primary">Primary</Button>{' '} */}
+                    <button type onClick={Sent}> submit</button>
                 </Form>
-            
+            </Container>
 
             {console.log('cus_details', cdetails)}
 
