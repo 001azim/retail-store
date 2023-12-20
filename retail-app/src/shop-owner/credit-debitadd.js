@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
 import Button from 'react-bootstrap/Button';
 
-import Common from "../common"
+import Common from "../components/common.js"
 // credit/debit list of customers
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import icon1 from './debit.png'
-import icon2 from './credit.png'
-import "./css/cus-list.css"
+import icon1 from '../debit.png'
+import icon2 from '../credit.png'
+import "../css/cus-list.css"
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
