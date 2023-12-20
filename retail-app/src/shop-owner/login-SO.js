@@ -1,8 +1,9 @@
-
+import '../css/login-SO.css'
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch ,useSelector} from "react-redux"
 import { setUserLogin,setStatus } from "../slices/shopOwnerLoginSlice"
+
 
 
 function LOGINSO(){ 
@@ -39,7 +40,7 @@ function LOGINSO(){
     }
 
     return(
-       <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
+       <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box' >
         <div className='40-w p-5 rounded bg-white'>
             <form>
                 <h3>Sign In</h3>
@@ -64,11 +65,12 @@ function LOGINSO(){
                     </label>
                 </div>
                 <div className='d-grid'>
-                    <button type="button" className='btn btn-primary' onClick={()=>alldata()}>Sign In</button>
+                    <button type="button" className='btn btn-success' onClick={()=>alldata()}>Sign In</button>
+                </div><br></br>
+                <div className='d-grid'>
+                    <button type="button" className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>Sign up</button>
                 </div>
-                <p className='text-right'>
-                    forgot <a href="">password</a> <a href="">Signup</a>
-                </p>
+                
             </form>
         </div>
        </div>
