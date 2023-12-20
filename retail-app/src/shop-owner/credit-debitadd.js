@@ -4,35 +4,43 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
-import { Button } from "bootstrap";
+// import { Button } from "bootstrap";
 import moment from 'moment'
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
+import Button from 'react-bootstrap/Button';
+
+import Common from "../common"
+// credit/debit list of customers
+
 
 function ADDAMOUNT() {
+
 
     const dispatch=useDispatch()
 
 let cdetails=useSelector((state)=>state.customer.details)
 
-console.log(cdetails.due_date)
 
 const setduedate =()=>{
 
     if (cdetails.due_amount <= 4999) {
-        dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
- 
+        dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
+ console.log(cdetails.due_amount)
+
      }
      else {
-         dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
-     }
+         dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
+         console.log(cdetails.due_amount)
+      
+        }
 }
     
 
 useEffect(()=>{
     setduedate()
-},[])
+},[cdetails.due_amount])
 
     //    post details to API
 
@@ -55,14 +63,13 @@ useEffect(()=>{
     return (
 
         <>
-
-            <Container>
-            {JSON.stringify(cdetails)}
-
+   <Common/>
+            <Container >
+          
                 <h1>Add credit or debit page </h1>
 
                 {/* customer name input */}
-                <InputGroup className="mb-3">
+                <InputGroup  className="mb-3">
                     <InputGroup.Text id="basic-addon1" >Customer Name</InputGroup.Text>
                     <Form.Control
 required
@@ -136,8 +143,8 @@ required
 
                     </InputGroup>
 
-                    {/* <Button variant="outline-primary">Primary</Button>{' '} */}
-                    <button type onClick={Sent}> submit</button>
+                    <Button Class="submit" variant="primary"  onClick={Sent}>submit</Button>
+           
                 </Form>
             </Container>
 

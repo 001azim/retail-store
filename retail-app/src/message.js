@@ -1,10 +1,11 @@
 // this page has history of messages sent to customers
+import Common from "./common"
 
 import React, { useState } from 'react'
 
 function MESSAGELST() {
 
-    const [formState, setFormState] = useState({})
+    const [formState, setFormState] = useState([])
     const changeHandler = (event) => {
         setFormState({ ...formState, [event.target.name]: event.target.value });
     };
@@ -32,6 +33,7 @@ function MESSAGELST() {
     }
     return (
         <div>
+            <Common/>
             <form className="flex flex-col justify-center items-center" onSubmit={submitHandler}>
                 <input
                     type="text"
