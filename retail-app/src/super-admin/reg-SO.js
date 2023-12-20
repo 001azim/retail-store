@@ -1,7 +1,7 @@
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import axios from "axios";
 import {useSelector,useDispatch} from 'react-redux'
@@ -12,7 +12,7 @@ import Validation from './validation';
 function SO_REG(){
     const navigate = useNavigate();
     const dispatch=useDispatch();
-    let {ownerDetails}=useSelector((state) => state.register);
+    let ownerDetails=useSelector((state) => state.register);
     // const [data, setData] = useState({
     //     Username:"",
     //     Shopname:"",

@@ -97,7 +97,6 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
   
     <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
     <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
-
     <Link to={`/customerlist`}><i class="fa-solid fa-house"></i></Link>
     <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
 
@@ -111,3 +110,4 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
     </>
   )
 }
+
