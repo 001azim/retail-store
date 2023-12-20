@@ -52,8 +52,10 @@ function App() {
       path: "/shopownerregister",
       element: < SO_REG />
     },
-
-    
+    // {
+    //   path: "/ownerlists",
+    //   element: < OWN />
+    // },
 
 
   ]);
