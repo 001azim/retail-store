@@ -1,4 +1,4 @@
-
+import '../css/login-SO.css'
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch ,useSelector} from "react-redux"
@@ -40,7 +40,7 @@ function LOGINSO(){
     }
 
     return(
-       <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
+       <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box' >
         <div className='40-w p-5 rounded bg-white'>
             <form>
                 <h3>Sign In</h3>
