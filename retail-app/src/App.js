@@ -1,4 +1,4 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -7,9 +7,15 @@ import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
-import {createBrowserRouter,RouterProvider,} from "react-router-dom";
-import store from './store'; 
-import { Provider } from 'react-redux'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+ import Common from './common';
+ import store from './store'
+ import { Provider } from 'react-redux';
 
 
 
@@ -19,7 +25,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      
+      element: <LOGINSO />
     },
     {
       path: "/msg",
@@ -37,10 +43,7 @@ function App() {
       path: "/debitlist",
       element: <DEBITLST/>
     },
-    {
-      path: "/shopownerlogin",
-      element: <LOGINSO/>
-    },
+  
     {
       path: "/superadminlogin",
       element: < SALOGIN />
@@ -49,8 +52,10 @@ function App() {
       path: "/shopownerregister",
       element: < SO_REG />
     },
-
-    
+    // {
+    //   path: "/ownerlists",
+    //   element: < OWN />
+    // },
 
 
   ]);
@@ -58,7 +63,9 @@ function App() {
 
   return (
 
+
     <Provider store={store}>
+
     <RouterProvider router={router}/>
     </Provider>
     
