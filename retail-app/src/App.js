@@ -54,8 +54,6 @@ function App() {
       element: < SO_REG />
     },
 
-    
-
 
   ]);
   

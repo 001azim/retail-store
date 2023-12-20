@@ -4,6 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 // import { Button } from "bootstrap";
 import moment from 'moment'
 import '../css/credit-debit.css'
@@ -15,6 +16,7 @@ import Common from "../common.js";
 
 function ADDAMOUNT() {
 
+    const navigate = useNavigate()
     const dispatch=useDispatch()
 
 let cdetails=useSelector((state)=>state.customer.details)
@@ -51,6 +53,7 @@ useEffect(()=>{
         }).then(function (response) {
             alert('ok')
             console.log(response)
+            navigate(`/customerlist`)
 
 
         })

@@ -4,8 +4,9 @@ import Common from "./common"
 function MESSAGELST(){
     return(
 <>
-<h1> messages history</h1>
+
 <Common />
+<h1> messages history</h1>
 </>
 
 

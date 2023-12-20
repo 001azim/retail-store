@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import moment from "moment"
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Common from "../common";
 function DEBITLST() {
 
     const navigate = useNavigate()
@@ -55,7 +56,7 @@ function DEBITLST() {
 
     return (
         <>
-
+            <Common/>
             < table class="table table-dark ">
                 <thead>
                     <tr>
