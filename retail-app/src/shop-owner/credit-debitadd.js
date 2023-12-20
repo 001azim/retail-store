@@ -9,6 +9,7 @@ import moment from 'moment'
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
+import Common from "../components/common.js";
 
 function ADDAMOUNT() {
 
@@ -55,7 +56,7 @@ useEffect(()=>{
     return (
 
         <>
-
+<Common/>
             <Container>
             {JSON.stringify(cdetails)}
 

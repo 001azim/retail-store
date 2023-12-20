@@ -2,11 +2,10 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
-import icon1 from '../debit.png'
-import icon2 from '../credit.png'
+
 import "../css/cus-list.css"
 import { useState,useEffect } from 'react';
-import Common from '../common';
+import Common from '../components/common';
 
 
 

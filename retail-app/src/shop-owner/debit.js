@@ -4,7 +4,7 @@ import Common from "../components/common"
 import moment from "moment"
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Common from "../common";
+
 function DEBITLST() {
 
     const navigate = useNavigate()
