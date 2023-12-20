@@ -22,7 +22,7 @@ function MESSAGELST() {
         }
         if (window.Email) {
             window.Email.send(config).then(() => alert("Email Sent Successfully"))
-            console.log(JSON.stringify(window.Email))
+            console.log(JSON.stringify(config))
 
         }
         else {
