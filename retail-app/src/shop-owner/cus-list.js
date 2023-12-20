@@ -11,7 +11,7 @@ import { useState,useEffect } from 'react';
 
 function CUSTOMERLST() {
 
-  let [apidata,setapidata] = useState({})
+  let [apidata,setapidata] = useState([])
 
   // const navigate= useNavigate()
   // const home = () =>navigate("/")

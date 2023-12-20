@@ -43,10 +43,7 @@ function App() {
       path: "/debitlist",
       element: <DEBITLST/>
     },
-    {
-      path: "/shopownerlogin",
-      element: <LOGINSO/>
-    },
+  
     {
       path: "/superadminlogin",
       element: < SALOGIN />

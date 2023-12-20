@@ -16,11 +16,7 @@ function LOGINSO(){
             url:"https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/sownerlogin",
         }).then(function(response){
             console.log(response.data)
-            // let allDatas=response.data;
-            // let filterval=allDatas.filter((e)=>e.username==userLogin.username && e.password==userLogin.password)
-            // if (userLogin.username==allDatas.username && userLogin.password==allDatas.password){
-            //     navigate("/customerlist")
-            // }     
+        
                 if(response.data.status=="success"){
                     dispatch(setStatus(true))
                     navigate("/customerlist")
@@ -28,17 +24,13 @@ function LOGINSO(){
         })
     }
 
-    let [userlogin,setuserlogin]= useState({
-        username: "",
-        password: ""
-    })
 
     const sendata= ()=>{
         axios.get('https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/sownerlogin').then((res)=>{
             let data=res.data
             for(let i=0;i<data.length;i++){
                 console.log(data[i].password)
-                if (data[i].username===userlogin.username || data[i].password===userlogin.password){
+                if (data[i].username===userLogin.username || data[i].password===userLogin.password){
                     navigate('/customerlist')
                 }}
                 
@@ -87,7 +79,7 @@ function LOGINSO(){
 
    
 
-
+    )
 
 }
 
