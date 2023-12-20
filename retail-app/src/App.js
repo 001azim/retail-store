@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import 'bootstrap/dist/css/bootstrap.min.css';
->>>>>>> ajil
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -10,20 +7,13 @@ import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
-<<<<<<< HEAD
-import {createBrowserRouter,RouterProvider,} from "react-router-dom";
-import store from './store'; 
-import { Provider } from 'react-redux'
-
-=======
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-// import Common from './common';
-// import store from './app/store'
-// import { Provider } from 'react-redux';
->>>>>>> ajil
+ import Common from './common';
+ import store from './store'
+ import { Provider } from 'react-redux';
 
 
 function App() {
@@ -70,27 +60,13 @@ function App() {
   
 
   return (
-<<<<<<< HEAD
 
 
     <Provider store={store}>
 
-=======
-    // <Provider store={store}>
-    <>
-
-    {/* <h1>app page</h1> */}
-    
->>>>>>> ajil
     <RouterProvider router={router}/>
     </Provider>
     
-<<<<<<< HEAD
-=======
-   
-    </>
-      // </Provider>
->>>>>>> ajil
   );
 }
 
