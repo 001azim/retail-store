@@ -5,6 +5,7 @@ import { useDispatch ,useSelector} from "react-redux"
 import { setUserLogin,setStatus } from "../slices/shopOwnerLoginSlice"
 
 
+
 function LOGINSO(){ 
     const navigate=useNavigate() 
     const dispatch=useDispatch()
@@ -64,11 +65,12 @@ function LOGINSO(){
                     </label>
                 </div>
                 <div className='d-grid'>
-                    <button type="button" className='btn btn-primary' onClick={()=>alldata()}>Sign In</button>
+                    <button type="button" className='btn btn-success' onClick={()=>alldata()}>Sign In</button>
+                </div><br></br>
+                <div className='d-grid'>
+                    <button type="button" className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>Sign up</button>
                 </div>
-                <p className='text-right'>
-                    forgot <a href="">password</a> <a href="">Signup</a>
-                </p>
+                
             </form>
         </div>
        </div>

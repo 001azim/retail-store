@@ -22,11 +22,11 @@ console.log(cdetails.due_date)
 const setduedate =()=>{
 
     if (cdetails.due_amount <= 4999) {
-        dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
+        dispatch(setdetails({cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
  
      }
      else {
-         dispatch(setdetails({due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
+         dispatch(setdetails({cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
      }
 }
     
