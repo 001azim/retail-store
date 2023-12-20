@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from "axios"
 import { useEffect } from "react"
 
@@ -7,6 +8,19 @@ import { useNavigate } from "react-router-dom";
 function DEBITLST() {
 
     const navigate = useNavigate()
+=======
+import Common from "../common"
+
+function DEBITLST(){
+
+return(
+    <>
+    <h1>debit list</h1>
+    <Common />
+    </>
+    
+)
+>>>>>>> ajil
 
     const home = () => navigate("/")
     const back = () => window.history.back()

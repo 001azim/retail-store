@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -11,6 +12,18 @@ import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
 import Button from 'react-bootstrap/Button';
 
+=======
+import Common from "../common"
+// credit/debit list of customers
+
+function ADDAMOUNT(){
+
+return(
+<>
+{/* <h1>add credit or debit page </h1> */}
+<Common/>
+</>
+>>>>>>> ajil
 
 function ADDAMOUNT() {
 
