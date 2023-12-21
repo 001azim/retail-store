@@ -13,6 +13,7 @@ export const customerSlice = createSlice({
         due_date: ""
 
     } ,
+    
   },
   reducers: {
     setdetails :(state,action)=>{

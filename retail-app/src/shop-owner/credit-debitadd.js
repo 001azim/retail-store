@@ -33,6 +33,7 @@ const setduedate =()=>{
 
 useEffect(()=>{
     setduedate()
+    
 },[])
 
     //    post details to API
