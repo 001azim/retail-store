@@ -40,7 +40,7 @@ function LOGINSO(){
     }
 
     return(
-       <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box' >
+       <> ,<div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box' >
         <div className='40-w p-5 rounded bg-white child'>
             <form>
                 <h3>Sign In</h3>
