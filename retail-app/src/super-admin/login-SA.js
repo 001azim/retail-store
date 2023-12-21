@@ -13,7 +13,7 @@ function SALOGIN(){
 const login=useSelector((state)=>state.user.loginValue)
 console.log(login)
 const Navigate=useNavigate()
-const dispatch=useDispatch
+const dispatch=useDispatch()
     const getdata=()=>{
 
         axios({
@@ -41,6 +41,9 @@ const dispatch=useDispatch
 return(
     <>
     <h1>superadmin login page</h1>
+
+    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
+        <div className='40-w p-5 rounded bg-white'>
 <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
          <Form.Label>user name</Form.Label>
@@ -66,6 +69,8 @@ return(
          Submit
        </Button>
      </Form>
+     </div>
+     </div>
 </>
 )
 }
