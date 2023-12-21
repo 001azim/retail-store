@@ -6,7 +6,7 @@ import {useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { checklogin } from "../slices/userSlice";
 import  {useSelector, useDispatch } from "react-redux";
-
+import "../css/login-SA.css"
 
 
 function SALOGIN(){
@@ -42,7 +42,7 @@ return(
     <>
     <h1>superadmin login page</h1>
 
-    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
+    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box'>
         <div className='40-w p-5 rounded bg-white'>
 <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
