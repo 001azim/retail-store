@@ -1,0 +1,10 @@
+.cover{
+    background-image: url(../retails4.webp);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .reg{
+    opacity: 1;
+} */

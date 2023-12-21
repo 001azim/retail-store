@@ -9,6 +9,7 @@ import { updateDetails } from '../slices/registerSlice';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import Validation from './validation';
+import '../css/reg-SO.css'
 function SO_REG(){
     const navigate = useNavigate();
     const dispatch=useDispatch();
@@ -22,7 +23,6 @@ function SO_REG(){
         }));
         
       };
-
       let [error,seterror]=useState({})
    
     const register=()=>{
@@ -43,10 +43,10 @@ function SO_REG(){
     }
 return(
     <>
-    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-info'>
-        <div className='40-w p-5 rounded bg-white'>
+    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 cover'>
+        <div className='40-w p-5 rounded bg-white reg'>
             <Form>
-            <h1>shopowner register page </h1>
+            <h1> Register </h1>
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                 <Form.Label column sm="2">
                 UserName
@@ -131,14 +131,14 @@ return(
                 </Col>
             </Form.Group>
             <div className='d-grid'>
-                    <button className='btn btn-primary' type='button' onClick={()=>register()}>Register</button>
+                    <button className='btn btn-success' type='button' onClick={()=>register()}>Register</button>
           
                 </div>
 
             </Form>
         </div>
     </div>
-    {/* <button className='btn btn-primary' type="button" onClick={register}>Register</button> */}
+    
 </>
 )
 
