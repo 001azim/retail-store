@@ -6,7 +6,7 @@ import {adduser} from "../slices/userSlice";
 import {useNavigate } from "react-router-dom";
 
 function OWN(){
-    const dispatch=useDispatch
+    const dispatch=useDispatch()
     const Navigate=useNavigate()
 
     const lists=useSelector((state)=>state.user.ownlist)
