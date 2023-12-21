@@ -4,19 +4,19 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
-// import { Button } from "bootstrap";
 import moment from 'moment'
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
 import Button from 'react-bootstrap/Button';
-
 import Common from "../components/common.js"
+
 // credit/debit list of customers
 
 
 function ADDAMOUNT() {
 
+let [alertdate,setalertdate]=useState('')
 
     const dispatch=useDispatch()
 
@@ -36,11 +36,20 @@ const setduedate =()=>{
       
         }
 }
-    
+
+
 
 useEffect(()=>{
     setduedate()
 },[cdetails.due_amount])
+
+
+useEffect(()=>{
+    if(cdetails.due_date){
+       setalertdate(moment(cdetails.due_date).subtract(7,"day").format('LL')) 
+   }},[cdetails.due_date])
+
+   {console.log(alertdate)}
 
     //    post details to API
 

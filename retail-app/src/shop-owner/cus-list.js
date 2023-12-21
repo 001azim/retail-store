@@ -6,6 +6,7 @@ import icon1 from '../debit.png'
 import icon2 from '../credit.png'
 import "../css/cus-list.css"
 import { useState,useEffect } from 'react';
+import Common from '../components/common';
 
 
 
@@ -39,38 +40,11 @@ useEffect(()=>{
 },[])
 
 console.log(apidata)
-  // axios({
-  //   method: 'get',
-  //   url: 'https://jsonplaceholder.typicode.com/users',
-    
-  // })
-  //   .then(async function (response) {
-  //     // console.log(response.data)
-  //     let data = response.data;
-  //     let htmll='';
-  //     // let custm= data.map((s)=>{
-  //     //   htmll=htmll+
-  //     // })
-  //     for (let i=0;i<data.length;i++){
-  //     //  console.log(data[i].phone_number)
-  //      htmll= htmll+`<tr>
-  //       <td>${data[i].id}</td>
-  //       <td>${data[i].customer_name}</td>
-  //       <td>${data[i].phone_number}</td>
-  //       <td>${data[i].date_of_last_purchase}</td>
-  //       <td>${data[i].debt_amount}</td>
-  //       <td>${data[i].due_date}</td>
-  //       <td><Button variant="success" onClick={}>Success</Button></td>
-  //     </tr>`
-     
-  //     }
-  //     document.getElementById("listdata").innerHTML= htmll
-  //   });
-    
+ 
 
   return (
     <>
-    
+    <Common/>
     <Table striped bordered hover variant="dark">
       <thead>
         <tr>
