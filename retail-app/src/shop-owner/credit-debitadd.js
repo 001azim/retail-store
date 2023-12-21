@@ -24,6 +24,7 @@ let cdetails=useSelector((state)=>state.customer.details)
 
 
 const setduedate =()=>{
+    
 
     if (cdetails.due_amount <= 4999) {
         dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
@@ -41,7 +42,7 @@ const setduedate =()=>{
 
 useEffect(()=>{
     setduedate()
-},[cdetails.due_amount])
+},[cdetails.due_amount,cdetails.Last_purchase_date])
 
 
 useEffect(()=>{
@@ -75,7 +76,7 @@ useEffect(()=>{
    <Common/>
             <Container >
           
-                <h1 class="heading">Add credit or debit page </h1>
+                <h1 class="heading">Add new customer </h1>
 
                 {/* customer name input */}
                 <InputGroup  className="mb-3">
