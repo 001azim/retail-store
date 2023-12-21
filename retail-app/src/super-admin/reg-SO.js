@@ -44,7 +44,7 @@ function SO_REG(){
 return(
     <>
     <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 cover'>
-        <div className='40-w p-5 rounded bg-white'>
+        <div className='40-w p-5 rounded bg-white reg'>
             <Form>
             <h1> Register </h1>
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -138,7 +138,7 @@ return(
             </Form>
         </div>
     </div>
-    {/* <button className='btn btn-primary' type="button" onClick={register}>Register</button> */}
+    
 </>
 )
 
