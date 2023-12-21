@@ -35,7 +35,7 @@ function SO_REG(){
                 ownerDetails
                 
           }}).then(function(response){
-            // console.log("Success",response)     
+           
             seterror(Validation(ownerDetails))
            } ) 
            navigate("/shopownerlogin");
@@ -71,7 +71,7 @@ return(
                 Email
                 </Form.Label>
                 <Col sm="10">
-                <Form.Control type="email" name='email' placeholder="Email" onChange={Change} />
+                <Form.Control type="email" name='email' placeholder="email" onChange={Change} />
                 {error.email && <span style={{color:"red"}}>{error.email}</span>}
                 </Col>
             </Form.Group>

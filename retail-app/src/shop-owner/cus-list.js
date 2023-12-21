@@ -7,7 +7,7 @@ import icon2 from '../credit.png'
 import "../css/cus-list.css"
 import { useState,useEffect } from 'react';
 import Common from '../components/common';
-
+import { customer_data } from '../data'
 
 
 function CUSTOMERLST() {
@@ -48,24 +48,26 @@ console.log(apidata)
     <Table striped bordered hover variant="dark">
       <thead>
         <tr>
-          <th>#</th>
+          <th>customer_id</th>
           <th>Name</th>
           <th>Contact</th>
-          <th>Purchase date</th>
-          <th>debt_amount</th>
-          <th>due_date</th>
-          <th>Send Notification</th>
+          <th>Last_purchase_date</th>
+          <th> Address</th>
+        
+        
+         
         </tr>
       </thead>
       <tbody >
         
-          {apidata.map((s)=>{
+          {customer_data.map((item)=>{
             return(
               <tr>
-                <td>{s.id}</td>
-                <td>{s.name}</td>
-                <td>{s.id}</td>
-                <td>{s.id}</td>
+                 <td>{item.customer_id}</td>
+                <td>{item.customer_name}</td>
+                <td>{item.email}</td>
+                <td>{item.last_purchase_date}</td>
+                <td>{item.address}</td>
               </tr>
             )
 })}
