@@ -30,7 +30,7 @@ function SO_REG(){
         axios({
           
             method: 'POST',
-            url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
+            url: ' https://3cf5b333-aa86-45ee-8038-d711979cf7ca.mock.pstmn.io/soregister',
             data: {
                 ownerDetails
                 
@@ -46,87 +46,87 @@ return(
     <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 cover'>
         <div className='40-w p-5 rounded bg-white reg'>
             <Form>
-            <h1> Register </h1>
+            <h1> Sign up </h1>
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 UserName
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="text" name='Username' placeholder="UserName"  required onChange={Change}/>
                 {error.Username && <span style={{color:"red"}}>{error.Username}</span>}
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 ShopName
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="text" name='Shopname' placeholder="ShopName" onChange={Change}/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 Email
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="email" name='email' placeholder="Email" onChange={Change} />
                 {error.email && <span style={{color:"red"}}>{error.email}</span>}
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 Password
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="password" name='password' placeholder="Password"  required onChange={Change}/>
                 {error.password && <span style={{color:"red"}}>{error.password}</span>}
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 Aadhar
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="text" name='aadhar' placeholder="Aadhar" onChange={Change}/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 Mobile No
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="text" name='mobileno' placeholder="Mobile" onChange={Change}/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 Address
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control as="textarea" name='address' rows={3} onChange={Change}/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 City
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="text" name='city' placeholder="city" onChange={Change}/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                 Pincode
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="9">
                 <Form.Control type="text" name='pin' placeholder="pincode" onChange={Change}/>
                 </Col>
             </Form.Group>
