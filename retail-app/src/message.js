@@ -1,5 +1,5 @@
 // this page has history of messages sent to customers
-import Common from "./common"
+import Common from "./components/common"
 
 import React, { useState } from 'react'
 

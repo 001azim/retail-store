@@ -13,7 +13,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
- import Common from './common';
+ import Common from './components/common';
  import store from './store'
  import { Provider } from 'react-redux';
 
