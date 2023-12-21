@@ -40,11 +40,12 @@ const dispatch=useDispatch()
 
 return(
     <>
-    <h1>superadmin login page</h1>
+   
 
     <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box'>
         <div className='40-w p-5 rounded bg-white'>
 <Form>
+    <h2>login page</h2><br></br>
       <Form.Group className="mb-3" controlId="formBasicEmail">
          <Form.Label>user name</Form.Label>
          <Form.Control type="name" placeholder="Enter name" id="name" onKeyUp={(e)=>dispatch(checklogin({

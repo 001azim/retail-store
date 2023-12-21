@@ -75,7 +75,7 @@ useEffect(()=>{
    <Common/>
             <Container >
           
-                <h1>Add credit or debit page </h1>
+                <h1 class="heading">Add credit or debit page </h1>
 
                 {/* customer name input */}
                 <InputGroup  className="mb-3">
