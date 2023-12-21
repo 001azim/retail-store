@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-import React from 'react';
-import emailjs from 'emailjs-com';
-import Common from './common';
-=======
 // this page has history of messages sent to customers
 import Common from "./components/common"
->>>>>>> e243f55b54c65f69cea1fd3e3c012e964570d117
-
+import React from 'react';
+import emailjs from 'emailjs-com';
 export default function MESSAGELST() {
 
   function sendEmail(e) {
