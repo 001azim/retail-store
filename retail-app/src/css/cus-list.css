@@ -1,0 +1,24 @@
+/* .search{
+    margin: 0 21px;
+ } */
+
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+ .boxs{
+    margin: 0 1%;
+ }
+
+ .form-flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    
+ }
+ .left-form{
+    width: 80%;
+ }
