@@ -46,16 +46,13 @@ function App() {
   
     {
       path: "/superadminlogin",
-      element: < SALOGIN />
+      element: <SALOGIN/>
     },
     {
       path: "/shopownerregister",
       element: < SO_REG />
     },
-    // {
-    //   path: "/ownerlists",
-    //   element: < OWN />
-    // },
+   
 
 
   ]);

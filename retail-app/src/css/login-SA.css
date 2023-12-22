@@ -1,8 +1,27 @@
 .box{
-    background-image: url('../logo.jpg');
+    background-image: url('../blur.jpg');
+    /* background-image: url('https://c0.wallpaperflare.com/preview/288/244/904/blur-close-up-code-coding.jpg'); */
+
     background-size: cover;
     background-repeat: no-repeat;
 }
 h2{
     text-align: center;
+    color: antiquewhite;
+}
+.all{
+    color: rgb(252, 249, 251);
+}
+#butt{
+    /* background-color: rgb(133, 204, 27); */
+    background-color: rgb(226, 157, 8);
+
+    color: black;
+}
+#name{
+    opacity: 60%;
+}
+#password{
+    opacity: 60%;
+
 }
