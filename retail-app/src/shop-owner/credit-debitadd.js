@@ -4,14 +4,19 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
-import { Button } from "bootstrap";
 import moment from 'moment'
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
-import Common from "../components/common.js";
+import Button from 'react-bootstrap/Button';
+import Common from "../components/common.js"
+
+// credit/debit list of customers
+
 
 function ADDAMOUNT() {
+
+let [alertdate,setalertdate]=useState('')
 
     const dispatch=useDispatch()
 
@@ -20,6 +25,7 @@ let cdetails=useSelector((state)=>state.customer.details)
 console.log(cdetails.due_date)
 
 const setduedate =()=>{
+    
 
     if (cdetails.due_amount <= 4999) {
         dispatch(setdetails({cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
@@ -29,12 +35,20 @@ const setduedate =()=>{
          dispatch(setdetails({cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
      }
 }
-    
+
+
 
 useEffect(()=>{
     setduedate()
-    
-},[])
+},[cdetails.due_amount,cdetails.Last_purchase_date])
+
+
+useEffect(()=>{
+    if(cdetails.due_date){
+       setalertdate(moment(cdetails.due_date).subtract(7,"day").format('LL')) 
+   }},[cdetails.due_date])
+
+   {console.log(alertdate)}
 
     //    post details to API
 
@@ -57,11 +71,10 @@ useEffect(()=>{
     return (
 
         <>
-<Common/>
-            <Container>
-            {JSON.stringify(cdetails)}
-
-                <h1>Add credit or debit page </h1>
+   <Common/>
+            <Container >
+          
+                <h1 class="heading">Add new customer </h1>
 
                 {/* customer name input */}
                 <InputGroup className="mb-3">

@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import "../css/cus-list.css"
+
 import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
+
 
 
 function CUSTOMERLST() {
@@ -83,8 +85,8 @@ function CUSTOMERLST() {
                 <td>{item.name}</td>
                 <td>{item.username}</td>
                 
-              </tr>
-            ))}
+</tr>
+              ))}
 
         </tbody>
       </Table>

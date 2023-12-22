@@ -1,5 +1,5 @@
-import React,{ useState } from 'react';
-
+import React,{ useState, useTransition } from 'react';
+import Modal from 'react-bootstrap/Modal';
 import icon1 from '../debit.png'
 import icon2 from '../credit.png'
 import "../css/common.css"
@@ -15,6 +15,11 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export default function Common() {
 
+ const [show, setShow] = useState(false);
+ const handleClose = () => setShow(false);
+ const handleShow = () => setShow(true);
+
+ 
   const back = () => window.history.back()
 
   const [file, setFile] = useState();
@@ -104,7 +109,6 @@ const handleclick = (event) =>{
                 </Form>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
-
           </Container>
         </Navbar>
 
@@ -112,17 +116,21 @@ const handleclick = (event) =>{
       </div>
 
       <div className='feedback' >
-        <button data-bs-toggle="modal" data-bs-target="#displyfeedback" className="feedback-style" >Feedback &nbsp;&nbsp;  <i style={{fontSize:"18px"}} class="fa-solid fa-comment-medical"></i></button>
+        {/* <button data-bs-toggle="modal" data-bs-target="#displyfeedback" className="feedback-style" >Feedback &nbsp;&nbsp;  <i style={{fontSize:"18px"}} class="fa-solid fa-comment-medical"></i></button> */}
 
+      
+      <Button  onClick={handleShow} id="feedback-style" >
+      Feedback &nbsp;&nbsp;  <i style={{fontSize:"18px"}} class="fa-solid fa-comment-medical"></i>
+        
+      </Button>
       </div>
-      <div className='modal' id='displyfeedback'>
-        <div className='modal-dialog modal-dialog-centered'>
-          <div className='modal-content'>
-            <div className='modal-header'>
-              <h5 className="modal-title">Feedback</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <Form style={{ padding: "10px" }} onSubmit={handleclick} >
+      
+      <Modal show={show} onHide={handleClose} className='formfeed'>
+        <Modal.Header closeButton>
+          <Modal.Title>Feedback</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form style={{ padding: "10px" }} onSubmit={handleclick} >
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label><b>Email address</b></Form.Label>
                 <Form.Control
@@ -143,16 +151,19 @@ const handleclick = (event) =>{
                 value={formState.fedMessage || ''} 
                  />
               </Form.Group>
-              
-            
-            <div class="modal-footer">
-              <input type="submit" class="btn btn-primary" value="Send fre"/>
-            </div>
-            </Form>
-          </div>
-        </div>
+         </Form>
+          </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
 
-      </div>
 
       <div className='menubox' style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }} >
 
