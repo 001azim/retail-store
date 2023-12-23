@@ -2,14 +2,14 @@ import '../css/login-SO.css'
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { setUserLogin, setStatus, setUserId } from "../slices/shopOwnerLoginSlice"
+import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
 
 
 
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { userLogin, userid } = useSelector((state) => state.shopOwerLogin)
+    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
 
     function alldata() {
         let formdata = new FormData()
@@ -20,7 +20,7 @@ function LOGINSO() {
 
             console.log(response.data)
             if (response.data.status == "success") {
-                dispatch(setUserId(response.data))
+                dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
                 navigate("/customerlist")
             } else {
