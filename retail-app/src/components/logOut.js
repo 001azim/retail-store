@@ -6,7 +6,7 @@ function Logout(){
     const Navigate=useNavigate()
     let logout=()=>{
         dispatch(setStatus(false))
-        Navigate()
+        Navigate("/")
     }
     return(
         <>

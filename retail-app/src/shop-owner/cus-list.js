@@ -6,8 +6,8 @@ import icon1 from '../debit.png'
 import icon2 from '../credit.png'
 import "../css/cus-list.css"
 import { useState,useEffect } from 'react';
-
-
+import Common from '../components/common';
+import { customer_data } from '../data';
 
 function CUSTOMERLST() {
 
@@ -39,59 +39,34 @@ useEffect(()=>{
 },[])
 
 console.log(apidata)
-  // axios({
-  //   method: 'get',
-  //   url: 'https://jsonplaceholder.typicode.com/users',
-    
-  // })
-  //   .then(async function (response) {
-  //     // console.log(response.data)
-  //     let data = response.data;
-  //     let htmll='';
-  //     // let custm= data.map((s)=>{
-  //     //   htmll=htmll+
-  //     // })
-  //     for (let i=0;i<data.length;i++){
-  //     //  console.log(data[i].phone_number)
-  //      htmll= htmll+`<tr>
-  //       <td>${data[i].id}</td>
-  //       <td>${data[i].customer_name}</td>
-  //       <td>${data[i].phone_number}</td>
-  //       <td>${data[i].date_of_last_purchase}</td>
-  //       <td>${data[i].debt_amount}</td>
-  //       <td>${data[i].due_date}</td>
-  //       <td><Button variant="success" onClick={}>Success</Button></td>
-  //     </tr>`
-     
-  //     }
-  //     document.getElementById("listdata").innerHTML= htmll
-  //   });
-    
+ 
 
   return (
     <>
-    
+    <Common/>
     <Table striped bordered hover variant="dark">
       <thead>
         <tr>
-          <th>#</th>
+          <th>customer_id</th>
           <th>Name</th>
           <th>Contact</th>
-          <th>Purchase date</th>
-          <th>debt_amount</th>
-          <th>due_date</th>
-          <th>Send Notification</th>
+          <th>Last_purchase_date</th>
+          <th> Address</th>
+        
+        
+         
         </tr>
       </thead>
       <tbody >
         
-          {apidata.map((s)=>{
+          {customer_data.map((item)=>{
             return(
               <tr>
-                <td>{s.id}</td>
-                <td>{s.name}</td>
-                <td>{s.id}</td>
-                <td>{s.id}</td>
+                 <td>{item.customer_id}</td>
+                <td>{item.customer_name}</td>
+                <td>{item.email}</td>
+                <td>{item.last_purchase_date}</td>
+                <td>{item.address}</td>
               </tr>
             )
 })}
@@ -100,7 +75,6 @@ console.log(apidata)
     </Table>
     <Button onClick={()=>add()} variant="success" > Success</Button>
     <div className='menubox' style={{position:'fixed',bottom:0,left:'50%',transform: 'translateX(-50%)'}} >
-    
     <button onClick={()=>window.history.back()} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
   
     <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
@@ -112,12 +86,10 @@ console.log(apidata)
 
     <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
     <button onClick={()=>window.history.forward} style={{backgroundColor:'white'}}><i class="fa-solid fa-arrow-right"></i></button>
-
-    
     </div>
-    
     </>
   );
+  
 }
 
 export default CUSTOMERLST;

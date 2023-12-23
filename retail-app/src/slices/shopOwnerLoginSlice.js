@@ -4,7 +4,7 @@ export const customerSlice = createSlice({
     name: 'shopOwerLogin',
     initialState: {
         userLogin:{
-            username:"",
+            email:"",
             password:""
         },
         userstatus:false

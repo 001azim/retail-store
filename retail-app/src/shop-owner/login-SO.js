@@ -12,43 +12,38 @@ function LOGINSO(){
     const {userLogin}=useSelector((state)=>state.shopOwerLogin)
 
     function alldata(){
-        axios({
-            method:"GET",
-            url:"https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/sownerlogin",
-        }).then(function(response){
-            console.log(response.data)
-        
+        let formdata=new FormData()
+        formdata.append("email",userLogin.email)
+        formdata.append("password",userLogin.password)
+       
+        axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login',formdata).then(function(response){
+            console.log(response)
+
                 if(response.data.status=="success"){
                     dispatch(setStatus(true))
                     navigate("/customerlist")
-                }   
+                }else{
+                    navigate("/")
+                    alert("check your email or password")
+                } 
+            
+            
         })
+    
     }
-
-
-    const sendata= ()=>{
-        axios.get('https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/sownerlogin').then((res)=>{
-            let data=res.data
-            for(let i=0;i<data.length;i++){
-                console.log(data[i].password)
-                if (data[i].username===userLogin.username || data[i].password===userLogin.password){
-                    navigate('/customerlist')
-                }}
-                
-           
-        })
-    }
+       
+    
 
     return(
-       <> ,<div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box' >
-        <div className='40-w p-5 rounded bg-white child'>
+       <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg' >
+        <div className='40-w p-5 child'>
             <form>
-                <h3>Sign In</h3>
+                <h1>Sign In</h1>
                 <div className='mb-2'>
-                    <label htmlFor="name">Name:</label>
-                    <input type="text" placeholder="Enter the name" className='form-control' onKeyUp={(e)=>dispatch(setUserLogin({
+                    <label htmlFor="name">Email:</label>
+                    <input type="email" placeholder="Enter the email" className='form-control' onKeyUp={(e)=>dispatch(setUserLogin({
             ...userLogin,
-            username : e.target.value
+            email : e.target.value
         }))}/>
                 </div>
                 <div className='mb-2'>
@@ -74,7 +69,6 @@ function LOGINSO(){
             </form>
         </div>
        </div>
-       {console.log(userLogin)}
        </>
 
 
