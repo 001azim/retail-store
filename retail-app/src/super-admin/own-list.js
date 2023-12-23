@@ -10,7 +10,7 @@ function OWN(){
     const Navigate=useNavigate()
 
     const lists=useSelector((state)=>state.user.ownlist)
-    const status=useSelector((state)=>state.user.userstatus)
+    
     useEffect(()=>{
     solist()
     },[])
@@ -18,18 +18,14 @@ function OWN(){
    
     function solist(){
         if (localStorage.getItem("loginstatus"==true)){
-        axios({
-            method:'GET',
-            url:
-            'https://61e76e73-937a-46f9-ba3f-2aa15263b49c.mock.pstmn.io',
-            data:{}
-        }).then(function(response){
+        axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
+        .then(function(response){
             console.log(response)
-            dispatch(adduser(response.data.data))
+            // dispatch(adduser(response.data.data))
         })
         }
         else{
-            Navigate("/superadminlogin")
+            // Navigate("/superadminlogin")
 
         }
         }
@@ -45,7 +41,13 @@ function OWN(){
                 <td>name</td>
                 <td>email</td>
                 <td>password</td>
-                <td>view</td>
+                <td>aadhar</td>
+                <td>street</td>
+                <td>city</td>
+                <td>area</td>
+                <td>phone</td>
+                <td>pincode</td>
+                <td>shop_name</td>
 
             </tr>
 
@@ -58,7 +60,15 @@ function OWN(){
                 <td>{data.name}</td>
                 <td>{data.email}</td>
                 <td>{data.password}</td>
-            </tr>
+                <td>{data.aadhar}</td>
+                <td>{data.street}</td>
+                <td>{data.city}</td>
+                <td>{data.area}</td>
+                <td>{data.phone}</td>
+                <td>{data.pincode}</td>
+                <td>{data.shop_name}</td>
+
+                </tr>
              )
         })}
         </tbody>

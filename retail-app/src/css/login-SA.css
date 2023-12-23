@@ -14,11 +14,11 @@ h2{
 }
 #butt{
     /* background-color: rgb(133, 204, 27); */
-    background-color: rgb(226, 157, 8);
+    background-color: rgb(226, 156, 5);
 
     color: black;
 }
-#name{
+#mail{
     opacity: 60%;
 }
 #password{
