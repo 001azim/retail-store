@@ -1,9 +1,22 @@
 .cover{
-    background-image: url(../retails4.webp);
+    background-image: url('../retails4.webp');
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow:scroll;
+}
+.detail{
+   opacity: 70%; 
 }
 
-/* .reg{
-    opacity: 1;
-} */
+.mailbox{
+    display: inline-block;
+    
+}
+
+.pasbox{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -5px;
+}
+
