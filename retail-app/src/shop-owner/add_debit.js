@@ -16,6 +16,8 @@ function Add_debit() {
     const dispatch=useDispatch()
 
     let customer_details=useSelector((state)=>state.customer.details)
+    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
+    const {customer_id}= useSelector((state) => state.customer)
     
 let cdetails=useSelector((state)=>state.customer.due_details)
 
