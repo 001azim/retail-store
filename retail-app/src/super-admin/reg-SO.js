@@ -21,41 +21,77 @@ function SO_REG() {
             ...ownerDetails,
             [e.target.name]: value
         }));
-        
-      };
-      let [error,seterror]=useState({})
-   
-    const register=()=>{
-        
-        axios({
-          
-            method: 'POST',
-            url: ' https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/soregister',
-            data: {
-                ownerDetails
-                
-          }}).then(function(response){
-           
-            seterror(Validation(ownerDetails))
-           } ) 
-           navigate("/shopownerlogin");
-             
+
+    };
+    let [error, seterror] = useState({})
+    //   const errorValidation=(e)=>{
+    //     seterror(Validation(data))
+    //   }
+
+    const register = () => {
+        // if(error){
+        //     seterror(Validation(ownerDetails))  
+        // }
+        // if(!error){
+        //     axios({
+
+        //         method: 'POST',
+        //         url: ' https://3cf5b333-aa86-45ee-8038-d71110710cf7ca.mock.pstmn.io/soregister',
+        //         data: {
+        //             ownerDetails
+
+        //       }}).then(function(response){
+
+        //         console.log("Success",response)     
+        //         // seterror(Validation(data))
+        //        } ) 
+        //        navigate("/shopownerlogin"); 
+        // }
+        let formData = new FormData();
+        formData.append("request", "create_shopowner")
+        formData.append("name", ownerDetails.name)
+        formData.append("email", ownerDetails.email)
+        formData.append("password", ownerDetails.password)
+        formData.append("aadhar", ownerDetails.aadhar)
+        formData.append("street", ownerDetails.street)
+        formData.append("city", ownerDetails.city)
+        formData.append("area", ownerDetails.area)
+        formData.append("phone", ownerDetails.phone)
+        formData.append("pincode", ownerDetails.pincode)
+        formData.append("shop_name", ownerDetails.shop_name)
+
+        console.log(formData)
+
+        axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
+            console.log(response)
+
+            if (response.data.status == "success") {
+                navigate("/");
+            }
+            else {
+                alert("Enter valid inputs")
+            }
+
+            // seterror(Validation(ownerDetails))
+        })
+        //    navigate("/shopownerlogin");
+
     }
-return(
-    <>
-    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 cover'>
-        <div className='40-w p-5 rounded bg-white reg'>
-            <Form>
-            <h1> Register </h1>
-            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                <Form.Label column sm="2">
-                UserName
-                </Form.Label>
-                <Col sm="10">
-                <Form.Control type="text" name='Username' placeholder="UserName"  required onChange={Change}/>
-                {error.Username && <span style={{color:"red"}}>{error.Username}</span>}
-                </Col>
-            </Form.Group>
+    return (
+        <>
+            <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 cover'>
+                <div className='40-w p-5'>
+                    <Form>
+                        <h1 className='align-items-center'> Register </h1>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                            <Form.Label column sm="3">
+                                UserName
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control type="text" name='name' placeholder="UserName" className='detail' required onChange={Change} />
+                                {error.Username && <span style={{ color: "red" }}>{error.Username}</span>}
+                            </Col>
+                        </Form.Group>
 
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                             <Form.Label column sm="3">
