@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
-import moment from 'moment'
+import { useNavigate } from "react-router";
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
@@ -15,8 +15,12 @@ import Common from "../components/common.js"
 
 
 function ADDAMOUNT() {
+    const dispatch=useDispatch()
 
-
+    let cdetails=useSelector((state)=>state.customer.details)
+    
+    
+  const  navigate=useNavigate()
     //    post details to API
 
     function Sent() {
@@ -35,6 +39,7 @@ function ADDAMOUNT() {
            
           
            } )
+           navigate('/adddebit')
     }
 
 
