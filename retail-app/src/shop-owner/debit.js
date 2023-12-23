@@ -18,30 +18,30 @@ function DEBITLST() {
 
         }).then(function (res) {
 
-            let data = res.data
-            console.log(data[0].id)
-            let filterdata = []
-            for (let i of data) {
-                if (i.debt_amount != 0) {
-                    filterdata.push(i)
-                }
-            }
+            // let data = res.data
+            console.log(res)
+            // let filterdata = []
+            // for (let i of data) {
+            //     if (i.debt_amount != 0) {
+            //         filterdata.push(i)
+            //     }
+            // }
 
-            let html = ""
-            for (let i of filterdata) {
-                console.log(i)
-                let due=i.date_of_last_purchase
-                html = html +
-                    `<tr>
-                        <td>${i.id}</td>
-                        <td>${i.debt_amount}</td>
-                        <td>${i.date_of_last_purchase}</td>
-                        <td>${moment(due).add(10, 'days').format('l')}</td>
+            // let html = ""
+            // for (let i of filterdata) {
+            //     console.log(i)
+            //     let due=i.date_of_last_purchase
+            //     html = html +
+            //         `<tr>
+            //             <td>${i.id}</td>
+            //             <td>${i.debt_amount}</td>
+            //             <td>${i.date_of_last_purchase}</td>
+            //             <td>${moment(due).add(10, 'days').format('l')}</td>
 
 
-                    </tr>`
-            }
-            document.getElementById("table").innerHTML = html
+            //         </tr>`
+            // }
+            // document.getElementById("table").innerHTML = html
         })
     }
 
