@@ -2,26 +2,26 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useSelector,useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Form from 'react-bootstrap/Form';
 import "../css/cus-list.css"
 import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
-import setapidata from "../slices/customerSlice"
+import { setapidata } from "../slices/customerSlice"
 
 
 
 function CUSTOMERLST() {
 
-  let ownerid = useSelector((state) => state.shopOwerLogin.ownerid)
+  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   console.log(ownerid)
   // let [apidata, setapidata] = useState([])
 
   const [query, setQuery] = useState("")
 
   const dispatch = useDispatch()
-  let apidata = useSelector((state)=>state.customer.apidata)
+  let apidata = useSelector((state) => state.customer.apidata)
 
   const navigate = useNavigate()
   // const home = () =>navigate("/")
@@ -42,17 +42,17 @@ function CUSTOMERLST() {
 
   useEffect(() => {
     // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
-      axios({
-        method: 'get',
-        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+    axios({
+      method: 'get',
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
-      })
+    })
       .then(function (res) {
         console.log(res.data.data)
-       dispatch(setapidata(res.data.data))
+        dispatch(setapidata(res.data.data))
         console.log(apidata)
-      })  
-  },[])
+      })
+  }, [])
 
   return (
     <>
@@ -88,7 +88,7 @@ function CUSTOMERLST() {
             {filteredItems.map((item, i) => (
               <tr key={i}>
 
-                <td>{item.id}</td> 
+                <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
 
