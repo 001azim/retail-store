@@ -9,7 +9,11 @@ import  {useSelector, useDispatch } from "react-redux";
 import "../css/login-SA.css"
 
 
+
+
+
 function SALOGIN(){
+    
 const login=useSelector((state)=>state.user.loginValue)
 console.log(login)
 const Navigate=useNavigate()
