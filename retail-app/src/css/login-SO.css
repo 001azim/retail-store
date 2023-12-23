@@ -3,3 +3,9 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+input{
+    opacity: 70%;
+}
+h1{
+    text-align: center;
+}
