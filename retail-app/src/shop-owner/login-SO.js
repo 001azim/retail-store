@@ -9,6 +9,7 @@ import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSli
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+   
     const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
 
     function alldata() {

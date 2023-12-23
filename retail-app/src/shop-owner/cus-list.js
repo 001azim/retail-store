@@ -1,95 +1,107 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { Link, } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import icon1 from '../debit.png'
-import icon2 from '../credit.png'
+import { useSelector, useDispatch } from "react-redux"
+import Form from 'react-bootstrap/Form';
 import "../css/cus-list.css"
-import { useState,useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
-import { customer_data } from '../data';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { setapidata } from "../slices/customerSlice"
+
+
 
 function CUSTOMERLST() {
 
-  let [apidata,setapidata] = useState([])
+  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+  console.log(ownerid)
+  // let [apidata, setapidata] = useState([])
 
-  // const navigate= useNavigate()
+  const [query, setQuery] = useState("")
+
+  const dispatch = useDispatch()
+  let apidata = useSelector((state) => state.customer.apidata)
+
+  const navigate = useNavigate()
   // const home = () =>navigate("/")
   // const back = ()=>window.history.back()
   // const forward = () => window.history.forward
 
-  const add = ()=>{
+  const add = () => {
     alert("sucess")
   }
-  
- 
-   
-  
-   
-useEffect(()=>{
-  axios({
-    method: 'get',
-    url: 'https://jsonplaceholder.typicode.com/users',
-    
-  })
-    .then(function(res){
-      setapidata(res.data)
+
+  const filteredItems = useMemo(() => {
+    return apidata.filter(item => {
+      return item.name.toLowerCase().includes(query.toLowerCase())
     })
+  }, [apidata, query])
 
-},[])
 
-console.log(apidata)
- 
+
+  useEffect(() => {
+    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
+    axios({
+      method: 'get',
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+
+    })
+      .then(function (res) {
+        console.log(res.data.data)
+        dispatch(setapidata(res.data.data))
+        console.log(apidata)
+      })
+  }, [])
 
   return (
     <>
-    <Common/>
-    <Table striped bordered hover variant="dark">
-      <thead>
-        <tr>
-          <th>customer_id</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Last_purchase_date</th>
-          <th> Address</th>
-        
-        
-         
-        </tr>
-      </thead>
-      <tbody >
-        
-          {customer_data.map((item)=>{
-            return(
-              <tr>
-                 <td>{item.customer_id}</td>
-                <td>{item.customer_name}</td>
+      <Common />
+      <div className='boxs'>
+        <div className='form-flex'>
+          <div className='left-form'>
+            <Form>
+              <InputGroup className='my-3 search'>
+                <Form.Control placeholder='Search contacts' value={query} onChange={e => setQuery(e.target.value)} />
+              </InputGroup>
+            </Form>
+          </div>
+          <div className='right-form d-flex'>
+            <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button>
+          </div>
+        </div>
+
+        <Table responsive striped bordered hover variant="light" className='cus-table'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Purchase date</th>
+              <th>debt_amount</th>
+              <th>due_date</th>
+              <th>Send Notification</th>
+            </tr>
+          </thead>
+          <tbody >
+
+            {filteredItems.map((item, i) => (
+              <tr key={i}>
+
+                <td>{item.id}</td>
+                <td>{item.name}</td>
                 <td>{item.email}</td>
-                <td>{item.last_purchase_date}</td>
-                <td>{item.address}</td>
+
               </tr>
-            )
-})}
-       
-      </tbody>
-    </Table>
-    <Button onClick={()=>add()} variant="success" > Success</Button>
-    <div className='menubox' style={{position:'fixed',bottom:0,left:'50%',transform: 'translateX(-50%)'}} >
-    <button onClick={()=>window.history.back()} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
-  
-    <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
-    <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
-    <Link to={`/`}><i class="fa-solid fa-house"></i></Link>
+            ))}
 
-    <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
-
-
-    <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
-    <button onClick={()=>window.history.forward} style={{backgroundColor:'white'}}><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
+          </tbody>
+        </Table>
+        {/* <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button> */}
+      </div>
     </>
   );
-  
+
 }
 
 export default CUSTOMERLST;
