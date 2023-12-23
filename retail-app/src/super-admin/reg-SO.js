@@ -36,8 +36,8 @@ function SO_REG(){
                 
           }}).then(function(response){
            
-            seterror(Validation(ownerDetails))
-           } ) 
+            seterror(Validation(ownerDetails))   
+           }) 
            navigate("/shopownerlogin");
              
     }

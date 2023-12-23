@@ -9,7 +9,7 @@
     padding: 0;
     box-sizing: border-box;
 }
- .menubox {
+ /* .menubox {
      background-color: white;
      width: 900px;
      display: flex;
@@ -21,10 +21,25 @@
      border-radius: 50px;
      border: none;
      box-shadow: 0 0 10px rgb(71, 71, 38);
-     margin: 20px;
- }
+     margin: 20px; */
+ /* } */
 
- .menubox button {
+ /* .menubox {
+    background-color: white;
+    width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 0 10px rgb(71, 71, 38);
+    margin: 20px;
+ } */
+
+ /* .menubox button {
      border: none;
  }
 
@@ -45,8 +60,8 @@
  .menubox img {
      width: 30px;
      /* padding: 25px 50px; */
- }
-
+ /* } */
+/* 
  .menubox span {
      padding: 20px 50px;
  }
@@ -59,7 +74,7 @@
      background-color: rgb(205, 191, 191);
  }
 
-
+*/
  #logo {
      margin-left: 50px;
 
@@ -68,7 +83,7 @@
 
  .box {
      position: relative;
- }
+ }  
 
  .time {
      position: absolute;
@@ -87,7 +102,7 @@
     /* display: flex;
     flex-direction: column; */
 
- .feedback-style {
+ #feedback-style {
      writing-mode: vertical-rl;
      position: fixed;
      left: 0px;
@@ -98,23 +113,26 @@
      font-size: 13px;
      border: none;
      outline: none;
-     padding: 12px 10px 12px 12px;
+     padding: 12px 10px 12px 12px ;
      cursor: pointer;
      white-space: nowrap;
      background-color: var(--hjFeedbackAccentColor, #f4364c) !important;
      transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
-     /* transition-property: transform, box-shadow;
-transition-duration: 0.1s, 0.1s;
-transition-timing-function: ease-in-out, ease-in-out;
-transition-delay: 0s, 0s; */
      opacity: 0.96;
      width: 40px;
      z-index: 99;
  }
 
- .feedback-style:hover {
+ #feedback-style:hover {
      transform: translateX(0px);
      box-shadow: 0 0 10px #463939;
  }
 
+ .formfeed{
+    margin-top: 10%;
+ }
  
+.menubox{
+    box-shadow: 0 0 10px rgb(71, 71, 38);
+    
+}

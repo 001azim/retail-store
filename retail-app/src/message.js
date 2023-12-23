@@ -29,7 +29,7 @@
 //     </form>
 //   );
 // }
-
+import Common from "./components/common";
 import React, { useState } from "react";
 
 const Contactus = () => {
@@ -47,7 +47,7 @@ const handleclick = (event) =>{
     window.Email.send({  
     SecureToken:"d4f462fc-a0dc-45f4-97ab-d7ac5db7f6fa",
     To: `${formState.email}`,
-    From: "ajilj4@gmail.com",
+    From: "safeeqameen@gmail.com",
     Subject: "This is the subject",
     Body: `${formState.name} And this is the body`,
     }).then(()=>alert("msg send sucessfully"));
@@ -57,6 +57,7 @@ const handleclick = (event) =>{
 
   return (
     <div>
+      <Common/>
       <form className="flex flex-col justify-center items-center" onSubmit={handleclick}>
         <input
           type="text"
@@ -78,4 +79,6 @@ const handleclick = (event) =>{
       </form>
     </div>
   )}
+
+  
 export default Contactus;

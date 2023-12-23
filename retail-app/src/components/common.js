@@ -1,9 +1,9 @@
-import React,{ useState, useTransition } from 'react';
+import React,{ useState, useTransition,use } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import icon1 from '../debit.png'
 import icon2 from '../credit.png'
 import "../css/common.css"
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -11,13 +11,38 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import HomeIcon from '@mui/icons-material/Home';
+import MessageIcon from '@mui/icons-material/Message';
+
+import { makeStyles } from '@material-ui/core/styles';
+
+  
+const useStyles = makeStyles({
+
+  btmnav:{
+    borderRadius: '50px',
+    
+  }
+
+})
 
 
 export default function Common() {
 
+ const classes = useStyles();
+ const [value, setValue] = React.useState(0);
  const [show, setShow] = useState(false);
  const handleClose = () => setShow(false);
  const handleShow = () => setShow(true);
+ const navigate = useNavigate()
 
  
   const back = () => window.history.back()
@@ -130,7 +155,7 @@ const handleclick = (event) =>{
           <Modal.Title>Feedback</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form style={{ padding: "10px" }} onSubmit={handleclick} >
+        <Form style={{ padding: "10px" }}  >
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label><b>Email address</b></Form.Label>
                 <Form.Control
@@ -157,15 +182,36 @@ const handleclick = (event) =>{
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleclick}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
-      
-
-
       <div className='menubox' style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }} >
+      <Box sx={{ width: 1000 }} >
+      <BottomNavigation
+      className={classes.btmnav} 
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      >
+        <BottomNavigationAction 
+        label="Recents" icon={<RestoreIcon />} />
+        <BottomNavigationAction component={Link}
+        to="/customerlist" label="Custumer" icon={<ContactEmergencyIcon />} />
+        <BottomNavigationAction component={Link}
+        to="/" label="Home" icon={<HomeIcon/>} />
+        <BottomNavigationAction component={Link}
+        to="/creditordebit" label="credit" icon={<AccountBalanceWalletIcon/>} />
+        <BottomNavigationAction component={Link}
+        to="/msg" label="chat" icon={<MessageIcon />} />
+      </BottomNavigation>
+      
+    </Box>
+    </div>
+      {/* <div className='menubox' style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }} >
 
         <button onClick={back} style={{ backgroundColor: 'white' }} ><i class="fa-solid fa-arrow-left"></i></button>
 
@@ -181,7 +227,7 @@ const handleclick = (event) =>{
         <button onClick={() => window.history.forward()} style={{ backgroundColor: 'white' }}><i class="fa-solid fa-arrow-right"></i></button>
 
 
-      </div>
+      </div> */}
     </>
   )
 }
