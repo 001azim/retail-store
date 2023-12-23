@@ -3,23 +3,21 @@ import { useEffect } from "react"
 import Common from "../components/common"
 import moment from "moment"
 import React from "react";
+import { useDispatch, useSelector } from "react-redux"
+
 // import { useNavigate } from "react-router-dom";
 function DEBITLST() {
 
-
+    let { ownerid } = useSelector((state) => state.shopOwerLogin)
     // let [response, setresponse] = useState()
-
+    let owner_id = ownerid.data.id
     function debtlist() {
 
-        axios({
-            method: 'get',
-            url: 'https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/debtlist',
-
-
-        }).then(function (res) {
+        axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`).then(function (res) {
 
             // let data = res.data
-            console.log(res)
+            console.log("res", res.data.data)
+            let customer_detail = res.data.data
             // let filterdata = []
             // for (let i of data) {
             //     if (i.debt_amount != 0) {
@@ -45,13 +43,13 @@ function DEBITLST() {
         })
     }
 
-    // useEffect(debtlist, [])
+    useEffect(debtlist, [])
 
 
 
     return (
         <>
-         <Common />
+            <Common />
 
             < table class="table table-dark ">
                 <thead>
@@ -62,12 +60,27 @@ function DEBITLST() {
                         <th>date</th>
                     </tr>
                 </thead>
-                <tbody id="table">
+                <tbody>
+                    {customer_list.map((customer) => {
+                        customer.debits.map((debit) => {
+                            return (
+                                <tr>
+                                    <td>{debit.last_purchase_at}</td>
+                                    <td>{debit.due_date}</td>
+                                    <td>{debit.debit_amount}</td>
+                                    {/* <td>{debit.last_purchase_date}</td>
+                                    <td>{debit.address}</td> */}
+                                </tr>
+                            )
+                        })
+
+                    })}
 
                 </tbody>
             </table >
+            {console.log("ans", (ownerid.data.id))}
 
-         
+
 
         </>
     )
