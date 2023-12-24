@@ -7,7 +7,7 @@ import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
-
+import Home from './super-admin/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
@@ -52,6 +52,11 @@ function App() {
       path: "/shopownerregister",
       element: < SO_REG />
     },
+    {
+      path: "/home",
+      element: < Home />
+    },
+   
    
 
 

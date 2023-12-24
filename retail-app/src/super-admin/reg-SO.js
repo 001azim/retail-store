@@ -43,7 +43,7 @@ function SO_REG(){
     }
 return(
     <>
-    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 cover'>
+    <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg'>
         <div className='40-w p-5 rounded bg-white reg'>
             <Form>
             <h1> Register </h1>
