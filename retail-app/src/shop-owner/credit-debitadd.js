@@ -16,7 +16,7 @@ import Common from "../components/common.js"
 
 function ADDAMOUNT() {
     const dispatch=useDispatch()
-
+    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
     let cdetails=useSelector((state)=>state.customer.details)
     
     
@@ -27,10 +27,11 @@ function ADDAMOUNT() {
        
 
         let formData = new FormData();
+        formData.append("owner_id",ownerid.data.id)
         formData.append("name",cdetails.customer_name)
         formData.append("email",cdetails.email)
         formData.append("address",cdetails.Address)
-        formData.append("mobile",cdetails.phone)
+        formData.append("phone",cdetails.phone)
        
 
        
@@ -41,7 +42,7 @@ function ADDAMOUNT() {
            } )
            navigate('/adddebit')
     }
-
+{console.log(ownerid.data.id)}
 
     return (
 
@@ -97,7 +98,7 @@ function ADDAMOUNT() {
                     />
                 </InputGroup>
 
-               <button onClick={()=>Sent()}>register</button>
+               <Button Class="submit" variant="primary"  onClick={()=>Sent()}>register</Button>
             </Container>
 
             {console.log('cus_details', cdetails)}

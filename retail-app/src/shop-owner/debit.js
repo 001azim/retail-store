@@ -4,14 +4,15 @@ import Common from "../components/common"
 import moment from "moment"
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 function DEBITLST() {
 
     const navigate = useNavigate()
 
 
-    const home = () => navigate("/")
-    const back = () => window.history.back()
-    const forward = () => window.history.forward
+    // const home = () => navigate("/")
+    // const back = () => window.history.back()
+    // const forward = () => window.history.forward
     // let [response, setresponse] = useState()
 
     function debtlist() {

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector,useDispatch } from "react-redux";
 import {adduser} from "../slices/userSlice";
 import {useNavigate } from "react-router-dom";
 
