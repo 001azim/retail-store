@@ -23,13 +23,13 @@ export const customerSlice = createSlice({
         state.details=action.payload
     },
     setduedetails :(state,action)=>{
-      state.details=action.payload
+      state.due_details=action.payload
   }
    
   },
 })
 
 
-export const { setdetails } = customerSlice.actions
+export const { setdetails,setduedetails } = customerSlice.actions
 
 export default customerSlice.reducer

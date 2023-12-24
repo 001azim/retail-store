@@ -21,6 +21,7 @@ import Ownerlist from './super-admin/ownerlist';
 
 
 
+
 function App() {
 
 
@@ -62,6 +63,7 @@ function App() {
       path: "/ownerslist",
       element: < Ownerlist />
     },
+  
 
 
   ]);
