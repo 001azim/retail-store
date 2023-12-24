@@ -7,8 +7,8 @@ import icon2 from '../credit.png'
 import "../css/cus-list.css"
 import { useState,useEffect } from 'react';
 import Common from '../components/common';
-import { customer_data } from '../data'
-
+import { customer_data } from '../data';
+import Logout from '../components/logOut';
 
 function CUSTOMERLST() {
 
@@ -76,7 +76,6 @@ console.log(apidata)
     </Table>
     <Button onClick={()=>add()} variant="success" > Success</Button>
     <div className='menubox' style={{position:'fixed',bottom:0,left:'50%',transform: 'translateX(-50%)'}} >
-    
     <button onClick={()=>window.history.back()} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
   
     <Link to={`/addcustomer`}><span><img src={icon1} alt='icon' /></span></Link>
@@ -88,12 +87,11 @@ console.log(apidata)
 
     <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
     <button onClick={()=>window.history.forward} style={{backgroundColor:'white'}}><i class="fa-solid fa-arrow-right"></i></button>
-
-    
     </div>
-    
+    <Logout/>
     </>
   );
+  
 }
 
 export default CUSTOMERLST;

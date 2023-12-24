@@ -55,15 +55,7 @@ function App() {
       path: "/shopownerregister",
       element: < SO_REG />
     },
-    {
-      path: "/adddebit",
-      element: < Add_debit />
-    },
-    {
-      path: "/ownerslist",
-      element: < Ownerlist />
-    },
-  
+   
 
 
   ]);

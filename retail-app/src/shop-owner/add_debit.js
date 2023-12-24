@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment'
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
+import Logout from '../components/logOut';
 
 function Add_debit() {
     let [alertdate,setalertdate]=useState('')
@@ -118,6 +119,7 @@ function Sent() {
 
      </Form>
  </Container>
+ <Logout/>
  </>
     )
 }
