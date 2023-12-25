@@ -40,9 +40,9 @@ function ADDAMOUNT() {
            
           
            } )
-           navigate('/adddebit')
+        //    navigate('/adddebit')
     }
-{console.log(ownerid.data.id)}
+{console.log(ownerid)}
 
     return (
 

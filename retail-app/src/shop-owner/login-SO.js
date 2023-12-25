@@ -9,9 +9,9 @@ import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSli
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { userLogin,userstatus } = useSelector((state) => state.shopOwnerLogin)
+    console.log(userstatus)
    
-    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
-
     function alldata() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
