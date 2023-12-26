@@ -1,5 +1,6 @@
 import '../css/login-SO.css'
 import axios from "axios"
+import { useEffect } from 'react'
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
@@ -9,7 +10,7 @@ import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSli
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { userLogin, ownerid,userstatus } = useSelector((state) => state.shopOwerLogin)
+    const { userLogin, ownerid,userstatus } = useSelector((state) => state.shopOwnerLogin)
     console.log(ownerid)
     console.log(userstatus)
     function alldata() {
@@ -23,6 +24,11 @@ function LOGINSO() {
             if (response.data.status == "success") {
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
+                localStorage.setItem("loggedin","true")
+                if (localStorage.getItem("loggedin")=="true"){
+                    dispatch(setOwnerId(response.data))
+                    dispatch(setStatus(true))
+                }
                 navigate("/customerlist")
             } else {
                 navigate("/")
@@ -31,6 +37,11 @@ function LOGINSO() {
         })
 
     }
+    useEffect(()=>{
+        if(localStorage.getItem("loggedin")=="true"){
+            alldata()
+        }
+    },[])
 
 
 

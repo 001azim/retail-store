@@ -85,7 +85,7 @@ function SO_REG() {
     //}
     return (
         <>
-            <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 cover'>
+            <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 bg'>
                 <div className='40-w p-5'>
                     <Form>
                         <h1 className='align-items-center'> Register </h1>
