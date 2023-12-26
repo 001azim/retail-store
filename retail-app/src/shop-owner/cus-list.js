@@ -14,19 +14,16 @@ import { setapidata } from "../slices/customerSlice"
 
 function CUSTOMERLST() {
 
-  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  let ownerid = useSelector((state) => state.shopOwerLogin.ownerid)
+  let apidata = useSelector((state) => state.customer.apidata)
   console.log(ownerid)
+
   // let [apidata, setapidata] = useState([])
 
   const [query, setQuery] = useState("")
-
-  const dispatch = useDispatch()
-  let apidata = useSelector((state) => state.customer.apidata)
-
-  const navigate = useNavigate()
-  // const home = () =>navigate("/")
-  // const back = ()=>window.history.back()
-  // const forward = () => window.history.forward
 
   const add = () => {
     alert("sucess")
@@ -38,13 +35,11 @@ function CUSTOMERLST() {
     })
   }, [apidata, query])
 
-
-
   useEffect(() => {
-    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
+    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid}`)
     axios({
       method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.id}`,
 
     })
       .then(function (res) {
@@ -66,7 +61,7 @@ function CUSTOMERLST() {
               </InputGroup>
             </Form>
           </div>
-          <div className='right-form d-flex'>
+          <div className='right-form '>
             <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button>
           </div>
         </div>
@@ -90,14 +85,20 @@ function CUSTOMERLST() {
 
                 <td>{item.id}</td>
                 <td>{item.name}</td>
-                <td>{item.email}</td>
+                <td>{item.phone}</td>
+                <td>{item.debit}</td>
+                <td>{item.phone}</td>
+                <td>{item.phone}</td>
+                <td ><Button type="button" className='btn btn-primary'>Send</Button></td>
+
+                
 
               </tr>
             ))}
 
           </tbody>
         </Table>
-        {/* <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button> */}
+
       </div>
     </>
   );

@@ -33,7 +33,7 @@ export const customerSlice = createSlice({
     setcustomerid :(state,action)=>{
       state.customer_id=action.payload
   },
-    setapidata:(state,action)=>{
+    setapidata : (state,action)=>{
     state.apidata=action.payload
 }
 

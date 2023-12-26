@@ -1,4 +1,5 @@
 import '../css/login-SO.css'
+import React, { useEffect } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
@@ -19,9 +20,10 @@ function LOGINSO() {
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
             
 
-            console.log(response.data)
+            console.log(response.data.data)
             if (response.data.status == "success") {
-                dispatch(setOwnerId(response.data))
+                localStorage.setItem("authLog",true)
+                dispatch(setOwnerId(response.data.data))
                 dispatch(setStatus(true))
                 navigate("/customerlist")
             } else {
@@ -32,7 +34,14 @@ function LOGINSO() {
 
     }
 
-
+// useEffect(()=>{
+//     if(ownerid.id!=0){
+//         navigate("/customerlist")
+//     }
+//     else{
+//         navigate('/')
+//     }
+// },[])
 
     return (
         <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg' >

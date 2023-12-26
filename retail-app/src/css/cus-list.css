@@ -12,7 +12,7 @@
     margin: 0 1%;
  }
 
- .form-flex{
+ /* .form-flex{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -21,4 +21,18 @@
  }
  .left-form{
     width: 80%;
+ } */
+
+ .form-flex{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
  }
+
+ .left-form{
+   flex-grow: 0.7;
+ }
+
+ 
+
+

@@ -1,9 +1,9 @@
-import React,{ useState, useTransition,use } from 'react';
+import React, { useState, useTransition, use } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import icon1 from '../debit.png'
 import icon2 from '../credit.png'
 import "../css/common.css"
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -11,47 +11,26 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import HomeIcon from '@mui/icons-material/Home';
-import MessageIcon from '@mui/icons-material/Message';
-
-import { makeStyles } from '@material-ui/core/styles';
-
-  
-const useStyles = makeStyles({
-
-  btmnav:{
-    borderRadius: '50px',
-    
-  }
-
-})
+import Logout from './logOut';
+import { Grow } from '@material-ui/core';
 
 
 export default function Common() {
 
- const classes = useStyles();
- const [value, setValue] = React.useState(0);
- const [show, setShow] = useState(false);
- const handleClose = () => setShow(false);
- const handleShow = () => setShow(true);
- const navigate = useNavigate()
+  const [value, setValue] = React.useState(0);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const navigate = useNavigate()
 
- 
+
   const back = () => window.history.back()
 
-  const [file, setFile] = useState();
-  function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
+  // const [file, setFile] = useState();
+  // function handleChange(e) {
+  //   console.log(e.target.files);
+  //   setFile(URL.createObjectURL(e.target.files[0]));
+  // }
 
   let currentTime = new Date();
   let options = { timeStyle: 'short', hour12: true };
@@ -65,21 +44,20 @@ export default function Common() {
     console.log(formState)
   };
 
-const handleclick = (event) =>{
-  event.preventDefault();
-  
-    window.Email.send({  
-    SecureToken:"27d68705-c0fb-42ce-9398-0a80e7930099 ",
-    To: "ja84don@gmail.com",
-    From: `${formState.email}`,
-    Subject: "This is the Feedback",
-    Body: `${formState.fedMessage}`,
-    }).then(()=>alert("msg send sucessfully"));
-    
-    }
+  const handleclick = (event) => {
+    event.preventDefault();
 
-    //////////////////////////////////////////////////////////////////////////
+    window.Email.send({
+      SecureToken: "27d68705-c0fb-42ce-9398-0a80e7930099 ",
+      To: "ja84don@gmail.com",
+      From: `${formState.email}`,
+      Subject: "This is the Feedback",
+      Body: `${formState.fedMessage}`,
+    }).then(() => alert("msg send sucessfully"));
 
+  }
+
+  //////////////////////////////////////////////////////////////////////////
 
   return (
     <>
@@ -96,21 +74,37 @@ const handleclick = (event) =>{
               id={`offcanvasNavbar-false-${false}`}
               aria-labelledby={`offcanvasNavbarLabel-false-${false}`}
               placement="end"
+              style={{ backgroundColor: "lavenderblush" }}
             >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-false-${false}`}>
-                  <img src='https://dragonflywellbeing.co.uk/wp-content/uploads/2021/02/Dragonfly-Wellbeing-Logo.png' alt='logo' width={130} />
-                </Offcanvas.Title>
-              </Offcanvas.Header>
+              <div >
+                <Offcanvas.Header closeButton style={{ backgroundColor: "lemonchiffon" }}>
+                  <Offcanvas.Title id={`offcanvasNavbarLabel-false-${false}`}>
+                    <img src='https://dragonflywellbeing.co.uk/wp-content/uploads/2021/02/Dragonfly-Wellbeing-Logo.png' alt='logo' width={130} />
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+              </div>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <input type="file" onChange={handleChange} hidden />
-                  <img src={file} alt='img' style={{ width: "100px", height: "100px", borderRadius: "50%" }} />
-                  <Nav.Link href="#action1">Home</Nav.Link>
+                  <div className='comnprofile'>
+                    <div className='profilepic'>
+                      <i class="fa-solid fa-user" style={{ color: "#c0bfbc", }}></i>
+                    </div>
+                    <h5>Ajil</h5>
+                  </div>
+                  <hr></hr>
+                  {/* <input type="file" onChange={handleChange} hidden /> */}
+                  {/* <img src={file} alt='img' style={{ width: "100px", height: "100px", borderRadius: "50%" }} /> */}
+                  <div className='slidenav'><Link to={`/msg`}>
+                    <Nav.Link href="#action1">Home</Nav.Link></Link></div>
+                  <div className='slidenav'><Nav.Link href="#action2">Contact</Nav.Link></div>
+                  <div className='slidenav'><Nav.Link href="#action3">About Us</Nav.Link></div>
+                  <div className='slidenav'><Nav.Link href="#action4">Issue</Nav.Link></div>
+                  <div className='slidenav'><Nav.Link href="#action5">Help</Nav.Link></div>
+                  
                   <Nav.Link href="#action2">Link</Nav.Link>
 
                   <NavDropdown
-                    title="Dropdown"
+                    title="Connect with Us"
                     id={`offcanvasNavbarDropdown-false-${false}`}
                   >
                     <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -122,62 +116,58 @@ const handleclick = (event) =>{
                       Something else here
                     </NavDropdown.Item>
                   </NavDropdown>
+                  <Logout/>
                 </Nav>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="outline-success">Search</Button>
-                </Form>
+              <div className='socialmedias'>
+              <hr></hr>
+                <a href='#'><i class="fa-brands fa-facebook"></i></a>
+                <a href='#'><i class="fa-brands fa-instagram"></i></a>
+               <a href='#'><i class="fa-brands fa-x-twitter"></i></a>
+               <a href='#'><i class="fa-brands fa-linkedin-in"></i></a>
+              </div>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-
-
       </div>
+
 
       <div className='feedback' >
         {/* <button data-bs-toggle="modal" data-bs-target="#displyfeedback" className="feedback-style" >Feedback &nbsp;&nbsp;  <i style={{fontSize:"18px"}} class="fa-solid fa-comment-medical"></i></button> */}
+        <Button onClick={handleShow} id="feedback-style" >
+          Feedback &nbsp;&nbsp;  <i style={{ fontSize: "18px" }} class="fa-solid fa-comment-medical"></i>
 
-      
-      <Button  onClick={handleShow} id="feedback-style" >
-      Feedback &nbsp;&nbsp;  <i style={{fontSize:"18px"}} class="fa-solid fa-comment-medical"></i>
-        
-      </Button>
+        </Button>
       </div>
-      
+
       <Modal show={show} onHide={handleClose} className='formfeed'>
         <Modal.Header closeButton>
           <Modal.Title>Feedback</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form style={{ padding: "10px" }}  >
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label><b>Email address</b></Form.Label>
-                <Form.Control
-                 type="email" 
-                 name="email" 
-                 onChange={changeHandler} 
-                 value={formState.email || ''} 
-                 placeholder="Enter Your Mail ID" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label><b>Message</b></Form.Label>
-                <Form.Control 
-                as="textarea" 
+          <Form style={{ padding: "10px" }}  >
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label><b>Email address</b></Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                onChange={changeHandler}
+                value={formState.email || ''}
+                placeholder="Enter Your Mail ID" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Label><b>Message</b></Form.Label>
+              <Form.Control
+                as="textarea"
 
-                name='fedMessage' 
-                onChange={changeHandler} 
+                name='fedMessage'
+                onChange={changeHandler}
                 rows={3}
-                value={formState.fedMessage || ''} 
-                 />
-              </Form.Group>
-         </Form>
-          </Modal.Body>
+                value={formState.fedMessage || ''}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -187,47 +177,22 @@ const handleclick = (event) =>{
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className='menubox' style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }} >
-      <Box sx={{ width: 1000 }} >
-      <BottomNavigation
-      className={classes.btmnav} 
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction 
-        label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction component={Link}
-        to="/customerlist" label="Custumer" icon={<ContactEmergencyIcon />} />
-        <BottomNavigationAction component={Link}
-        to="/" label="Home" icon={<HomeIcon/>} />
-        <BottomNavigationAction component={Link}
-        to="/creditordebit" label="credit" icon={<AccountBalanceWalletIcon/>} />
-        <BottomNavigationAction component={Link}
-        to="/msg" label="chat" icon={<MessageIcon />} />
-      </BottomNavigation>
-      
-    </Box>
-    </div>
-      {/* <div className='menubox' style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }} >
 
-        <button onClick={back} style={{ backgroundColor: 'white' }} ><i class="fa-solid fa-arrow-left"></i></button>
 
-        <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
+   {localStorage.getItem("authLog")?<div className='menubox' 
+      style={
+        { position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }
+      } >
+
+        <button onClick={back}style={{ backgroundColor: 'white' }} ><i class="fa-solid fa-arrow-left"></i></button>
+        <Link to={`/addcustomer`}><span><img src={icon1} alt='icon' /></span></Link>
         <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
-
         <Link to={`/`}><i class="fa-solid fa-house"></i></Link>
         <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
-
         <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
-
-
         <button onClick={() => window.history.forward()} style={{ backgroundColor: 'white' }}><i class="fa-solid fa-arrow-right"></i></button>
 
-
-      </div> */}
+      </div>:null}
     </>
   )
 }
