@@ -26,7 +26,7 @@ const dispatch=useDispatch()
             'https://41d08e21-9a75-47f9-b74e-547d9ceecbe0.mock.pstmn.io',
             data:{}
         }).then(function(response){
-            console.log(response)
+           
             
                 if(response.data.status=="success"){
 
