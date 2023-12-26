@@ -10,15 +10,13 @@ import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 
-import Add_debit from './add_debit';
-
-
 function CUSTOMERLST() {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   let {userstatus}=useSelector((state)=> state.customer)
 
   // let [apidata, setapidata] = useState([])
+  const [debit, setdebit]=useState()
 
   const [query, setQuery] = useState("")
 
@@ -49,18 +47,19 @@ function CUSTOMERLST() {
       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
     })
-      .then(function (res) {
-        console.log(res.data.data)
-        dispatch(setapidata(res.data.data))
+      .then(function (response) {
+        console.log(response)
+        dispatch(setapidata(response.data.data))
         console.log(apidata)
+        console.log(response.data.email)
       })
   }, [])
 
   const adddue=(id)=>{
-    alert(id)
-   
-    navigate('/adddebit')
 
+   
+navigate(`/adddebit/${id}`)
+   
 
   }
 
@@ -77,7 +76,7 @@ function CUSTOMERLST() {
             </Form>
           </div>
           <div className='right-form d-flex'>
-            <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button>
+            <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
         </div>
 
@@ -89,6 +88,7 @@ function CUSTOMERLST() {
               <th>email</th>
               <th>phone</th>
               <th>Address</th>
+              <th>Add due </th>
               <th>Add due </th>
             </tr>
           </thead>
@@ -103,13 +103,13 @@ function CUSTOMERLST() {
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>  <Button variant="outline-primary" onClick={()=>adddue(item.id)}>Add debt</Button></td>
-
+        <td>{item.debits.debitamount}</td>
               </tr>
             ))}
 
           </tbody>
         </Table>
-        {/* <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button> */}
+        {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
       </div>
     </>
   );

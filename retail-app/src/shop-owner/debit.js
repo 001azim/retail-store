@@ -34,7 +34,7 @@ function DEBITLST() {
 
             let html = ""
             for (let i of filterdata) {
-                console.log(i)
+           
                 let due=i.date_of_last_purchase
                 html = html +
                     `<tr>

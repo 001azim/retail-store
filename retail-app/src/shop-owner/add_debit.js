@@ -23,6 +23,7 @@ function Add_debit() {
 let cdetails=useSelector((state)=>state.customer.due_details)
 
  const navigate=useNavigate()
+ const {customerid}=useParams()
 
 useEffect(()=>{
     if(cdetails.due_date){
@@ -35,12 +36,12 @@ useEffect(()=>{
 
     const setduedate =()=>{
         if (cdetails.due_amount <= 4999) {
-            dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
+            dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_at).add(90,"day").format('LL')}))
      console.log(cdetails.due_amount)
     
          }
          else {
-             dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
+             dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_at).add(7,"day").format('LL')}))
              console.log(cdetails.due_amount)
           
             }
@@ -49,17 +50,17 @@ useEffect(()=>{
     
 useEffect(()=>{
     setduedate()
-},[cdetails.due_amount,cdetails.Last_purchase_date])
+},[cdetails.due_amount,cdetails.Last_purchase_at])
 
 
 function Sent() {
-       
-
+     
     
     let formData = new FormData();
-    formData.append("name",cdetails.Last_purchase_date)
-    formData.append("email",cdetails.due_amount)
-    formData.append("address",cdetails.due_date)
+    formData.append("customer_id",customerid)
+    formData.append("Last_purchase_at",cdetails.Last_purchase_at)
+    formData.append("debit_amount",cdetails.due_amount)
+    formData.append("due_date",cdetails.due_date)
     
 
    
@@ -74,6 +75,8 @@ function Sent() {
   return (
   <>
     <Container>
+     <br></br>
+     <h2> add due </h2>
         {/* {console.log('customer_details',customer_details)} */}
             <Form>
          {/* date of last purchase */}
@@ -84,7 +87,7 @@ function Sent() {
              type="date"
              aria-label="Username"
              aria-describedby="basic-addon1"
-             onChange={(e) => dispatch( setduedetails({ ...cdetails, Last_purchase_date: e.target.value }))} />
+             onChange={(e) => dispatch( setduedetails({ ...cdetails, Last_purchase_at: e.target.value }))} />
      </InputGroup>
 
 

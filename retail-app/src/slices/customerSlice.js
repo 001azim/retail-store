@@ -12,7 +12,7 @@ export const customerSlice = createSlice({
 
     } ,
     due_details :{
-      Last_purchase_date: "",
+      Last_purchase_at: "",
       due_amount: 0,
       due_date: ""
 

@@ -63,7 +63,7 @@ function SO_REG() {
         console.log(formData)
 
         axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
-            console.log(response)
+        
 
             if (response.data.status == "success") {
                 navigate("/");

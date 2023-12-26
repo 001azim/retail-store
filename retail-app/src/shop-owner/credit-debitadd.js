@@ -16,7 +16,7 @@ import Common from "../components/common.js"
 
 function ADDAMOUNT() {
     const dispatch=useDispatch()
-    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
+    let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
     let cdetails=useSelector((state)=>state.customer.details)
     
     
@@ -36,11 +36,14 @@ function ADDAMOUNT() {
 
        
         axios.post('https://agaram.academy/api/retail/index.php?request=create_customer',formData).then(function(response){
-            console.log('response',response)
+            console.log('response',response.data.status)
+            if(response.data.status=="success"){
+                navigate('/customerlist')
+            }
            
           
            } )
-        //    navigate('/adddebit')
+     
     }
 {console.log(ownerid)}
 

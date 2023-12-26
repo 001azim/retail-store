@@ -19,7 +19,7 @@ function LOGINSO() {
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
             
 
-            console.log(response.data)
+           
             if (response.data.status == "success") {
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))

@@ -54,7 +54,7 @@ function App() {
       element: < SO_REG />
     },
     {
-      path: "/adddebit",
+      path: "/adddebit/:customerid",
       element: < Add_debit />
     },
     {
