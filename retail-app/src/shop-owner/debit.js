@@ -1,78 +1,87 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Common from "../components/common"
-import moment from "moment"
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
+import { setapidata } from "../slices/customerSlice"
+import Debittotal from "../components/debittotal";
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router'
+
 function DEBITLST() {
+    let navigate=useNavigate()
+    let dispatch = useDispatch()
+    let { ownerid } = useSelector((state) => state.shopOwnerLogin)
+    let { apidata, } = useSelector((state) => state.customer)
+    const [debit, setdebit] = useState([]);
 
-    const navigate = useNavigate()
-
-
-    const home = () => navigate("/")
-    const back = () => window.history.back()
-    const forward = () => window.history.forward
-    // let [response, setresponse] = useState()
-
+    let owner_id = ownerid.data.id
     function debtlist() {
 
-        axios({
-            method: 'get',
-            url: 'https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/debtlist',
+        axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`).then(function (res) {
 
+            console.log("res", res.data.data)
+            let customer_detail = res.data.data
+            dispatch(setapidata(customer_detail))
 
-        }).then(function (res) {
-
-            let data = res.data
-            console.log(data[0].id)
-            let filterdata = []
-            for (let i of data) {
-                if (i.debt_amount != 0) {
-                    filterdata.push(i)
-                }
-            }
-
-            let html = ""
-            for (let i of filterdata) {
-           
-                let due=i.date_of_last_purchase
-                html = html +
-                    `<tr>
-                        <td>${i.id}</td>
-                        <td>${i.debt_amount}</td>
-                        <td>${i.date_of_last_purchase}</td>
-                        <td>${moment(due).add(10, 'days').format('l')}</td>
-
-
-                    </tr>`
-            }
-            document.getElementById("table").innerHTML = html
         })
     }
 
-    // useEffect(debtlist, [])
+    useEffect(debtlist, [])
+    useEffect(() => {
+        const customerList = Debittotal(apidata)
+
+        setdebit(customerList)
 
 
+    }, []);
 
+    const credit=(id)=>{
+
+        navigate(`/credit/${id}`)
+           
+        
+          }
     return (
         <>
-         <Common />
+            <Common />
 
             < table class="table table-dark ">
                 <thead>
                     <tr>
                         <th>Customer ID</th>
+                        <th>Customer Name</th>
                         <th>Debt Amount</th>
                         <th>Date of  Last Debt</th>
-                        <th>date</th>
+                        <th>Due date</th>
+                        <th>Credit</th>
                     </tr>
                 </thead>
-                <tbody id="table">
+                <tbody>
+                    {console.log("api", apidata)}
+
+                    {debit.map((customer) => {
+                        if (customer.debit_total) {
+                            return (
+                                <tr>
+                                    <td>{customer.id}</td>
+                                    <td>{customer.name}</td>
+                                    <td>{customer.debit_total}</td>
+                                    <td>{customer.debits[0].last_purchase_at}</td>
+                                    <td>{customer.debits[0].due_date}</td>
+                                    <td><Button variant="outline-primary" onClick={()=>credit(customer.id)}>Credit</Button></td>
+                                </tr>)
+
+                        }
+
+                    })}
+
 
                 </tbody>
             </table >
+            {console.log("ans", (ownerid.data.id))}
 
-         
+
 
         </>
     )
