@@ -9,6 +9,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
+import Debittotal from '../components/debittotal';
 
 
 
@@ -17,7 +18,8 @@ function CUSTOMERLST() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  let ownerid = useSelector((state) => state.shopOwerLogin.ownerid)
+  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+  let {userstatus}=useSelector((state)=> state.customer)
   let apidata = useSelector((state) => state.customer.apidata)
   console.log(ownerid)
 
@@ -49,9 +51,19 @@ function CUSTOMERLST() {
       })
   }, [])
 
+  const [debit, setdebit] = useState(false);
+
+  
+
+  const adddue=(id)=>{
+    navigate(`/adddebit/${id}`)
+      }
+
   return (
     <>
+    {/* <Debittotal filteredItems={filteredItems}/> */}
       <Common />
+      <h1 style={{textAlign: 'start',textTransform:"uppercase",margin:"15px"}}>{ownerid.name}</h1>
       <div className='boxs'>
         <div className='form-flex'>
           <div className='left-form'>
@@ -62,7 +74,7 @@ function CUSTOMERLST() {
             </Form>
           </div>
           <div className='right-form '>
-            <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button>
+            <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
         </div>
 
@@ -90,7 +102,7 @@ function CUSTOMERLST() {
                 <td>{item.phone}</td>
                 <td>{item.email}</td>
                 <td>{item.address}</td>
-                <td><Button variant="outline-secondary" onClick={()=>alert(i)}> <b>+</b> ADD </Button></td>
+                <td> <Button variant="outline-secondary" onClick={()=>alert(i)}> <b>+</b> ADD </Button></td>
                 <td><Button type="button"  className='btn btn-primary' onClick={()=>{
                   alert(i)
 

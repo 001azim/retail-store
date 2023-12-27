@@ -10,9 +10,9 @@ import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSli
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { userLogin,userstatus } = useSelector((state) => state.shopOwnerLogin)
+    console.log(userstatus)
    
-    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
-
     function alldata() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
@@ -20,7 +20,7 @@ function LOGINSO() {
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
             
 
-            console.log(response.data.data)
+           
             if (response.data.status == "success") {
                 localStorage.setItem("authLog",true)
                 dispatch(setOwnerId(response.data.data))

@@ -12,7 +12,7 @@ export const customerSlice = createSlice({
 
     } ,
     due_details :{
-      Last_purchase_date: "",
+      Last_purchase_at: "",
       due_amount: 0,
       due_date: ""
 
@@ -33,7 +33,7 @@ export const customerSlice = createSlice({
     setcustomerid :(state,action)=>{
       state.customer_id=action.payload
   },
-    setapidata : (state,action)=>{
+    setapidata:(state,action)=>{
     state.apidata=action.payload
 }
 

@@ -1,91 +1,97 @@
-import axios from "axios"
-import { useEffect } from "react"
-import Common from "../components/common"
-import moment from "moment"
-import React from "react";
-import { useNavigate } from "react-router-dom";
+// import axios from "axios"
+// import { useEffect } from "react"
+// import Common from "../components/common"
+// import React from "react";
+// import { useDispatch, useSelector } from "react-redux"
+// import { setapidata, setdebtdata } from "../slices/customerSlice"
 
-function DEBITLST() {
+// function DEBITLST() {
+//     let dispatch = useDispatch()
+//     let { ownerid } = useSelector((state) => state.shopOwnerLogin)
+//     let { apidata, debtdata } = useSelector((state) => state.customer)
 
-    const navigate = useNavigate()
+//     let owner_id = ownerid.data.id
+//     function debtlist() {
 
+//         axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`).then(function (res) {
 
-    // const home = () => navigate("/")
-    // const back = () => window.history.back()
-    // const forward = () => window.history.forward
-    // let [response, setresponse] = useState()
+//             console.log("res", res.data.data)
+//             let customer_detail = res.data.data
+//             dispatch(setapidata(customer_detail))
+//         })
+//     }
 
-    function debtlist() {
-
-        axios({
-            method: 'get',
-            url: 'https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/debtlist',
-
-
-        }).then(function (res) {
-
-            let data = res.data
-            console.log(data[0].id)
-            let filterdata = []
-            for (let i of data) {
-                if (i.debt_amount != 0) {
-                    filterdata.push(i)
-                }
-            }
-
-            let html = ""
-            for (let i of filterdata) {
-                console.log(i)
-                let due=i.date_of_last_purchase
-                html = html +
-                    `<tr>
-                        <td>${i.id}</td>
-                        <td>${i.debt_amount}</td>
-                        <td>${i.date_of_last_purchase}</td>
-                        <td>${moment(due).add(10, 'days').format('l')}</td>
-
-
-                    </tr>`
-            }
-            document.getElementById("table").innerHTML = html
-        })
-    }
-
-    // useEffect(debtlist, [])
+//     useEffect(debtlist, [])
 
 
 
-    return (
-        <>
-         <Common />
+//     return (
+//         <>
+//             <Common />
 
-            < table class="table table-dark ">
-                <thead>
-                    <tr>
-                        <th>Customer ID</th>
-                        <th>Debt Amount</th>
-                        <th>Date of  Last Debt</th>
-                        <th>date</th>
-                    </tr>
-                </thead>
-                <tbody id="table">
-
-                </tbody>
-            </table >
-
-         
-
-        </>
-    )
-
-}
+//             < table class="table table-dark ">
+//                 <thead>
+//                     <tr>
+//                         <th>Customer ID</th>
+//                         <th>Customer Name</th>
+//                         <th>Debt Amount</th>
+//                         <th>Date of  Last Debt</th>
+//                         <th>Due date</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody>
+//                     {console.log("api", apidata)}
 
 
+//                     {apidata.map((customer_list) => {
+//                         customer_list.debits.filter((debit) => {
+                            
+//                             if (debit.debit_amount > 0) {
+//                                 { dispatch(setdebtdata(customer_list)) }
+//                             }
+//                         })
+
+
+//                         // return (
+//                         //     <>
+//                         //         {debit.debit_amount}!=0?{dispatch(setdebtdata(debit))}
+
+
+//                         //     </>
+//                         // )
 
 
 
+//                     })}
+//                     {/* {apidata.map((customer) => {
+//                         return (
+//                             <tr>
+//                                 <td>{customer.id}</td>
+//                                 <td>{customer.name}</td>
+
+
+//                                 {customer.debits.map((debit) => {
+//                                     return (
+//                                         <>
+//                                             <td>{debit.debit_amount}</td>
+//                                             <td>{debit.last_purchase_at}</td>
+//                                             <td>{debit.due_date}</td>
+//                                         </>
+//                                     )
+//                                 })}</tr>)
+
+//                     })} */}
+
+//                 </tbody>
+//             </table >
+//             {console.log("ans", (ownerid.data.id))}
 
 
 
+//         </>
+//     )
 
-export default DEBITLST
+// }
+
+
+// export default DEBITLST
