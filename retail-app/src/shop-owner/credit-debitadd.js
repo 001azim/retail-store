@@ -45,7 +45,6 @@ function ADDAMOUNT() {
            } )
      
     }
-{console.log(ownerid)}
 
     return (
 

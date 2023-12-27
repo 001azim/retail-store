@@ -8,31 +8,26 @@ import "../css/cus-list.css"
 import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { setapidata } from "../slices/customerSlice"
+import { setapidata,setdueamount } from "../slices/customerSlice"
 import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
 
 function CUSTOMERLST(props) {
-
+// owner id from loginpage
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-  let {userstatus}=useSelector((state)=> state.customer)
-
-  // let [apidata, setapidata] = useState([])
-  
 
   const [query, setQuery] = useState("")
 
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
+let {due_amount}=useSelector((state)=>state.customer)
 
   const navigate = useNavigate()
   // const home = () =>navigate("/")
   // const back = ()=>window.history.back()
   // const forward = () => window.history.forward
 
-  const add = () => {
-    alert("sucess")
-  }
+  // search bar filter
 
   const filteredItems = useMemo(() => {
     return apidata.filter(item => {
@@ -41,7 +36,7 @@ function CUSTOMERLST(props) {
   }, [apidata, query])
 
 
-
+// get all customers by sending owner id
   useEffect(() => {
     axios({
       method: 'get',
@@ -51,39 +46,31 @@ function CUSTOMERLST(props) {
       .then(function (response) {
         console.log(response)
         dispatch(setapidata(response.data.data))
-        console.log(apidata)
-        console.log(response.data.email)
+    
         
       })
   }, [])
+
+// filtered iten set in debit state
+
   const [debit, setdebit] = useState([]);
 
   useEffect(() => {
   
   const customerList =  Debittotal(filteredItems)
-  //   let customerList = filteredItems.map((item) => {
-  //     let cus_tot = 0;
-  //     if(item.debits){
-  //       item.debits.map((c_d)=>{
-  //         cus_tot = cus_tot + c_d.debit_amount
-  //       }) 
-  //     }
-
-  //     return {...item,debit_total:cus_tot};
-  //   });
+  
     setdebit(customerList)
 
 
   }, [filteredItems]);
 
 
-  const adddue=(id)=>{
-
+  const adddue=(id,due_amount)=>{
+dispatch(setdueamount(due_amount))
 navigate(`/adddebit/${id}`)
-   
+ 
 
   }
-console.log(debit.debit_total)
 
   return (
     <>
@@ -124,31 +111,20 @@ console.log(debit.debit_total)
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
-               
                 <td>{item.address}</td>
                 <td>
-  {item.debit_total < 5000  ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+  {item.debit_total < 5000  ? (<Button variant="outline-primary" onClick={() => adddue(item.id,item.debit_total)}>  Add debt
     </Button>
   ) : (
     <h4>debit limit reached</h4>
   )}
 </td>
-        <td>{item.debits.map((list)=>{
-        
-          return(
-            <th>
-         <td>{list.debit_amount}</td>
-            
-            </th>
-          )
-        
-        })}</td>
+<td>{item.debit_total}</td>
               </tr>
             ))}
 
           </tbody>
         </Table>
-        {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
       </div>
     </>
   );
