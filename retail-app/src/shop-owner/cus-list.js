@@ -9,14 +9,16 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
-
-
+import { useRef } from 'react';
+import Debittotal from '../components/debittotal';
 
 function CUSTOMERLST() {
 
-  // let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-  // console.log(ownerid)
+  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+  let {userstatus}=useSelector((state)=> state.customer)
+
   // let [apidata, setapidata] = useState([])
+  
 
   const [query, setQuery] = useState("")
 
@@ -40,47 +42,76 @@ function CUSTOMERLST() {
 
 
 
-  // useEffect(() => {
-  //   // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
-  //   axios({
-  //     method: 'get',
-  //     url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
-  //   })
-  //     .then(function (res) {
-  //       console.log(res.data.data)
-  //       dispatch(setapidata(res.data.data))
-  //       console.log(apidata)
-  //     })
-  // }, [])
+    })
+      .then(function (response) {
+        console.log(response)
+        dispatch(setapidata(response.data.data))
+        console.log(apidata)
+        console.log(response.data.email)
+        
+      })
+  }, [])
+  const [debit, setdebit] = useState(false);
+
+  // useEffect(() => {
+  
+
+  //   let customerList = filteredItems.map((item) => {
+  //     let cus_tot = 0;
+  //     if(item.debits){
+  //       item.debits.map((c_d)=>{
+  //         cus_tot = cus_tot + c_d.debit_amount
+  //       }) 
+  //     }
+
+  //     return {...item,debit_total:cus_tot};
+  //   });
+    
+  //   console.log("==>",customerList)
+
+  // }, [filteredItems]);
+
+
+  const adddue=(id)=>{
+
+navigate(`/adddebit/${id}`)
+   
+
+  }
 
   return (
     <>
+    <Debittotal filteredItems={filteredItems}/>
       <Common />
       <div className='boxs'>
         <div className='form-flex'>
           <div className='left-form'>
             <Form>
               <InputGroup className='my-3 search'>
-                <Form.Control placeholder='Search contacts' value={query} onChange={e => setQuery(e.target.value)} />
+                <Form.Control placeholder='Search customers' value={query} onChange={e => setQuery(e.target.value)} />
               </InputGroup>
             </Form>
           </div>
           <div className='right-form d-flex'>
-            <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button>
+            <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
         </div>
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Contact</th>
-              <th>Purchase date</th>
-              <th>debt_amount</th>
-              <th>due_date</th>
-              <th>Send Notification</th>
+              <th>id</th>
+              <th>Customer name</th>
+              <th>email</th>
+              <th>phone</th>
+              <th>Address</th>
+              <th>Add due </th>
+              <th> due amount </th>
             </tr>
           </thead>
           <tbody >
@@ -91,13 +122,33 @@ function CUSTOMERLST() {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
-
+                <td>{item.phone}</td>
+                <td>{item.address}</td>
+                <td>
+  {debit === false ? (
+    <Button variant="outline-primary" onClick={() => adddue(item.id)}>
+      Add debt
+    </Button>
+  ) : (
+    <h1>no due</h1>
+  )}
+</td>
+        <td>{item.debits.map((list)=>{
+        
+          return(
+            <th>
+         <td>{list.debit_amount}</td>
+            
+            </th>
+          )
+        
+        })}</td>
               </tr>
             ))}
 
           </tbody>
         </Table>
-        {/* <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button> */}
+        {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
       </div>
     </>
   );

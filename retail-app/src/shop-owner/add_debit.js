@@ -9,37 +9,39 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment'
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 
 function Add_debit() {
     let [alertdate,setalertdate]=useState('')
 
     const dispatch=useDispatch()
 
-    let customer_details=useSelector((state)=>state.customer.details)
-    const { userLogin, ownerid } = useSelector((state) => state.shopOwerLogin)
-    const {customer_id}= useSelector((state) => state.customer)
     
+    const { userLogin, ownerid } = useSelector((state) => state.shopOwnerLogin)
+    const {customer_id}= useSelector((state) => state.customer)
+
 let cdetails=useSelector((state)=>state.customer.due_details)
 
  const navigate=useNavigate()
+ const {customerid}=useParams()
 
 useEffect(()=>{
     if(cdetails.due_date){
        setalertdate(moment(cdetails.due_date).subtract(7,"day").format('LL')) 
    }},[cdetails.due_date])
 
+
    {console.log(alertdate)}
 
-    const setduedate =()=>{
-    
 
+    const setduedate =()=>{
         if (cdetails.due_amount <= 4999) {
-            dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
+            dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_at).add(90,"day").format('LL')}))
      console.log(cdetails.due_amount)
     
          }
          else {
-             dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
+             dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_at).add(7,"day").format('LL')}))
              console.log(cdetails.due_amount)
           
             }
@@ -48,33 +50,40 @@ useEffect(()=>{
     
 useEffect(()=>{
     setduedate()
-},[cdetails.due_amount,cdetails.Last_purchase_date])
+},[cdetails.due_amount,cdetails.Last_purchase_at])
 
 
 function Sent() {
-       
-
+     
     
     let formData = new FormData();
-    formData.append("name",cdetails.Last_purchase_date)
-    formData.append("email",cdetails.due_amount)
-    formData.append("address",cdetails.due_date)
+    formData.append("customer_id",customerid)
+    formData.append("Last_purchase_at",cdetails.Last_purchase_at)
+    formData.append("debit_amount",cdetails.due_amount)
+    formData.append("due_date",cdetails.due_date)
     
 
    
-    // axios.post('https://agaram.academy/api/retail/index.php?request=create_customer',formData).then(function(response){
-    //     console.log('response',response)
-       
-      
-    //    } )
-   
+    axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
+            console.log('response',response)
+            if(response.data.status=="success"){
+                navigate('/customerlist')
+            }
+            else{
+                alert("failed")
+            }
+           
+          
+           } )
 }
 
 
   return (
   <>
     <Container>
-        {console.log('customer_details',customer_details)}
+     <br></br>
+     <h2> add due </h2>
+        {/* {console.log('customer_details',customer_details)} */}
             <Form>
          {/* date of last purchase */}
          <InputGroup className="mb-3">
@@ -84,7 +93,7 @@ function Sent() {
              type="date"
              aria-label="Username"
              aria-describedby="basic-addon1"
-             onChange={(e) => dispatch( setduedetails({ ...cdetails, Last_purchase_date: e.target.value }))} />
+             onChange={(e) => dispatch( setduedetails({ ...cdetails, Last_purchase_at: e.target.value }))} />
      </InputGroup>
 
 
