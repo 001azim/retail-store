@@ -111,7 +111,6 @@ console.log(debit.debit_total)
               <th>phone</th>
               <th>Address</th>
               <th>Add due </th>
-              <th> due amount </th>
             </tr>
           </thead>
           <tbody >
@@ -133,16 +132,6 @@ console.log(debit.debit_total)
     <h4>debit limit reached</h4>
   )}
 </td>
-        <td>{item.debits.map((list)=>{
-        
-          return(
-            <th>
-         <td>{list.debit_amount}</td>
-            
-            </th>
-          )
-        
-        })}</td>
               </tr>
             ))}
 

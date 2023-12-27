@@ -1,10 +1,12 @@
 import axios from "axios"
-import { useEffect ,useState} from "react"
+import { useEffect, useState } from "react"
 import Common from "../components/common"
 import React from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
+import Button from 'react-bootstrap/Button';
+
 function DEBITLST() {
     let dispatch = useDispatch()
     let { ownerid } = useSelector((state) => state.shopOwnerLogin)
@@ -45,30 +47,25 @@ function DEBITLST() {
                         <th>Debt Amount</th>
                         <th>Date of  Last Debt</th>
                         <th>Due date</th>
+                        <th>Credit</th>
                     </tr>
                 </thead>
                 <tbody>
                     {console.log("api", apidata)}
 
                     {debit.map((customer) => {
-                       if(customer.debit_total){
+                        if (customer.debit_total) {
                             return (
                                 <tr>
                                     <td>{customer.id}</td>
                                     <td>{customer.name}</td>
                                     <td>{customer.debit_total}</td>
+                                    <td>{customer.debits[0].last_purchase_at}</td>
+                                    <td>{customer.debits[0].due_date}</td>
+                                    <td><Button variant="outline-primary">Credit</Button></td>
+                                </tr>)
 
-
-                                    {customer.debits.map((debit) => {
-                                        return (
-                                            <>
-                                                <td>{debit.last_purchase_at}</td>
-                                                <td>{debit.due_date}</td>
-                                            </>
-                                        )
-                                    })}</tr>)
-
-                                }
+                        }
 
                     })}
 
