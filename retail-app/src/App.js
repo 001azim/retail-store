@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css';
 import MESSAGELST from './message'
 import ADDAMOUNT from './shop-owner/credit-debitadd';
@@ -10,14 +10,14 @@ import SO_REG from './super-admin/reg-SO';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
- import Common from './components/common';
+//  import Common from './components/common';
  import store from './store'
  import { Provider } from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
-
+import Credit from './shop-owner/credit';
 
 
 function App() {
@@ -61,7 +61,10 @@ function App() {
       path: "/ownerslist",
       element: < Ownerlist />
     },
-   
+    {
+      path: "/credit/:customerid",
+      element: < Credit />
+    },
 
 
   ]);

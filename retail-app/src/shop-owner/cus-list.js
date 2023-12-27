@@ -98,7 +98,6 @@ navigate(`/adddebit/${id}`)
               <th>phone</th>
               <th>Address</th>
               <th>Add due </th>
-              <th> due amount </th>
             </tr>
           </thead>
           <tbody >
@@ -119,7 +118,6 @@ navigate(`/adddebit/${id}`)
     <h4>debit limit reached</h4>
   )}
 </td>
-<td>{item.debit_total}</td>
               </tr>
             ))}
 
