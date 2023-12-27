@@ -1,10 +1,32 @@
 .bg{
-    background-image: url(../retailapp.avif);
+    background-image: url("../retailapp.avif");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow:scroll;
+    position: relative;
+    height: 100vh;
+
+}
+.detail{
+   opacity: 70%; 
 }
 
-/* .reg{
-    opacity: 1;
-} */
+.mailbox{
+    display: inline-block;
+    
+}
+
+.pasbox{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -5px;
+}
+.positionchange{
+position: absolute ;
+right: 49%;
+bottom: -28%;
+}
+   

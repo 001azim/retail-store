@@ -4,15 +4,16 @@ export const registerSlice=createSlice({
     name: 'register',
     initialState: {
       ownerDetails: {
-        Username:"",
-        Shopname:"",
+        name:"",
+        shop_name:"",
         email: "",
         password: "",
         aadhar:"",
-        mobileno:"",
-        address:"",
+        phone:"",
+        street:"",
         city:"",
-        pin:""
+        area:"",
+        pincode:""
       },
     },
 

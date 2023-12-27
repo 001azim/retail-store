@@ -6,6 +6,7 @@ function Logout(){
     const Navigate=useNavigate()
     let logout=()=>{
         dispatch(setStatus(false))
+        localStorage.removeItem("Id")
         Navigate("/")
     }
     return(

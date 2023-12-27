@@ -9,7 +9,7 @@ export default configureStore({
 
 
 customer:customerSlice,
-shopOwerLogin:shopOwnerLoginSlice,
+shopOwnerLogin:shopOwnerLoginSlice,
 register:registerSlice,
 user:userSlice
   },

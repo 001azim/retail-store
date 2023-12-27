@@ -1,13 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import MESSAGELST from './message'
+import MESSAGELST from './message';
 import ADDAMOUNT from './shop-owner/credit-debitadd';
 import CUSTOMERLST from './shop-owner/cus-list';
 import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
-import Home from './super-admin/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
@@ -16,6 +15,9 @@ import {
  import Common from './components/common';
  import store from './store'
  import { Provider } from 'react-redux';
+import Add_debit from './shop-owner/add_debit';
+import Ownerlist from './super-admin/ownerlist';
+import Home from './super-admin/home';
 
 
 
@@ -32,7 +34,7 @@ function App() {
       element: <MESSAGELST/>
     },
     {
-      path: "/creditordebit",
+      path: "/addcustomer",
       element: <ADDAMOUNT/>
     },
     {
@@ -53,11 +55,17 @@ function App() {
       element: < SO_REG />
     },
     {
+      path: "/adddebit/:customerid",
+      element: < Add_debit />
+    },
+    {
+      path: "/ownerslist",
+      element: < Ownerlist />
+    },
+    {
       path: "/home",
       element: < Home />
     },
-   
-   
 
 
   ]);

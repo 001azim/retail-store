@@ -10,33 +10,27 @@ export default function Home(){
   const navigate=useNavigate()
     return(
         <>
-        <div className='bg'>
+        <div className='backgroundhmge'>
          <div>
         <Navbar >
-        <Container>
-          <Navbar.Brand href="#home">Debit relief</Navbar.Brand>
+      
+          <Navbar.Brand >Debit relief</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <button id="sn" onClick={()=>navigate("/")}>sign in</button>
-              <button id="sn">sign up</button>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+              <button id="sn" onClick={()=>navigate("/")}>sign in</button> 
+              <button id="sn" onClick={()=>navigate("/shopownerregister")}>sign up</button> 
+             
             </Nav>
           </Navbar.Collapse>
-        </Container>
+     
       </Navbar>
       </div>
-      
+        <div className='quotes'>
+          <h1 className='quote'>He who is quick</h1>
+          <h1 className='quote'>To borrow</h1>
+          <h1 className='quote'>is slow to pay</h1>  
+        </div>
     </div>
       </>
     )
