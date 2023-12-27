@@ -1,14 +1,15 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect ,useState} from "react"
 import Common from "../components/common"
 import React from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { setapidata, setdebtdata } from "../slices/customerSlice"
-
+import { setapidata } from "../slices/customerSlice"
+import Debittotal from "../components/debittotal";
 function DEBITLST() {
     let dispatch = useDispatch()
-    let { ownerid } = useSelector((state) => state.shopOwerLogin)
-    let { apidata, debtdata } = useSelector((state) => state.customer)
+    let { ownerid } = useSelector((state) => state.shopOwnerLogin)
+    let { apidata, } = useSelector((state) => state.customer)
+    const [debit, setdebit] = useState([]);
 
     let owner_id = ownerid.data.id
     function debtlist() {
@@ -23,7 +24,13 @@ function DEBITLST() {
     }
 
     useEffect(debtlist, [])
+    useEffect(() => {
+        const customerList = Debittotal(apidata)
 
+        setdebit(customerList)
+
+
+    }, []);
 
 
     return (
@@ -43,39 +50,28 @@ function DEBITLST() {
                 <tbody>
                     {console.log("api", apidata)}
 
-
-                    {/* {apidata.map((customer_list) => {
-                        customer_list.debits.filter((debit) => {
-                            
-                            if (debit.debit_amount > 0) {
-                                { dispatch(setdebtdata(customer_list)) }
-                            }
-                        })
-
-
-                        
+                    {debit.map((customer) => {
+                       if(customer.debit_total){
+                            return (
+                                <tr>
+                                    <td>{customer.id}</td>
+                                    <td>{customer.name}</td>
+                                    <td>{customer.debit_total}</td>
 
 
+                                    {customer.debits.map((debit) => {
+                                        return (
+                                            <>
+                                                <td>{debit.last_purchase_at}</td>
+                                                <td>{debit.due_date}</td>
+                                            </>
+                                        )
+                                    })}</tr>)
 
-                    })} */}
-                    {/* {apidata.map((customer) => {
-                        return (
-                            <tr>
-                                <td>{customer.id}</td>
-                                <td>{customer.name}</td>
+                                }
 
+                    })}
 
-                                {customer.debits.map((debit) => {
-                                    return (
-                                        <>
-                                            <td>{debit.debit_amount}</td>
-                                            <td>{debit.last_purchase_at}</td>
-                                            <td>{debit.due_date}</td>
-                                        </>
-                                    )
-                                })}</tr>)
-
-                    })} */}
 
                 </tbody>
             </table >

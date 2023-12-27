@@ -22,7 +22,6 @@ export const customerSlice = createSlice({
     },
     apidata: [],
 
-    debtdata: []
 
   },
   reducers: {
@@ -38,16 +37,13 @@ export const customerSlice = createSlice({
     setapidata: (state, action) => {
       state.apidata = action.payload
     },
-    setdebtdata:(state,action)=>{
-      state.debtdata = action.payload
-
-    }
+    
 
 
   },
 })
 
 
-export const { setdetails, setduedetails, setcustomerid, setapidata,setdebtdata } = customerSlice.actions
+export const { setdetails, setduedetails, setcustomerid, setapidata } = customerSlice.actions
 
 export default customerSlice.reducer
