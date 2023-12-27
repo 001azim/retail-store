@@ -94,7 +94,8 @@ export default function Common() {
                   <hr></hr>
                   {/* <input type="file" onChange={handleChange} hidden /> */}
                   {/* <img src={file} alt='img' style={{ width: "100px", height: "100px", borderRadius: "50%" }} /> */}
-                  <div className='slidenav'><Link to={`/msg`}>
+                  <div className='aligntextnav'>
+                  <div className='slidenav'><Link to={`/msg`} style={{textDecoration:'none'}}>
                     <Nav.Link href="#action1">Home</Nav.Link></Link></div>
                   <div className='slidenav'><Nav.Link href="#action2">Contact</Nav.Link></div>
                   <div className='slidenav'><Nav.Link href="#action3">About Us</Nav.Link></div>
@@ -117,7 +118,9 @@ export default function Common() {
                     </NavDropdown.Item>
                   </NavDropdown>
                   <Logout/>
+                  </div>
                 </Nav>
+                
               <div className='socialmedias'>
               <hr></hr>
                 <a href='#'><i class="fa-brands fa-facebook"></i></a>

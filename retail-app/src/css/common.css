@@ -145,10 +145,20 @@
     position: fixed;
     bottom: 0;
    width: 100%;
+   background-color: white;
  }
  .socialmedias a i{
     margin: 35px;
  }
  .slidenav:hover{
+    width: 100%;
     background-color: antiquewhite;
  }
+
+ .aligntextnav{
+    width: 100%;
+    height: calc(950px - 400px);
+    padding-left: 10px;
+    font-size: larger;
+ }
+

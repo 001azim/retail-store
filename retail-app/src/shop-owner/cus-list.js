@@ -72,24 +72,29 @@ function CUSTOMERLST() {
               <th>#</th>
               <th>Name</th>
               <th>Contact</th>
-              <th>Purchase date</th>
-              <th>debt_amount</th>
-              <th>due_date</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Add due</th>
               <th>Send Notification</th>
             </tr>
           </thead>
           <tbody >
 
             {filteredItems.map((item, i) => (
+              // console.log(JSON.stringify
+              // (item.debits.debit_amount)),
               <tr key={i}>
 
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.phone}</td>
-                <td>{item.debit}</td>
-                <td>{item.phone}</td>
-                <td>{item.phone}</td>
-                <td ><Button type="button" className='btn btn-primary'>Send</Button></td>
+                <td>{item.email}</td>
+                <td>{item.address}</td>
+                <td><Button variant="outline-secondary" onClick={()=>alert(i)}> <b>+</b> ADD </Button></td>
+                <td><Button type="button"  className='btn btn-primary' onClick={()=>{
+                  alert(i)
+
+                }}>Send</Button></td>
 
                 
 

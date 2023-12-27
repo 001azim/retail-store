@@ -103,7 +103,7 @@ const Contactus = () => {
         <div className="leftmsgbox">
           <div className="leftheader">
             <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
-            <h4>Owner name<span>Total Member : 5</span></h4>
+            <h4>Owner name<span>Total Member : {apidata.length}</span></h4>
           </div>
           <div className="msgsearch">
             <Form>
@@ -198,7 +198,7 @@ const Contactus = () => {
               }}
               value={value}
             />
-            <button className="btn btn-success" style={{marginLeft: "3px",borderRadius: 50, paddingLeft:30, paddingRight:30}}><i class="fa-regular fa-paper-plane"></i></button>
+            <button className="btn btn-success" onClick={()=>alert("msg send success fully")} style={{marginLeft: "3px",borderRadius: 50, paddingLeft:30, paddingRight:30}}><i class="fa-regular fa-paper-plane"></i></button>
           </div>
           <div className="msglist">
               <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
