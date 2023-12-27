@@ -10,22 +10,21 @@ import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSli
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { userLogin,userstatus } = useSelector((state) => state.shopOwnerLogin)
+    let { userLogin,userstatus,ownerid } = useSelector((state) => state.shopOwnerLogin)
     console.log(userstatus)
+    console.log(ownerid)
+    //console.log(ownerid.data.name)
    
     function alldata() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
         formdata.append("password", userLogin.password)
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
-            
-
-           
             if (response.data.status == "success") {
                 dispatch(setOwnerId(response.data))
-                dispatch(setStatus(true))
-                localStorage.setItem("loggedin","true")
-                if (localStorage.getItem("loggedin")=="true"){
+                dispatch(setStatus(true))   
+                localStorage.setItem("Id",response.data.data.id)
+                if (localStorage.getItem("Id")){
                     dispatch(setOwnerId(response.data))
                     dispatch(setStatus(true))
                 }
@@ -38,9 +37,10 @@ function LOGINSO() {
 
     }
     useEffect(()=>{
-        if(localStorage.getItem("loggedin")=="true"){
-            alldata()
-        }
+       if(localStorage.getItem("Id")){
+        alldata()
+       }
+        
     },[])
 
 

@@ -7,89 +7,122 @@ import Form from 'react-bootstrap/Form';
 import "../css/cus-list.css"
 import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
-import { customer_data } from '../data';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { setapidata } from "../slices/customerSlice"
+import Logout from '../components/logOut';
+import Add_debit from './add_debit';
+
 function CUSTOMERLST() {
 
-  let [apidata,setapidata] = useState([])
-const {ownerid}=useSelector((state)=>state.shopOwerLogin)
+  let {ownerid,userstatus} = useSelector((state) => state.shopOwnerLogin)
+  //let {userstatus}=useSelector((state)=> state.customer)
+  console.log(ownerid)
+  console.log(userstatus)
 
+  // let [apidata, setapidata] = useState([])
+  const [debit, setdebit]=useState()
+
+  const [query, setQuery] = useState("")
+
+  const dispatch = useDispatch()
+  let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
   // const home = () =>navigate("/")
   // const back = ()=>window.history.back()
   // const forward = () => window.history.forward
-
+  let id=localStorage.getItem("Id")
+  console.log(id)
   const add = () => {
     alert("sucess")
   }
-  
- 
-   
-  
-   
-useEffect(()=>{
-  axios({
-    method: 'get',
-    url: 'https://jsonplaceholder.typicode.com/users',
-    
-  })
-    .then(function(res){
-      setapidata(res.data)
+  const filteredItems = useMemo(() => {
+    return apidata.filter(item => {
+      return item.name.toLowerCase().includes(query.toLowerCase())
     })
+  }, [apidata, query])
+  useEffect(() => {
+    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
+  //`if(!ownerid?.status){   
+    if(localStorage.getItem("Id")){
+    axios({
+      method: 'get',
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
 
-},[])
+    })
+     
+      .then(function (response) {
+        console.log(response)
+        dispatch(setapidata(response.data.data))
+        console.log(apidata)
+        console.log(response.data.email)
+      })
+   }
+      
+  }, [])
 
-console.log(apidata)
- 
-{console.log('ownerid',ownerid)}
+
+  const adddue=(id)=>{
+    alert(id)
+
+    navigate('/adddebit')
+
+
+navigate(`/adddebit/${id}`)
+
+
+  }
   return (
     <>
-    <Common/>
-    <Table striped bordered hover variant="dark">
-      <thead>
-        <tr>
-          <th>customer_id</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Last_purchase_date</th>
-          <th> Address</th>
-        
-        
-         
-        </tr>
-      </thead>
-      <tbody >
-        
-          {customer_data.map((item)=>{
-            return(
-              <tr>
-                 <td>{item.customer_id}</td>
-                <td>{item.customer_name}</td>
+      <Common />
+      <div className='boxs'>
+        <div className='form-flex'>
+          <div className='left-form'>
+            <Form>
+              <InputGroup className='my-3 search'>
+                <Form.Control placeholder='Search customers' value={query} onChange={e => setQuery(e.target.value)} />
+              </InputGroup>
+            </Form>
+          </div>
+          <div className='right-form d-flex'>
+            <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button>
+            <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
+          </div>
+        </div>
+
+        <Table responsive striped bordered hover variant="light" className='cus-table'>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Customer name</th>
+              <th>email</th>
+              <th>phone</th>
+              <th>Address</th>
+              <th>Add due </th>
+              <th>Add due </th>
+            </tr>
+          </thead>
+          <tbody >
+            {filteredItems.map((item, i) => (
+              <tr key={i}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
+                <td>  <Button variant="outline-primary" onClick={()=>adddue(item.id)}>Add debt</Button></td>
+
+        <td>{item.debits.debitamount}</td>
               </tr>
-            )
-})}
-       
-      </tbody>
-    </Table>
-    <Button onClick={()=>add()} variant="success" > Success</Button>
-    <div className='menubox' style={{position:'fixed',bottom:0,left:'50%',transform: 'translateX(-50%)'}} >
-    <button onClick={()=>window.history.back()} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
-  
-    {/* <Link to={`/addcustomer`}><span><img src={icon1} alt='icon' /></span></Link> */}
-    <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
-    <Link to={`/`}><i class="fa-solid fa-house"></i></Link>
+            ))}
 
-    <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
-{/* <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link> */}
+          </tbody>
+        </Table>
+        {/* <Button variant="success" onClick={() => navigate('/creditordebit')} > Add Customer</Button> */}
+        {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
 
-    {/*  */}
-    <button onClick={()=>window.history.forward} style={{backgroundColor:'white'}}><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
+      </div>
+      <Logout/>
     </>
   );
-
 }
-
 export default CUSTOMERLST;

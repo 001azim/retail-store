@@ -5,6 +5,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../css/home.css'
+import 'bootstrap/dist/css/bootstrap.min.css';  
+
 
 export default function Home(){
   const navigate=useNavigate()
@@ -25,11 +27,12 @@ export default function Home(){
           </Navbar.Collapse>
         
       </Navbar>
+      
       </div>
       
    
     <div>
-    <h1 style={{fontSize:"150px"}}><i>If you are going to be rich you need to be Accountable for your MONEY</i></h1>
+    <h1 style={{fontSize:"100px"}}><i>If you are going to be rich you need to be Accountable for your MONEY</i></h1>
     </div>
     </div>
       </>
