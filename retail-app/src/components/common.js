@@ -1,4 +1,4 @@
-import React,{ useState, useTransition,use } from 'react';
+import React,{ useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import icon1 from '../debit.png'
 import icon2 from '../credit.png'
@@ -204,7 +204,7 @@ const handleclick = (event) =>{
         <BottomNavigationAction component={Link}
         to="/" label="Home" icon={<HomeIcon/>} />
         <BottomNavigationAction component={Link}
-        to="/creditordebit" label="credit" icon={<AccountBalanceWalletIcon/>} />
+        to="/debitlist" label="credit" icon={<AccountBalanceWalletIcon/>} />
         <BottomNavigationAction component={Link}
         to="/msg" label="chat" icon={<MessageIcon />} />
       </BottomNavigation>

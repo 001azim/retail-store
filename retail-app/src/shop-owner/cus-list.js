@@ -14,8 +14,8 @@ import { setapidata } from "../slices/customerSlice"
 
 function CUSTOMERLST() {
 
-  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-  console.log(ownerid)
+  // let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+  // console.log(ownerid)
   // let [apidata, setapidata] = useState([])
 
   const [query, setQuery] = useState("")
@@ -40,19 +40,19 @@ function CUSTOMERLST() {
 
 
 
-  useEffect(() => {
-    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
-    axios({
-      method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+  // useEffect(() => {
+  //   // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
+  //   axios({
+  //     method: 'get',
+  //     url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
-    })
-      .then(function (res) {
-        console.log(res.data.data)
-        dispatch(setapidata(res.data.data))
-        console.log(apidata)
-      })
-  }, [])
+  //   })
+  //     .then(function (res) {
+  //       console.log(res.data.data)
+  //       dispatch(setapidata(res.data.data))
+  //       console.log(apidata)
+  //     })
+  // }, [])
 
   return (
     <>
