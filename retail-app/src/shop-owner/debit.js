@@ -1,78 +1,58 @@
 import axios from "axios"
 import { useEffect } from "react"
 import Common from "../components/common"
-import moment from "moment"
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
+import { setapidata, setdebtdata } from "../slices/customerSlice"
+
 function DEBITLST() {
+    let dispatch = useDispatch()
+    let { ownerid } = useSelector((state) => state.shopOwerLogin)
+    let { apidata, debtdata } = useSelector((state) => state.customer)
 
-    const navigate = useNavigate()
-
-
-    const home = () => navigate("/")
-    const back = () => window.history.back()
-    const forward = () => window.history.forward
-    // let [response, setresponse] = useState()
-
+    let owner_id = ownerid.data.id
+    
     function debtlist() {
 
         axios({
             method: 'get',
-            url: 'https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/debtlist',
-
-
-        }).then(function (res) {
-
-            let data = res.data
-            console.log(data[0].id)
-            let filterdata = []
-            for (let i of data) {
-                if (i.debt_amount != 0) {
-                    filterdata.push(i)
-                }
-            }
-
-            let html = ""
-            for (let i of filterdata) {
-           
-                let due=i.date_of_last_purchase
-                html = html +
-                    `<tr>
-                        <td>${i.id}</td>
-                        <td>${i.debt_amount}</td>
-                        <td>${i.date_of_last_purchase}</td>
-                        <td>${moment(due).add(10, 'days').format('l')}</td>
-
-
-                    </tr>`
-            }
-            document.getElementById("table").innerHTML = html
+            url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+      
+          })
+            .then(function (response) {
+           console.log()
         })
     }
 
-    // useEffect(debtlist, [])
+    useEffect(debtlist, [])
 
 
 
     return (
         <>
-         <Common />
+            <Common />
 
             < table class="table table-dark ">
                 <thead>
                     <tr>
                         <th>Customer ID</th>
+                        <th>Customer Name</th>
                         <th>Debt Amount</th>
                         <th>Date of  Last Debt</th>
-                        <th>date</th>
+                        <th>Due date</th>
                     </tr>
                 </thead>
-                <tbody id="table">
+                <tbody>
+                  
+                  
+
+                  
 
                 </tbody>
             </table >
+            {console.log("ans", (ownerid.data.id))}
 
-         
+
 
         </>
     )
