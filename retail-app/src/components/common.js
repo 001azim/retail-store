@@ -95,7 +95,7 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
     
     <button onClick={back} style={{backgroundColor:'white'}} ><i class="fa-solid fa-arrow-left"></i></button>
   
-    <Link to={`/creditordebit`}><span><img src={icon1} alt='icon' /></span></Link>
+    <Link to={`/addcustomer`}><span><img src={icon1} alt='icon' /></span></Link>
     <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
 
     <Link to={`/`}><i class="fa-solid fa-house"></i></Link>

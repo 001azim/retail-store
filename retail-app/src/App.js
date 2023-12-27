@@ -16,6 +16,8 @@ import {
  import Common from './components/common';
  import store from './store'
  import { Provider } from 'react-redux';
+import Add_debit from './shop-owner/add_debit';
+import Ownerlist from './super-admin/ownerlist';
 
 
 
@@ -32,7 +34,7 @@ function App() {
       element: <MESSAGELST/>
     },
     {
-      path: "/creditordebit",
+      path: "/addcustomer",
       element: <ADDAMOUNT/>
     },
     {
@@ -51,6 +53,14 @@ function App() {
     {
       path: "/shopownerregister",
       element: < SO_REG />
+    },
+    {
+      path: "/adddebit",
+      element: < Add_debit />
+    },
+    {
+      path: "/ownerslist",
+      element: < Ownerlist />
     },
    
 

@@ -26,7 +26,7 @@ function SO_REG(){
       let [error,seterror]=useState({})
    
     const register=()=>{
-        
+      
         axios({
           
             method: 'POST',

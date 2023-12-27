@@ -9,6 +9,9 @@ import  {useSelector, useDispatch } from "react-redux";
 import "../css/login-SA.css"
 
 
+
+
+
 function SALOGIN(){
     
 const login=useSelector((state)=>state.user.loginValue)
@@ -31,7 +34,7 @@ const dispatch=useDispatch()
 
                 alert("success")
                 localStorage.setItem("loginstatus",true)
-                // Navigate("/ownerlists")
+                Navigate("/ownerslist")
             }
             else{
                 alert("wrong username/password")

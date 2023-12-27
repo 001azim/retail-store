@@ -1,40 +1,62 @@
+import React from 'react'
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {adduser} from "../slices/userSlice";
 import {useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import Table from 'react-bootstrap/Table'
 
-function OWN(){
-    const dispatch=useDispatch()
+function Ownerlist() {
+  const dispatch=useDispatch()
     const Navigate=useNavigate()
 
     const lists=useSelector((state)=>state.user.ownlist)
-    
+    console.log("list",lists)
+
     useEffect(()=>{
-    solist()
+      solist()
     },[])
 
    
     function solist(){
-        if (localStorage.getItem("loginstatus"==true)){
+        // if (localStorage.getItem("loginstatus"==true)){
         axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
         .then(function(response){
             console.log(response)
-            // dispatch(adduser(response.data.data))
+            let user_list=response.data.data
+            console.log("user",user_list)
+            dispatch(adduser(user_list))
         })
-        }
-        else{
+        // }
+        // else{
+        //   alert("something wrong")
             // Navigate("/superadminlogin")
 
-        }
-        }
+        // }
+      }
+      
+      const getdata=()=>{
+
+        
+
+        axios.post('https://agaram.academy/api/retail/index.php?request=getAllCustomer&owner_id=2')
+
+        .then(function(response){
+            console.log(response)
+            
+                
+
+        })
+    }
+  
+  return (
+    <>
     
-    return(
-        <>
     <h1>shop owners list</h1>
     
-    <table border={1}>
+     <Table striped bordered hover size="sm" variant="dark">
         <thead>
             <tr>
                 <td>id</td>
@@ -48,12 +70,13 @@ function OWN(){
                 <td>phone</td>
                 <td>pincode</td>
                 <td>shop_name</td>
+                <td>users count</td>
 
             </tr>
 
         </thead>
         <tbody>
-            {lists.value.map((data)=>{
+            {lists.map((data)=>{
             return(
              <tr>
                 <td>{data.id}</td>
@@ -67,14 +90,17 @@ function OWN(){
                 <td>{data.phone}</td>
                 <td>{data.pincode}</td>
                 <td>{data.shop_name}</td>
+                <td>{data.length}</td>
 
                 </tr>
              )
         })}
         </tbody>
 
-    </table>
-    </>
-    )
+    </Table>
+    <button type="button" onClick={()=>getdata()}>button</button>
+    </> 
+  )
 }
-export default OWN;
+
+export default Ownerlist

@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
-import moment from 'moment'
+import { useNavigate } from "react-router";
 import '../css/credit-debit.css'
 import { useDispatch, useSelector } from "react-redux";
 import  {setdetails}  from "../slices/customerSlice.js";
@@ -15,58 +15,31 @@ import Common from "../components/common.js"
 
 
 function ADDAMOUNT() {
-
-let [alertdate,setalertdate]=useState('')
-
     const dispatch=useDispatch()
 
-let cdetails=useSelector((state)=>state.customer.details)
-
-
-const setduedate =()=>{
+    let cdetails=useSelector((state)=>state.customer.details)
     
-
-    if (cdetails.due_amount <= 4999) {
-        dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(90,"day").format('LL')}))
- console.log(cdetails.due_amount)
-
-     }
-     else {
-         dispatch(setdetails({...cdetails,due_date : moment(cdetails.Last_purchase_date).add(7,"day").format('LL')}))
-         console.log(cdetails.due_amount)
-      
-        }
-}
-
-
-
-useEffect(()=>{
-    setduedate()
-},[cdetails.due_amount,cdetails.Last_purchase_date])
-
-
-useEffect(()=>{
-    if(cdetails.due_date){
-       setalertdate(moment(cdetails.due_date).subtract(7,"day").format('LL')) 
-   }},[cdetails.due_date])
-
-   {console.log(alertdate)}
-
+    
+  const  navigate=useNavigate()
     //    post details to API
 
     function Sent() {
-        alert('g')
-        axios({
-            method: 'POST',
-            url: 'https://2cf5b323-aa86-45ee-8028-d711979cf7ca.mock.pstmn.io/customer_debt',
-            data: {}
+       
 
-        }).then(function (response) {
-            alert('ok')
-            console.log(response)
+        let formData = new FormData();
+        formData.append("name",cdetails.customer_name)
+        formData.append("email",cdetails.email)
+        formData.append("address",cdetails.Address)
+        formData.append("mobile",cdetails.phone)
+       
 
-
-        })
+       
+        axios.post('https://agaram.academy/api/retail/index.php?request=create_customer',formData).then(function(response){
+            console.log('response',response)
+           
+          
+           } )
+           navigate('/adddebit')
     }
 
 
@@ -76,18 +49,19 @@ useEffect(()=>{
    <Common/>
             <Container >
           
-                <h1 class="heading">Add new customer </h1>
+                <h3 class="heading">Add new customer </h3>
 
                 {/* customer name input */}
-                <InputGroup  className="mb-3">
+                <InputGroup  className="mb-3" required>
                     <InputGroup.Text id="basic-addon1" >Customer Name</InputGroup.Text>
                     <Form.Control
-required
-                        aria-label="Username"
+              
+             aria-label="Username"
                         aria-describedby="basic-addon1"
                         onKeyUp={(e) => dispatch(setdetails({ ...cdetails, customer_name: e.target.value }))}
                     />
                 </InputGroup>
+
                 {/* mobile no input */}
 
                 <InputGroup className="mb-3">
@@ -100,8 +74,20 @@ required
                     />
                 </InputGroup>
 
+                 {/* email input */}
+
+                 <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                    <Form.Control
+                    required
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, email: e.target.value }))}
+                    />
+                </InputGroup>
+
                 {/* address input */}
-                <InputGroup className="mb-3">
+                <InputGroup className="mb-3" required>
                     <InputGroup.Text id="basic-addon1">Address</InputGroup.Text>
                     <Form.Control
                     required
@@ -111,51 +97,7 @@ required
                     />
                 </InputGroup>
 
-                {/* date of last purchase */}
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1">Date of last purchase</InputGroup.Text>
-                    <Form.Control
-                    required
-                        type="date"
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        onChange={(e) => dispatch( setdetails({ ...cdetails, Last_purchase_date: e.target.value }))} />
-
-
-                </InputGroup>
-
-
-                {/* due amount */}
-
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1"> Due Amount  <i class="fa-solid fa-indian-rupee-sign"></i></InputGroup.Text>
-
-                    <Form.Control
-                        type="number"
-                        required
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, due_amount: e.target.value }))} />
-
-
-                </InputGroup>
-
-
-
-                <Form>
-
-
-                    {/* due date  */}
-
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Due Date</InputGroup.Text>
-                        <Form.Label htmlFor="disabledTextInput">{cdetails.due_date}</Form.Label>
-
-                    </InputGroup>
-
-                    <Button Class="submit" variant="primary"  onClick={Sent}>submit</Button>
-           
-                </Form>
+               <button onClick={()=>Sent()}>register</button>
             </Container>
 
             {console.log('cus_details', cdetails)}
