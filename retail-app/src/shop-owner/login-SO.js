@@ -23,7 +23,7 @@ function LOGINSO() {
            
             if (response.data.status == "success") {
                 localStorage.setItem("authLog",true)
-                dispatch(setOwnerId(response.data.data))
+                dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
                 navigate("/customerlist")
             } else {

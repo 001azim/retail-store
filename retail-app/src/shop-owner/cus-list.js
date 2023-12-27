@@ -13,12 +13,17 @@ import Debittotal from '../components/debittotal';
 
 
 
-function CUSTOMERLST() {
+function CUSTOMERLST(props) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+
+  console.log(ownerid)
+  // let [apidata, setapidata] = useState([])
+
+
   let {userstatus}=useSelector((state)=> state.customer)
   let apidata = useSelector((state) => state.customer.apidata)
   console.log(ownerid)
@@ -41,7 +46,7 @@ function CUSTOMERLST() {
     // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid}`)
     axios({
       method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.id}`,
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
     })
       .then(function (res) {
@@ -115,7 +120,6 @@ function CUSTOMERLST() {
 
           </tbody>
         </Table>
-
       </div>
     </>
   );
