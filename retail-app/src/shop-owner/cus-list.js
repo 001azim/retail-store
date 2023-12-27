@@ -66,7 +66,7 @@ function CUSTOMERLST(props) {
 
   return (
     <>
-    {/* <Debittotal filteredItems={filteredItems}/> */}
+    
       <Common />
       <h1 style={{textAlign: 'start',textTransform:"uppercase",margin:"15px"}}>{ownerid.name}</h1>
       <div className='boxs'>
