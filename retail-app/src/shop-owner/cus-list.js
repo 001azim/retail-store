@@ -12,7 +12,7 @@ import { setapidata } from "../slices/customerSlice"
 import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
 
-function CUSTOMERLST() {
+function CUSTOMERLST(props) {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   let {userstatus}=useSelector((state)=> state.customer)
@@ -56,11 +56,11 @@ function CUSTOMERLST() {
         
       })
   }, [])
-  const [debit, setdebit] = useState(false);
+  const [debit, setdebit] = useState([]);
 
-  // useEffect(() => {
+  useEffect(() => {
   
-
+  const customerList =  Debittotal(filteredItems)
   //   let customerList = filteredItems.map((item) => {
   //     let cus_tot = 0;
   //     if(item.debits){
@@ -71,10 +71,10 @@ function CUSTOMERLST() {
 
   //     return {...item,debit_total:cus_tot};
   //   });
-    
-  //   console.log("==>",customerList)
+    setdebit(customerList)
 
-  // }, [filteredItems]);
+
+  }, [filteredItems]);
 
 
   const adddue=(id)=>{
@@ -83,10 +83,10 @@ navigate(`/adddebit/${id}`)
    
 
   }
+console.log(debit.debit_total)
 
   return (
     <>
-    <Debittotal filteredItems={filteredItems}/>
       <Common />
       <div className='boxs'>
         <div className='form-flex'>
@@ -116,21 +116,21 @@ navigate(`/adddebit/${id}`)
           </thead>
           <tbody >
 
-            {filteredItems.map((item, i) => (
+
+            {debit.map((item, i) => (
               <tr key={i}>
 
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
+               
                 <td>{item.address}</td>
                 <td>
-  {debit === false ? (
-    <Button variant="outline-primary" onClick={() => adddue(item.id)}>
-      Add debt
+  {item.debit_total < 5000  ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
     </Button>
   ) : (
-    <h1>no due</h1>
+    <h4>debit limit reached</h4>
   )}
 </td>
         <td>{item.debits.map((list)=>{

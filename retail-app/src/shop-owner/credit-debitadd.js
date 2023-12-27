@@ -104,7 +104,6 @@ function ADDAMOUNT() {
                <Button Class="submit" variant="primary"  onClick={()=>Sent()}>register</Button>
             </Container>
 
-            {console.log('cus_details', cdetails)}
 
         </>
 
