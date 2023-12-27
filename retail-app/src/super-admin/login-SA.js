@@ -20,19 +20,21 @@ const Navigate=useNavigate()
 const dispatch=useDispatch()
     const getdata=()=>{
 
-        axios({
-            method:'GET',
-            url:
-            'https://41d08e21-9a75-47f9-b74e-547d9ceecbe0.mock.pstmn.io',
-            data:{}
-        }).then(function(response){
-           
+        let formData=new FormData()
+        formData.append("email",login.email)
+        formData.append("password",login.password)
+        console.log(formData)
+
+        axios.post('https://agaram.academy/api/retail/index.php?request=super_admin_login',formData)
+
+        .then(function(response){
+            console.log(response)
             
                 if(response.data.status=="success"){
 
                 alert("success")
                 localStorage.setItem("loginstatus",true)
-                Navigate("/ownerlists")
+                Navigate("/ownerslist")
             }
             else{
                 alert("wrong username/password")
@@ -47,32 +49,33 @@ return(
    
 
     <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 box'>
-        <div className='40-w p-5 rounded bg-white'>
+        <div className='40-w p-5 rounded'>
 <Form>
     <h2>login page</h2><br></br>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-         <Form.Label>user name</Form.Label>
-         <Form.Control type="name" placeholder="Enter name" id="name" onKeyUp={(e)=>dispatch(checklogin({
+         <Form.Label class="all">User id</Form.Label>
+         <Form.Control type="email" placeholder="Enter name" id="mail" onKeyUp={(e)=>dispatch(checklogin({
     ...login,
-    name:e.target.value}))}/>
+    email:e.target.value}))}/>
          <Form.Text className="text-muted">
         
          </Form.Text>
        </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-         <Form.Label>Password</Form.Label>
+         <Form.Label class="all">Password</Form.Label>
          <Form.Control type="password" placeholder="Password" id="password"  onKeyUp={(e)=>dispatch(checklogin({
             ...login,
             password:e.target.value
         }))}/>
+        <br></br>
        </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      
-       </Form.Group>
-       <Button variant="primary" type="button" onClick={()=>getdata()} >
+      <Form.Group className="d-grid" controlId="formBasicCheckbox">
+      <Button id="butt" type="button" onClick={()=>getdata()} >
          Submit
        </Button>
+       </Form.Group>
+     
      </Form>
      </div>
      </div>

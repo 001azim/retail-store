@@ -66,6 +66,12 @@ function Sent() {
    
     axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
             console.log('response',response)
+            if(response.data.status=="success"){
+                navigate('/customerlist')
+            }
+            else{
+                alert("failed")
+            }
            
           
            } )

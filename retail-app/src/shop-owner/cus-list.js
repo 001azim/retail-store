@@ -9,14 +9,15 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
+import { useRef } from 'react';
 
 function CUSTOMERLST() {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-  let {userstatus}=useSelector((state)=> state.customer)
+  let {userstatus}=useSelector((state)=> state.shopOwnerLogin)
 
   // let [apidata, setapidata] = useState([])
-  const [debit, setdebit]=useState()
+  
 
   const [query, setQuery] = useState("")
 
@@ -41,7 +42,6 @@ function CUSTOMERLST() {
 
 
   useEffect(() => {
-    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
     axios({
       method: 'get',
       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
@@ -52,12 +52,28 @@ function CUSTOMERLST() {
         dispatch(setapidata(response.data.data))
         console.log(apidata)
         console.log(response.data.email)
+        
       })
   }, [])
+  const [debit, setdebit] = useState(false);
+
+  useEffect(() => {
+  
+
+    filteredItems.map((item) => {
+      item.debits.map((item) => {
+
+        if (item.debit_amount > 0){
+          setdebit(true)
+        }
+      });
+    });
+    
+  }, [filteredItems]);
+
 
   const adddue=(id)=>{
 
-   
 navigate(`/adddebit/${id}`)
    
 
@@ -89,7 +105,7 @@ navigate(`/adddebit/${id}`)
               <th>phone</th>
               <th>Address</th>
               <th>Add due </th>
-              <th>Add due </th>
+              <th> due amount </th>
             </tr>
           </thead>
           <tbody >
@@ -102,8 +118,23 @@ navigate(`/adddebit/${id}`)
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
-                <td>  <Button variant="outline-primary" onClick={()=>adddue(item.id)}>Add debt</Button></td>
-        <td>{item.debits.debitamount}</td>
+                <td>
+
+    <Button variant="outline-primary" onClick={() => adddue(item.id)}>
+      Add debt
+    </Button>
+ 
+</td>
+        <td>{item.debits.map((list)=>{
+        
+          return(
+            <th>
+         <td>{list.debit_amount}</td>
+            
+            </th>
+          )
+        
+        })}</td>
               </tr>
             ))}
 
