@@ -44,7 +44,7 @@ function DEBITLST() {
                     {console.log("api", apidata)}
 
 
-                    {apidata.map((customer_list) => {
+                    {/* {apidata.map((customer_list) => {
                         customer_list.debits.filter((debit) => {
                             
                             if (debit.debit_amount > 0) {
@@ -53,17 +53,11 @@ function DEBITLST() {
                         })
 
 
-                        // return (
-                        //     <>
-                        //         {debit.debit_amount}!=0?{dispatch(setdebtdata(debit))}
-
-
-                        //     </>
-                        // )
+                        
 
 
 
-                    })}
+                    })} */}
                     {/* {apidata.map((customer) => {
                         return (
                             <tr>
