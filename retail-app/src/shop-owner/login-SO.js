@@ -1,4 +1,5 @@
 import '../css/login-SO.css'
+import React, { useEffect } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
@@ -21,6 +22,7 @@ function LOGINSO() {
 
            
             if (response.data.status == "success") {
+                localStorage.setItem("authLog",true)
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
                 navigate("/customerlist")
@@ -32,7 +34,14 @@ function LOGINSO() {
 
     }
 
-
+// useEffect(()=>{
+//     if(ownerid.id!=0){
+//         navigate("/customerlist")
+//     }
+//     else{
+//         navigate('/')
+//     }
+// },[])
 
     return (
         <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg' >
