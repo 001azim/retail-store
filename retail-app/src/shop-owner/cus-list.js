@@ -85,6 +85,25 @@ navigate(`/adddebit/${id}`)
   }
 console.log(debit.debit_total)
 
+let id=localStorage.getItem("Id")
+
+useEffect(()=>
+{if(localStorage.getItem("Id")){
+  axios({
+    method: 'get',
+    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+
+  })
+   
+  .then(function (response) {
+    console.log(response)
+    dispatch(setapidata(response.data.data))
+    console.log(apidata)
+    console.log(response.data.email)
+    })
+ }
+    
+}, [])
   return (
     <>
       <Common />
