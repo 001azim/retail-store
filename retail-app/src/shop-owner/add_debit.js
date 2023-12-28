@@ -10,7 +10,7 @@ import moment from 'moment'
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router';
-import Debittotal from '../components/debittotal';
+import Logout from '../components/logOut'
 
 function Add_debit() {
     let [alertdate,setalertdate]=useState('')
@@ -136,6 +136,7 @@ else{
 
      </Form>
  </Container>
+ <Logout/>
  </>
     )
 }

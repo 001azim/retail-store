@@ -1,6 +1,7 @@
 import '../css/login-SO.css'
 import React, { useEffect } from 'react'
 import axios from "axios"
+import { useEffect } from 'react'
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
@@ -10,21 +11,25 @@ import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSli
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { userLogin,userstatus } = useSelector((state) => state.shopOwnerLogin)
+    let { userLogin,userstatus,ownerid } = useSelector((state) => state.shopOwnerLogin)
     console.log(userstatus)
+    console.log(ownerid)
+    //console.log(ownerid.data.name)
    
     function alldata() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
         formdata.append("password", userLogin.password)
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
-            
-
-           
             if (response.data.status == "success") {
                 localStorage.setItem("authLog",true)
                 dispatch(setOwnerId(response.data))
-                dispatch(setStatus(true))
+                dispatch(setStatus(true))   
+                localStorage.setItem("Id",response.data.data.id)
+                if (localStorage.getItem("Id")){
+                    dispatch(setOwnerId(response.data))
+                    dispatch(setStatus(true))
+                }
                 navigate("/customerlist")
             } else {
                 navigate("/")
@@ -33,6 +38,12 @@ function LOGINSO() {
         })
 
     }
+    useEffect(()=>{
+       if(localStorage.getItem("Id")){
+        alldata()
+       }
+        
+    },[])
 
 // useEffect(()=>{
 //     if(ownerid.id!=0){
