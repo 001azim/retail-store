@@ -9,6 +9,8 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
+import { useRef } from 'react';
+import Debittotal from '../components/debittotal';
 
 function CUSTOMERLST(props) {
 
@@ -82,6 +84,25 @@ navigate(`/adddebit/${id}`)
   }
 console.log(debit.debit_total)
 
+let id=localStorage.getItem("Id")
+
+useEffect(()=>
+{if(localStorage.getItem("Id")){
+  axios({
+    method: 'get',
+    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+
+  })
+   
+  .then(function (response) {
+    console.log(response)
+    dispatch(setapidata(response.data.data))
+    console.log(apidata)
+    console.log(response.data.email)
+    })
+ }
+    
+}, [])
   return (
     <>
       <Common />
@@ -134,8 +155,10 @@ console.log(debit.debit_total)
 
           </tbody>
         </Table>
+      
         {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
-      </div>
+      <Logout/>
+             </div>
     </>
   );
 

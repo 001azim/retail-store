@@ -45,7 +45,6 @@ function ADDAMOUNT() {
            } )
      
     }
-{console.log(ownerid)}
 
     return (
 
@@ -114,4 +113,3 @@ function ADDAMOUNT() {
 }
 
 export default ADDAMOUNT
-

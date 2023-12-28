@@ -1,15 +1,11 @@
- /* .menubox button{
-    padding: 30px;
-    margin-left: 20px;
-    border-radius: 50%;
-    border: 0;whi
-} */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
- /* .menubox {
+ 
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ .menubox {
      background-color: white;
      width: 900px;
      display: flex;
@@ -21,25 +17,12 @@
      border-radius: 50px;
      border: none;
      box-shadow: 0 0 10px rgb(71, 71, 38);
-     margin: 20px; */
- /* } */
+     margin: 20px; 
+ }
 
- /* .menubox {
-    background-color: white;
-    width: 900px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
-    height: 50px;
-    border-radius: 50px;
-    border: none;
-    box-shadow: 0 0 10px rgb(71, 71, 38);
-    margin: 20px;
- } */
+ 
 
- /* .menubox button {
+ .menubox button {
      border: none;
  }
 
@@ -52,16 +35,13 @@
      background-color: rgb(205, 191, 191);
  }
 
- .menubox button,
- i:hover {
-     background-color: rgb(205, 191, 191);
- }
+ 
 
  .menubox img {
      width: 30px;
-     /* padding: 25px 50px; */
- /* } */
-/* 
+    
+  } 
+ 
  .menubox span {
      padding: 20px 50px;
  }
@@ -70,11 +50,6 @@
      background-color: rgb(205, 191, 191);
  }
 
- .menubox span:active {
-     background-color: rgb(205, 191, 191);
- }
-
-*/
  #logo {
      margin-left: 50px;
 
@@ -83,7 +58,7 @@
 
  .box {
      position: relative;
- }  
+ }
 
  .time {
      position: absolute;
@@ -113,7 +88,7 @@
      font-size: 13px;
      border: none;
      outline: none;
-     padding: 12px 10px 12px 12px ;
+     padding: 12px 10px 12px 12px;
      cursor: pointer;
      white-space: nowrap;
      background-color: var(--hjFeedbackAccentColor, #f4364c) !important;
@@ -128,11 +103,60 @@
      box-shadow: 0 0 10px #463939;
  }
 
- .formfeed{
-    margin-top: 10%;
+ .formfeed {
+     margin-top: 10%;
  }
- 
-.menubox{
-    box-shadow: 0 0 10px rgb(71, 71, 38);
-    
-}
+
+ .menubox {
+     box-shadow: 0 0 10px rgb(71, 71, 38);
+
+ }
+
+ .profilepic {
+     width: 100px;
+     height: 100px;
+     background-color: aquamarine;
+     border-radius: 50%;
+     position: relative;
+
+ }
+
+ .profilepic i {
+     margin: 22px;
+     font-size: 60px;
+     position: absolute;
+ }
+
+ .comnprofile h5 {
+     padding: 10px
+ }
+
+ .comnprofile {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+ }
+
+ .socialmedias{
+    position: fixed;
+    bottom: 0;
+   width: 100%;
+   background-color: white;
+ }
+ .socialmedias a i{
+    margin: 35px;
+ }
+ .slidenav:hover{
+    width: 100%;
+    background-color: antiquewhite;
+ }
+
+ .aligntextnav{
+    width: 100%;
+    height: calc(950px - 400px);
+    padding-left: 10px;
+    font-size: larger;
+ }
+

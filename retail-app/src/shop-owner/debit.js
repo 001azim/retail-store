@@ -12,7 +12,7 @@ function DEBITLST() {
     let navigate=useNavigate()
     let dispatch = useDispatch()
     let { ownerid } = useSelector((state) => state.shopOwnerLogin)
-    let { apidata, } = useSelector((state) => state.customer)
+    let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
 
     let owner_id = ownerid.data.id
@@ -79,21 +79,13 @@ function DEBITLST() {
 
                 </tbody>
             </table >
-            {console.log("ans", (ownerid.data.id))}
+            
 
 
 
         </>
     )
-
 }
-
-
-
-
-
-
-
 
 
 export default DEBITLST

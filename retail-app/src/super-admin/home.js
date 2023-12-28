@@ -5,6 +5,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../css/home.css'
+import 'bootstrap/dist/css/bootstrap.min.css';  
+
 
 export default function Home(){
   const navigate=useNavigate()
@@ -12,25 +14,26 @@ export default function Home(){
         <>
         <div className='backgroundhmge'>
          <div>
-        <Navbar >
-      
-          <Navbar.Brand >Debit relief</Navbar.Brand>
+        <Navbar className='bg-black'>
+        
+          <Navbar.Brand href="#home">Debit relief</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <button id="sn" onClick={()=>navigate("/")}>sign in</button> 
-              <button id="sn" onClick={()=>navigate("/shopownerregister")}>sign up</button> 
-             
+              <button id="sn" onClick={()=>navigate("/")}>sign in</button>
+              <button id="sn" onClick={()=>navigate("/shopownerregister")}>sign up</button>
+              
             </Nav>
           </Navbar.Collapse>
-     
+        
       </Navbar>
+      
       </div>
-        <div className='quotes'>
-          <h1 className='quote'>He who is quick</h1>
-          <h1 className='quote'>To borrow</h1>
-          <h1 className='quote'>is slow to pay</h1>  
-        </div>
+      
+   
+    <div>
+    <h1 style={{fontSize:"100px"}}><i>If you are going to be rich you need to be Accountable for your MONEY</i></h1>
+    </div>
     </div>
       </>
     )
