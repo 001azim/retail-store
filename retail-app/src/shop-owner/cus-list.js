@@ -11,6 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
+import Logout from '../components/logOut';
 
 function CUSTOMERLST(props) {
 
@@ -119,7 +120,9 @@ useEffect(()=>
             <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
         </div><br></br>
-        <h2>Hi welcome {ownerid.data.name}</h2><br></br>
+
+        <h1>welcome {ownerid.data.name}</h1><br></br>
+
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
             <tr>

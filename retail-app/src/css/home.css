@@ -10,8 +10,15 @@
 }
 #sn{
     background-color:rgb(113, 245, 205) ;
-    border-color:rgb(82, 234, 245) ;
-    
-    margin-right: 30px;
-    border-radius: 8px;
+    /* border-color:rgb(82, 234, 245) ; */
+    background-color:rgb(215, 218, 217) ;
+
+}
+.quotes{
+    position: absolute;
+    top: 35%;
+    left: 15%;
+}
+.quote{
+    font-size: 60px;
 }
