@@ -72,7 +72,6 @@ function SO_REG() {
                 alert("Enter valid inputs")
             }
 
-            // seterror(Validation(ownerDetails))
         })
         //    navigate("/shopownerlogin");
         }
@@ -87,6 +86,7 @@ function SO_REG() {
         <>
             <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 bg'>
                 <div className='40-w p-5'>
+                    <div className='positionchange'>
                     <Form>
                         <h1 className='align-items-center'> Register </h1>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -189,6 +189,8 @@ function SO_REG() {
                         {console.log(ownerDetails)}
                     </Form>
                 </div>
+                </div>
+
             </div>
 
         </>

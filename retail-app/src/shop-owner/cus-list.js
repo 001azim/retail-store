@@ -12,11 +12,11 @@ import { setapidata } from "../slices/customerSlice"
 import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
+
 function CUSTOMERLST(props) {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   let {userstatus}=useSelector((state)=> state.customer)
-
   // let [apidata, setapidata] = useState([])
   
 
@@ -96,7 +96,7 @@ console.log(debit.debit_total)
     <>
       <Common />
       <div className='boxs'>
-        <div className='form-flex'>
+        <div className='form-flex'>                                                                                                                                                                                                                                 
           <div className='left-form'>
             <Form>
               <InputGroup className='my-3 search'>
@@ -107,7 +107,9 @@ console.log(debit.debit_total)
           <div className='right-form d-flex'>
             <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
-        </div>
+        </div><br></br>
+
+        <h1>welcome {ownerid.data.name}</h1><br></br>
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
