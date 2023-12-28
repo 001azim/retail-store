@@ -14,7 +14,8 @@ function DEBITLST() {
     let { ownerid } = useSelector((state) => state.shopOwnerLogin)
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
-
+    let id=localStorage.getItem("Id")
+    console.log(id)
     let owner_id = ownerid.data.id
     function debtlist() {
 

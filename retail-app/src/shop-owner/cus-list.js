@@ -40,22 +40,26 @@ function CUSTOMERLST(props) {
     })
   }, [apidata, query])
 
+  let id=localStorage.getItem("Id")
+  console.log(id)
 
-
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
-
-    })
+  useEffect(()=>{
+    if(localStorage.getItem("Id")){
+      axios({
+        method: 'get',
+        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+    
+      })
+       
       .then(function (response) {
         console.log(response)
         dispatch(setapidata(response.data.data))
         console.log(apidata)
         console.log(response.data.email)
+        })
+     }
         
-      })
-  }, [])
+    }, [])
   const [debit, setdebit] = useState([]);
 
   useEffect(() => {
@@ -85,25 +89,9 @@ navigate(`/adddebit/${id}`)
   }
 console.log(debit.debit_total)
 
-let id=localStorage.getItem("Id")
 
-useEffect(()=>
-{if(localStorage.getItem("Id")){
-  axios({
-    method: 'get',
-    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+// useEffect(()=>{
 
-  })
-   
-  .then(function (response) {
-    console.log(response)
-    dispatch(setapidata(response.data.data))
-    console.log(apidata)
-    console.log(response.data.email)
-    })
- }
-    
-}, [])
   return (
     <>
       <Common />

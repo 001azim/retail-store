@@ -21,14 +21,14 @@ function LOGINSO() {
         formdata.append("password", userLogin.password)
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
             if (response.data.status == "success") {
-                localStorage.setItem("authLog",true)
+                
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))   
                 localStorage.setItem("Id",response.data.data.id)
-                if (localStorage.getItem("Id")){
-                    dispatch(setOwnerId(response.data))
-                    dispatch(setStatus(true))
-                }
+                // if (localStorage.getItem("Id")){
+                //     dispatch(setOwnerId(response.data))
+                //     dispatch(setStatus(true))
+                // }
                 navigate("/customerlist")
             } else {
                 navigate("/")
