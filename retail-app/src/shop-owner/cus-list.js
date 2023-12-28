@@ -86,7 +86,7 @@ console.log(debit.debit_total)
     <>
       <Common />
       <div className='boxs'>
-        <div className='form-flex'>
+        <div className='form-flex'>                                                                                                                                                                                                                                 
           <div className='left-form'>
             <Form>
               <InputGroup className='my-3 search'>
