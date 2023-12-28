@@ -11,7 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
-
+import Logout from '../components/logOut';
 function CUSTOMERLST(props) {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
@@ -137,8 +137,10 @@ console.log(debit.debit_total)
 
           </tbody>
         </Table>
+      
         {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
-      </div>
+      <Logout/>
+             </div>
     </>
   );
 

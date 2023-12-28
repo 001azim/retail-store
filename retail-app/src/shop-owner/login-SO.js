@@ -1,7 +1,6 @@
 import '../css/login-SO.css'
 import React, { useEffect } from 'react'
 import axios from "axios"
-import { useEffect } from 'react'
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
