@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ import Table from 'react-bootstrap/Table'
 
 function Ownerlist() {
   const dispatch=useDispatch()
-    const Navigate=useNavigate()
+  const Navigate=useNavigate()
 
     const lists=useSelector((state)=>state.user.ownlist)
     console.log("list",lists)
@@ -19,7 +19,7 @@ function Ownerlist() {
       solist()
     },[])
 
-   
+   let [counts,setcount]=useState([])
     function solist(){
         // if (localStorage.getItem("loginstatus"==true)){
         axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
@@ -37,22 +37,36 @@ function Ownerlist() {
         // }
       }
       
-      const getdata=()=>{
-
-        
-
-        axios.post('https://agaram.academy/api/retail/index.php?request=getAllCustomer&owner_id=2')
-
+      
+       let no_customer=0
+      const usersid=(userid)=>{
+        axios({
+          method: 'get',
+          url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${userid}`,
+    
+        })
+         
         .then(function(response){
-            console.log(response)
+            console.log(response.data.data.length)
+            let countList=response.data.data.length
+            no_customer=countList
+            console.log(no_customer)
             
+            
+
+            setcount(response.data.data.length)
+            // console.log("count",counts)
                 
 
         })
+
+        
     }
   
   return (
     <>
+
+    
     
     <h1>shop owners list</h1>
     
@@ -70,7 +84,8 @@ function Ownerlist() {
                 <td>phone</td>
                 <td>pincode</td>
                 <td>shop_name</td>
-                <td>users count</td>
+                <td>customers count</td>
+                <td>count</td>
 
             </tr>
 
@@ -90,15 +105,22 @@ function Ownerlist() {
                 <td>{data.phone}</td>
                 <td>{data.pincode}</td>
                 <td>{data.shop_name}</td>
-                <td>{data.length}</td>
-
+                <td><button onClick={()=> usersid(data.id)}>view</button></td>
+               {/* <td>{data.id}</td>  */}
+               <td>
+                {counts.map((c)=>{
+                  return(
+                    c
+                  )
+                })}
+               </td>
                 </tr>
              )
         })}
         </tbody>
 
     </Table>
-    <button type="button" onClick={()=>getdata()}>button</button>
+    {/* <button type="button" onClick={()=>getdata()}>button</button> */}
     </> 
   )
 }

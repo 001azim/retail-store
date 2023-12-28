@@ -16,7 +16,7 @@ import Common from "../components/common.js"
 
 function ADDAMOUNT() {
     const dispatch=useDispatch()
-
+    let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
     let cdetails=useSelector((state)=>state.customer.details)
     
     
@@ -27,21 +27,25 @@ function ADDAMOUNT() {
        
 
         let formData = new FormData();
+        formData.append("owner_id",ownerid.data.id)
         formData.append("name",cdetails.customer_name)
         formData.append("email",cdetails.email)
         formData.append("address",cdetails.Address)
-        formData.append("mobile",cdetails.phone)
+        formData.append("phone",cdetails.phone)
        
 
        
         axios.post('https://agaram.academy/api/retail/index.php?request=create_customer',formData).then(function(response){
-            console.log('response',response)
+            console.log('response',response.data.status)
+            if(response.data.status=="success"){
+                navigate('/customerlist')
+            }
            
           
            } )
-           navigate('/adddebit')
+     
     }
-
+{console.log(ownerid)}
 
     return (
 
@@ -97,7 +101,7 @@ function ADDAMOUNT() {
                     />
                 </InputGroup>
 
-               <button onClick={()=>Sent()}>register</button>
+               <Button Class="submit" variant="primary"  onClick={()=>Sent()}>register</Button>
             </Container>
 
             {console.log('cus_details', cdetails)}

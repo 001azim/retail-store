@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const customerSlice = createSlice({
-    name: 'shopOwerLogin',
+export const shopOwnerLoginSlice = createSlice({
+    name: 'shopOwnerLogin',
     initialState: {
         userLogin:{
-            username:"",
+            email:"",
             password:""
         },
-        userstatus:false
+        userstatus:false,
+        ownerid:{}
     },
     reducers: {
         setUserLogin :(state,action)=>{
@@ -15,12 +16,15 @@ export const customerSlice = createSlice({
       },
       setStatus:(state,action)=>{
         state.userstatus=action.payload
+      },
+      setOwnerId:(state,action)=>{
+        state.ownerid=action.payload
       }
      
     },
   })
   
   
-  export const { setUserLogin,setStatus } = customerSlice.actions
+  export const { setUserLogin,setStatus,setOwnerId } = shopOwnerLoginSlice.actions
   
-  export default customerSlice.reducer
+  export default shopOwnerLoginSlice.reducer
