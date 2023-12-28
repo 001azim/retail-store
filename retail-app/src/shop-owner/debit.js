@@ -37,6 +37,7 @@ function DEBITLST() {
 
     return (
         <>
+        
             <Common />
 
             < table class="table table-dark ">

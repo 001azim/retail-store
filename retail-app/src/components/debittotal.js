@@ -11,7 +11,6 @@ function Debittotal(c_data) {
           return {...item,debit_total:cus_tot};
         });
 
-
 }
 
 export default Debittotal

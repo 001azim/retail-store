@@ -36,6 +36,7 @@ useEffect(()=>{
 
     const setduedate =()=>{
         if (cdetails.due_amount <= 4999) {
+            
             dispatch(setduedetails({...cdetails,due_date : moment(cdetails.Last_purchase_at).add(90,"day").format('LL')}))
      console.log(cdetails.due_amount)
     
@@ -107,7 +108,12 @@ function Sent() {
              required
              aria-label="Username"
              aria-describedby="basic-addon1"
-             onKeyUp={(e) => dispatch( setduedetails({ ...cdetails, due_amount: e.target.value }))} />
+             onKeyUp={(e) =>{if(e.target.value<=5000){
+        dispatch(setduedetails({ ...cdetails, due_amount: e.target.value }))}
+        else {
+            alert("limit reached");
+            e.target.value=0}
+            }} />
 
 
      </InputGroup>

@@ -1,3 +1,133 @@
+// import Table from 'react-bootstrap/Table';
+// import Button from 'react-bootstrap/Button';
+// import { Link, useNavigate } from "react-router-dom";
+// import axios from 'axios';
+// import { useSelector, useDispatch } from "react-redux"
+// import Form from 'react-bootstrap/Form';
+// import "../css/cus-list.css"
+// import { useState, useEffect, useMemo } from 'react';
+// import Common from '../components/common';
+// import InputGroup from 'react-bootstrap/InputGroup';
+// import { setapidata } from "../slices/customerSlice"
+// import Debittotal from '../components/debittotal';
+
+
+
+// function CUSTOMERLST(props) {
+
+//   const navigate = useNavigate()
+//   const dispatch = useDispatch()
+
+//   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+
+//   console.log(ownerid)
+//   // let [apidata, setapidata] = useState([])
+
+
+//   let {userstatus}=useSelector((state)=> state.customer)
+//   let apidata = useSelector((state) => state.customer.apidata)
+//   console.log(ownerid)
+
+//   // let [apidata, setapidata] = useState([])
+
+//   const [query, setQuery] = useState("")
+
+//   const add = () => {
+//     alert("sucess")
+//   }
+
+//   const filteredItems = useMemo(() => {
+//     return apidata.filter(item => {
+//       return item.name.toLowerCase().includes(query.toLowerCase())
+//     })
+//   }, [apidata, query])
+
+//   useEffect(() => {
+//     // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid}`)
+//     axios({
+//       method: 'get',
+//       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+
+//     })
+//       .then(function (res) {
+//         console.log(res.data.data)
+//         dispatch(setapidata(res.data.data))
+//         console.log(apidata)
+//       })
+//   }, [])
+
+//   const [debit, setdebit] = useState(false);
+
+  
+
+//   const adddue=(id)=>{
+//     navigate(`/adddebit/${id}`)
+//       }
+
+//   return (
+//     <>
+    
+//       <Common />
+//       <h1 style={{textAlign: 'start',textTransform:"uppercase",margin:"15px"}}>{ownerid.name}</h1>
+//       <div className='boxs'>
+//         <div className='form-flex'>
+//           <div className='left-form'>
+//             <Form>
+//               <InputGroup className='my-3 search'>
+//                 <Form.Control placeholder='Search contacts' value={query} onChange={e => setQuery(e.target.value)} />
+//               </InputGroup>
+//             </Form>
+//           </div>
+//           <div className='right-form '>
+//             <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
+//           </div>
+//         </div>
+
+//         <Table responsive striped bordered hover variant="light" className='cus-table'>
+//           <thead>
+//             <tr>
+//               <th>#</th>
+//               <th>Name</th>
+//               <th>Contact</th>
+//               <th>Email</th>
+//               <th>Address</th>
+//               <th>Add due</th>
+//               <th>Send Notification</th>
+//             </tr>
+//           </thead>
+//           <tbody >
+
+//             {filteredItems.map((item, i) => (
+//               // console.log(JSON.stringify
+//               // (item.debits.debit_amount)),
+//               <tr key={i}>
+
+//                 <td>{item.id}</td>
+//                 <td>{item.name}</td>
+//                 <td>{item.phone}</td>
+//                 <td>{item.email}</td>
+//                 <td>{item.address}</td>
+//                 <td> <Button variant="outline-secondary" onClick={()=>alert(i)}> <b>+</b> ADD </Button></td>
+//                 <td><Button type="button"  className='btn btn-primary' onClick={()=>{
+//                   alert(i)
+
+//                 }}>Send</Button></td>
+
+                
+
+//               </tr>
+//             ))}
+
+//           </tbody>
+//         </Table>
+//       </div>
+//     </>
+//   );
+
+// }
+
+// export default CUSTOMERLST;
+
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
@@ -9,28 +139,26 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
+import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
-
-
 
 function CUSTOMERLST(props) {
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-
-  console.log(ownerid)
-  // let [apidata, setapidata] = useState([])
-
-
   let {userstatus}=useSelector((state)=> state.customer)
-  let apidata = useSelector((state) => state.customer.apidata)
-  console.log(ownerid)
 
   // let [apidata, setapidata] = useState([])
+  
 
   const [query, setQuery] = useState("")
+
+  const dispatch = useDispatch()
+  let apidata = useSelector((state) => state.customer.apidata)
+
+  const navigate = useNavigate()
+  // const home = () =>navigate("/")
+  // const back = ()=>window.history.back()
+  // const forward = () => window.history.forward
 
   const add = () => {
     alert("sucess")
@@ -42,43 +170,64 @@ function CUSTOMERLST(props) {
     })
   }, [apidata, query])
 
+
+
   useEffect(() => {
-    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid}`)
     axios({
       method: 'get',
       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
     })
-      .then(function (res) {
-        console.log(res.data.data)
-        dispatch(setapidata(res.data.data))
+      .then(function (response) {
+        console.log(response)
+        dispatch(setapidata(response.data.data))
         console.log(apidata)
+        console.log(response.data.email)
+        
       })
   }, [])
+  const [debit, setdebit] = useState([]);
 
-  const [debit, setdebit] = useState(false);
-
+  useEffect(() => {
   
+  const customerList =  Debittotal(filteredItems)
+  //   let customerList = filteredItems.map((item) => {
+  //     let cus_tot = 0;
+  //     if(item.debits){
+  //       item.debits.map((c_d)=>{
+  //         cus_tot = cus_tot + c_d.debit_amount
+  //       }) 
+  //     }
+
+  //     return {...item,debit_total:cus_tot};
+  //   });
+    setdebit(customerList)
+
+
+  }, [filteredItems]);
+
 
   const adddue=(id)=>{
-    navigate(`/adddebit/${id}`)
-      }
+
+navigate(`/adddebit/${id}`)
+   
+
+  }
+console.log(debit.debit_total)
 
   return (
     <>
-    
       <Common />
-      <h1 style={{textAlign: 'start',textTransform:"uppercase",margin:"15px"}}>{ownerid.name}</h1>
       <div className='boxs'>
         <div className='form-flex'>
           <div className='left-form'>
             <Form>
               <InputGroup className='my-3 search'>
-                <Form.Control placeholder='Search contacts' value={query} onChange={e => setQuery(e.target.value)} />
+                <Form.Control placeholder='Search customers' value={query} onChange={e => setQuery(e.target.value)} />
               </InputGroup>
             </Form>
           </div>
-          <div className='right-form '>
+          <div className='right-form d-flex'>
             <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
         </div>
@@ -86,40 +235,50 @@ function CUSTOMERLST(props) {
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Contact</th>
-              <th>Email</th>
+              <th>id</th>
+              <th>Customer name</th>
+              <th>email</th>
+              <th>phone</th>
               <th>Address</th>
-              <th>Add due</th>
-              <th>Send Notification</th>
+              <th>Add due </th>
+              <th> due amount </th>
             </tr>
           </thead>
           <tbody >
 
-            {filteredItems.map((item, i) => (
-              // console.log(JSON.stringify
-              // (item.debits.debit_amount)),
+
+            {debit.map((item, i) => (
               <tr key={i}>
 
                 <td>{item.id}</td>
                 <td>{item.name}</td>
-                <td>{item.phone}</td>
                 <td>{item.email}</td>
+                <td>{item.phone}</td>
+               
                 <td>{item.address}</td>
-                <td> <Button variant="outline-secondary" onClick={()=>alert(i)}> <b>+</b> ADD </Button></td>
-                <td><Button type="button"  className='btn btn-primary' onClick={()=>{
-                  alert(i)
-
-                }}>Send</Button></td>
-
-                
-
+                <td>
+  {item.debit_total < 5000  ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+    </Button>
+  ) : (
+    <h4>debit limit reached</h4>
+  )}
+</td>
+        <td>{item.debits.map((list)=>{
+        
+          return(
+            
+         <td>{list.debit_amount}</td>
+            
+           
+          )
+        
+        })}</td>
               </tr>
             ))}
 
           </tbody>
         </Table>
+        {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
       </div>
     </>
   );
