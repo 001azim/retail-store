@@ -249,7 +249,6 @@ console.log(debit.debit_total)
 
             {debit.map((item, i) => (
               <tr key={i}>
-
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>

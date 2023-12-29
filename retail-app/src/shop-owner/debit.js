@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router'
 
 function DEBITLST() {
+    let navigate=useNavigate()
     let dispatch = useDispatch()
     let { ownerid } = useSelector((state) => state.shopOwnerLogin)
     let { apidata } = useSelector((state) => state.customer)
@@ -34,7 +36,12 @@ function DEBITLST() {
 
     }, []);
 
+    const credit=(id)=>{
 
+        navigate(`/credit/${id}`)
+           
+        
+          }
     return (
         <>
         
@@ -63,7 +70,7 @@ function DEBITLST() {
                                     <td>{customer.debit_total}</td>
                                     <td>{customer.debits[0].last_purchase_at}</td>
                                     <td>{customer.debits[0].due_date}</td>
-                                    <td><Button variant="outline-primary">Credit</Button></td>
+                                    <td><Button variant="outline-primary" onClick={()=>credit(customer.id)}>Credit</Button></td>
                                 </tr>)
 
                         }

@@ -40,12 +40,9 @@ function ADDAMOUNT() {
             if(response.data.status=="success"){
                 navigate('/customerlist')
             }
-           
-          
            } )
      
     }
-{console.log(ownerid)}
 
     return (
 

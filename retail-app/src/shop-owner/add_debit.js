@@ -10,6 +10,7 @@ import moment from 'moment'
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router';
+import Debittotal from '../components/debittotal';
 
 function Add_debit() {
     let [alertdate,setalertdate]=useState('')
@@ -18,7 +19,7 @@ function Add_debit() {
 
     
     const { userLogin, ownerid } = useSelector((state) => state.shopOwnerLogin)
-    const {customer_id}= useSelector((state) => state.customer)
+    const {customer_id,due_amount}= useSelector((state) => state.customer)
 
 let cdetails=useSelector((state)=>state.customer.due_details)
 
@@ -52,30 +53,36 @@ useEffect(()=>{
 useEffect(()=>{
     setduedate()
 },[cdetails.due_amount,cdetails.Last_purchase_at])
-
+{console.log(due_amount)}
 
 function Sent() {
      
     
     let formData = new FormData();
     formData.append("customer_id",customerid)
-    formData.append("Last_purchase_at",cdetails.Last_purchase_at)
+    formData.append("last_purchase_at",cdetails.Last_purchase_at)
     formData.append("debit_amount",cdetails.due_amount)
     formData.append("due_date",cdetails.due_date)
     
-
-   
+if(due_amount+Number(cdetails.due_amount) < 5000){
     axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
-            console.log('response',response)
-            if(response.data.status=="success"){
-                navigate('/customerlist')
-            }
-            else{
-                alert("failed")
-            }
-           
-          
-           } )
+        console.log('response',response)
+
+        if(response.data.status=="success"){
+            navigate('/customerlist')
+        }
+        else{
+            alert("failed")
+        }
+       
+      
+       } )
+}
+else{
+    alert("You already have debt of",due_amount)
+}
+   
+   
 }
 
 
@@ -84,7 +91,7 @@ function Sent() {
     <Container>
      <br></br>
      <h2> add due </h2>
-        {/* {console.log('customer_details',customer_details)} */}
+       
             <Form>
          {/* date of last purchase */}
          <InputGroup className="mb-3">

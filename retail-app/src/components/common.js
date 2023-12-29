@@ -1,3 +1,4 @@
+
 import React, { useState, useTransition, use } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import icon1 from '../debit.png'
@@ -12,11 +13,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Logout from './logOut';
+import { useSelector} from "react-redux"
+import emailjs from '@emailjs/browser';
 
 
 
 export default function Common() {
 
+  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   const [value, setValue] = React.useState(0);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -44,16 +48,30 @@ export default function Common() {
     console.log(formState)
   };
 
-  const handleclick = (event) => {
-    event.preventDefault();
+  const serviceId = 'service_z08nwwc'
+    const templateId = 'template_zh2yccg'
+    const publicKey = '1E3EtlJD8BKYRI7Jn'
 
-    window.Email.send({
-      SecureToken: "27d68705-c0fb-42ce-9398-0a80e7930099 ",
-      To: "ja84don@gmail.com",
-      From: `${formState.email}`,
-      Subject: "This is the Feedback",
-      Body: `${formState.fedMessage}`,
-    }).then(() => alert("msg send sucessfully"));
+  const handleclick = (event) => {
+    // event.preventDefault();
+
+    const templateParams = {
+      from_name: 'retail shop',
+      from_email: formState.email,
+      to_name: ownerid.data.name,
+      message: formState.fedMessage ,
+    };
+
+    // Send the email using EmailJS
+    emailjs.send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        console.log('Email sent successfully!', response);
+        
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error) 
+      });
+
 
   }
 
@@ -94,14 +112,13 @@ export default function Common() {
                   <hr></hr>
                   {/* <input type="file" onChange={handleChange} hidden /> */}
                   {/* <img src={file} alt='img' style={{ width: "100px", height: "100px", borderRadius: "50%" }} /> */}
-                  <div className='aligntextnav'>
-                  <div className='slidenav'><Link to={`/msg`} style={{textDecoration:'none'}}>
+                  <div className='slidenav'><Link to={`/msg`}>
                     <Nav.Link href="#action1">Home</Nav.Link></Link></div>
                   <div className='slidenav'><Nav.Link href="#action2">Contact</Nav.Link></div>
                   <div className='slidenav'><Nav.Link href="#action3">About Us</Nav.Link></div>
                   <div className='slidenav'><Nav.Link href="#action4">Issue</Nav.Link></div>
                   <div className='slidenav'><Nav.Link href="#action5">Help</Nav.Link></div>
-                  
+
                   <Nav.Link href="#action2">Link</Nav.Link>
 
                   <NavDropdown
@@ -117,22 +134,21 @@ export default function Common() {
                       Something else here
                     </NavDropdown.Item>
                   </NavDropdown>
-                  <Logout/>
-                  </div>
+                  <Logout />
                 </Nav>
-                
-              <div className='socialmedias'>
-              <hr></hr>
-                <a href='#'><i class="fa-brands fa-facebook"></i></a>
-                <a href='#'><i class="fa-brands fa-instagram"></i></a>
-               <a href='#'><i class="fa-brands fa-x-twitter"></i></a>
-               <a href='#'><i class="fa-brands fa-linkedin-in"></i></a>
-              </div>
+                <div className='socialmedias'>
+                  <hr></hr>
+                  <a href='#'><i class="fa-brands fa-facebook"></i></a>
+                  <a href='#'><i class="fa-brands fa-instagram"></i></a>
+                  <a href='#'><i class="fa-brands fa-x-twitter"></i></a>
+                  <a href='#'><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
       </div>
+
 
       <div className='feedback' >
         {/* <button data-bs-toggle="modal" data-bs-target="#displyfeedback" className="feedback-style" >Feedback &nbsp;&nbsp;  <i style={{fontSize:"18px"}} class="fa-solid fa-comment-medical"></i></button> */}
@@ -181,21 +197,20 @@ export default function Common() {
       </Modal>
 
 
-   {localStorage.getItem("authLog")?<div className='menubox' 
-      style={
-        { position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }
-      } >
+      {localStorage.getItem("authLog") ? <div className='menubox'
+        style={
+          { position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }
+        } >
 
-        <button onClick={back}style={{ backgroundColor: 'white' }} ><i class="fa-solid fa-arrow-left"></i></button>
-        <Link to={`/addcustomer`} ><span ><img src={icon1} alt='icon' /></span></Link>
+        <button onClick={back} style={{ backgroundColor: 'white' }} ><i class="fa-solid fa-arrow-left"></i></button>
+        <Link to={`/addcustomer`}><span><img src={icon1} alt='icon' /></span></Link>
         <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
         <Link to={`/`}><i class="fa-solid fa-house"></i></Link>
         <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
         <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
         <button onClick={() => window.history.forward()} style={{ backgroundColor: 'white' }}><i class="fa-solid fa-arrow-right"></i></button>
 
-      </div>:null}
+      </div> : null}
     </>
   )
 }
-

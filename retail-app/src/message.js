@@ -30,7 +30,7 @@
 //   );
 // }
 import Common from "./components/common";
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import InputGroup from 'react-bootstrap/InputGroup';
 // import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -48,12 +48,14 @@ const Contactus = () => {
   const onChange = (event) => setValue(event.target.value);
   let apidata = useSelector((state) => state.customer.apidata)
   console.log(apidata)
-  let [isdisplay,setisdisplay] = useState(false);
-  let [message,setmessage]=useState({
-    userid:null,
-    msge:["ghfg","fgcgxvx","vhgvcgcgcg"]
+  let [isdisplay, setisdisplay] = useState(false);
+  let [message, setmessage] = useState({
+    userid: null,
+    msge: ["ghfg", "fgcgxvx", "vhgvcgcgcg"]
   })
-  let [id,setid]=useState(null)
+  let [id, setid] = useState(null)
+
+
 
   React.useLayoutEffect(() => {
     // Reset height - important to shrink on delete
@@ -65,29 +67,20 @@ const Contactus = () => {
     )}px`;
   }, [value]);
 
- let messagesmsg=[{
-    id:0,
-    message:["ghghgh","jhjhg"]},
-    {id:1,
-    message:["gfgdgdnjh","cgswW","jghfgfvgcg"]},
-    {id:2,
-      message:["hghhffyfyfy","tdrdrse32u","gyryrrttdgffx"]}
+  let messagesmsg = [{
+    id: 0,
+    message: ["ghghgh", "jhjhg"]
+  },
+  {
+    id: 1,
+    message: ["gfgdgdnjh", "cgswW", "jghfgfvgcg"]
+  },
+  {
+    id: 2,
+    message: ["hghhffyfyfy", "tdrdrse32u", "gyryrrttdgffx"]
+  }
   ]
-  //   const changeHandler = (event) => {
-  //     setFormState({ ...formState, [event.target.name]: event.target.value });
-  //   };
 
-  // const handleclick = (event) =>{
-  //   event.preventDefault();
-
-  //     window.Email.send({  
-  //     SecureToken:"d4f462fc-a0dc-45f4-97ab-d7ac5db7f6fa",
-  //     To: `${formState.email}`,
-  //     From: "safeeqameen@gmail.com",
-  //     Subject: "This is the subject",
-  //     Body: `${formState.name} And this is the body`,
-  //     }).then(()=>alert("msg send sucessfully"));
-  //     }
 
 
   return (
@@ -126,62 +119,59 @@ const Contactus = () => {
             </Form>
           </div>
           <div className="msgperson">
-            
-            {apidata.map((Member,i)=>(
-              
-              <a onClick={()=>{
+
+            {apidata.map((Member, i) => (
+
+              <a onClick={() => {
                 alert(i)
                 setisdisplay(true)
                 setid(i)
-                }}><div className="perpersonmsg" key={i}>
-              <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
-              <h5>{Member.name}<span >latest msg</span></h5>
-            </div></a>
+              }}><div className="perpersonmsg" key={i}>
+                  <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
+                  <h5>{Member.name}<span >latest msg</span></h5>
+                </div></a>
             ))}
-            
+
           </div>
         </div>
         <div className="rightmsgbox">
-        <div>
-          <div className="rightmsgheader">
-            <h6>Member Name</h6>
-            <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
-          </div>
-          <div className="rightscrollsection">
-          <div className="rightmsgsection">
-            <form>
-            <textarea
-            className="textareamsg"
-              placeholder="Type Message . . ."
-              onChange={onChange}
-              ref={textareaRef}
-              id="msgtextarea"
-
-              style={{
-                width: "100%",
-                minHeight: MIN_TEXTAREA_HEIGHT,
-                resize: "none"
-              }}
-              value={value}
-            />
-            <button className="btn btn-success" type="button" onClick={()=>{
-              // alert(id)
-              setmessage({msge:document.getElementById("msgtextarea").value})
-              
-            }} style={{marginLeft: "3px",borderRadius: 50, paddingLeft:30, paddingRight:30}}><i class="fa-regular fa-paper-plane"></i></button>
-            </form>
-          </div>
-          <div className="msglist">
+          <div>
+            <div className="rightmsgheader">
+              <h6>Member Name</h6>
               <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
-              <div className="msglistmsg">
-                
-                <p>{message.msge}</p>
+            </div>
+            <div className="rightscrollsection">
+              <div className="rightmsgsection">
+                <form >
+                  <textarea
+                    className="textareamsg"
+                    placeholder="Type Message . . ."
+                    onChange={onChange}
+                    // onKeyUp={(e)=>console.log(e.target.value)}
+                    ref={textareaRef}
+                    id="msgtextarea"
+
+                    style={{
+                      width: "100%",
+                      minHeight: MIN_TEXTAREA_HEIGHT,
+                      resize: "none"
+                    }}
+                    value={value}
+                  />
+                  <button className="btn btn-success" type="button" onClick={()=> alert ("msg send sucfly")} style={{ marginLeft: "3px", borderRadius: 50, paddingLeft: 30, paddingRight: 30 }}><i class="fa-regular fa-paper-plane"></i></button>
+                </form>
               </div>
+              <div className="msglist">
+                <img src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8" alt="prof" />
+                <div className="msglistmsg">
+
+                  <p>{message.msge}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          </div>           
         </div>
-        </div>
-      </div>  
+      </div>
     </div>
   )
 }
