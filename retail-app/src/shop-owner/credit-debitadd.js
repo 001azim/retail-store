@@ -66,14 +66,14 @@ function ADDAMOUNT() {
                 </InputGroup>
 
                 {/* mobile no input */}
-
+                
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Mobile</InputGroup.Text>
                     <Form.Control
                     required
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, mobile: e.target.value }))}
+                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, phone: e.target.value }))}
                     />
                 </InputGroup>
 
@@ -102,7 +102,7 @@ function ADDAMOUNT() {
 
                <Button Class="submit" variant="primary"  onClick={()=>Sent()}>register</Button>
             </Container>
-
+{JSON.stringify(cdetails)}
 
         </>
 
