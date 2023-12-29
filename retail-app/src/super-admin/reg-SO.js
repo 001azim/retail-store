@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateDetails } from '../slices/registerSlice';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
-import Validation from './validation';
+//import Validation from './validation';
 import '../css/reg-SO.css'
 function SO_REG() {
     const navigate = useNavigate();
@@ -16,7 +16,8 @@ function SO_REG() {
 
     let { ownerDetails } = useSelector((state) => state.register);
     const Change = (e) => {
-        const value = e.target.value;
+        const value = (e.target.value);
+        
         dispatch(updateDetails({
             ...ownerDetails,
             [e.target.name]: value
@@ -29,24 +30,8 @@ function SO_REG() {
     //   }
 
     const register = () => {
-        // if(error){
-        //     seterror(Validation(ownerDetails))  
-        // }
-        // if(!error){
-        //     axios({
-
-        //         method: 'POST',
-        //         url: ' https://3cf5b333-aa86-45ee-8038-d71110710cf7ca.mock.pstmn.io/soregister',
-        //         data: {
-        //             ownerDetails
-
-        //       }}).then(function(response){
-
-        //         console.log("Success",response)     
-        //         // seterror(Validation(data))
-        //        } ) 
-        //        navigate("/shopownerlogin"); 
-        // }
+        
+       
         let formData = new FormData();
         formData.append("request", "create_shopowner")
         formData.append("name", ownerDetails.name)
@@ -61,7 +46,7 @@ function SO_REG() {
         formData.append("shop_name", ownerDetails.shop_name)
 
         console.log(formData)
-        //if(ownerDetails.trim().length!==""){
+        //if(!ownerDetails.phone==null){
             axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
             console.log(response)
 
@@ -73,6 +58,7 @@ function SO_REG() {
             }
 
         })
+        alert('ok')
         //    navigate("/shopownerlogin");
         }
         // else{
@@ -95,7 +81,7 @@ function SO_REG() {
                             </Form.Label>
                             <Col sm="10">
                                 <Form.Control type="text" name='name' placeholder="UserName" className='detail' required onChange={Change} />
-                                {error.Username && <span style={{ color: "red" }}>{error.Username}</span>}
+                                {/* {error.Username && <span style={{ color: "red" }}>{error.Username}</span>} */}
                             </Col>
                         </Form.Group>
 
@@ -114,7 +100,7 @@ function SO_REG() {
                                 </Form.Label>
                                 <Col sm="9">
                                     <Form.Control type="email" name='email' placeholder="email" className='detail' required onChange={Change} />
-                                    {error.email && <span style={{ color: "red" }}>{error.email}</span>}
+                                    {/* {error.email && <span style={{ color: "red" }}>{error.email}</span>} */}
                                 </Col>
                             </Form.Group>
 
@@ -124,7 +110,7 @@ function SO_REG() {
                                 </Form.Label>
                                 <Col sm="8">
                                     <Form.Control type="password" name='password' placeholder="Password" className='detail' required onChange={Change} />
-                                    {error.password && <span style={{ color: "red" }}>{error.password}</span>}
+                                    {/* {error.password && <span style={{ color: "red" }}>{error.password}</span>} */}
                                 </Col>
                             </Form.Group>
                         </div>
@@ -142,7 +128,7 @@ function SO_REG() {
                                 Mobile No
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="text" name='phone' placeholder="phone" className='detail' onChange={Change} />
+                                <Form.Control type="text" name='phone' placeholder="phone" className='detail' required onChange={Change} />
                             </Col>
                         </Form.Group>
 
@@ -151,7 +137,7 @@ function SO_REG() {
                                 street
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type='text' name='street' placeholder='street' className='detail' onChange={Change} />
+                                <Form.Control type='text' name='street' placeholder='street' className='detail' required onChange={Change} />
                             </Col>
                         </Form.Group>
 
@@ -160,7 +146,7 @@ function SO_REG() {
                                 City
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="text" name='city' placeholder="city" className='detail' onChange={Change} />
+                                <Form.Control type="text" name='city' placeholder="city" className='detail' required onChange={Change} />
                             </Col>
                         </Form.Group>
                         <div>
@@ -169,7 +155,7 @@ function SO_REG() {
                                     Area
                                 </Form.Label>
                                 <Col sm="9">
-                                    <Form.Control type="text" name='area' placeholder="area" className='detail' onChange={Change} />
+                                    <Form.Control type="text" name='area' placeholder="area" className='detail' required onChange={Change} />
                                 </Col>
                             </Form.Group>
 
@@ -178,7 +164,7 @@ function SO_REG() {
                                     Pincode
                                 </Form.Label>
                                 <Col sm="8">
-                                    <Form.Control type="text" name='pincode' placeholder="pincode" className='detail' onChange={Change} />
+                                    <Form.Control type="text" name='pincode' placeholder="pincode" className='detail' required onChange={Change} />
                                 </Col>
                             </Form.Group>
                         </div>
@@ -187,7 +173,7 @@ function SO_REG() {
 
                         </div>
                         {console.log(ownerDetails)}
-                    </Form>
+                    </Form >
                 </div>
                 </div>
 

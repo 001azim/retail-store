@@ -24,7 +24,7 @@ function LOGINSO() {
                 
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))   
-                localStorage.setItem("Id",response.data.data.id)
+                //localStorage.setItem("Id",response.data.data.id)
                 // if (localStorage.getItem("Id")){
                 //     dispatch(setOwnerId(response.data))
                 //     dispatch(setStatus(true))
@@ -37,12 +37,12 @@ function LOGINSO() {
         })
 
     }
-    useEffect(()=>{
-       if(localStorage.getItem("Id")){
-        alldata()
-       }
+    // useEffect(()=>{
+    //    if(localStorage.getItem("Id")){
+    //     alldata()
+    //    }
         
-    },[])
+    // },[])
 
 // useEffect(()=>{
 //     if(ownerid.id!=0){

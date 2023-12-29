@@ -43,6 +43,8 @@ function DEBITLST() {
            
         
           }
+// let debtors=debit.filter((d)=>)
+          
     return (
         <>
             <Common />
