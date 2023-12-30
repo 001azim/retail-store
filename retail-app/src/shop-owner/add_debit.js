@@ -60,7 +60,7 @@ function Sent() {
     let formData = new FormData();
     formData.append("customer_id",customerid)
     formData.append("last_purchase_at",cdetails.Last_purchase_at)
-    formData.append("debit_amount",cdetails.due_amount)
+    formData.append("amount",cdetails.due_amount)
     formData.append("due_date",cdetails.due_date)
     formData.append("type","debit")
 

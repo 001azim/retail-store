@@ -58,7 +58,6 @@ function DEBITLST() {
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log("api", apidata)}
 
                     {debit.map((customer) => {
                         if (customer.debit_total) {
