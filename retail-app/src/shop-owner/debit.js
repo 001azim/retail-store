@@ -7,20 +7,23 @@ import { setapidata } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
+import moment from "moment";
+
+
 
 function DEBITLST() {
-    let navigate=useNavigate()
+    let navigate = useNavigate()
     let dispatch = useDispatch()
     let { ownerid } = useSelector((state) => state.shopOwnerLogin)
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
-    let id=localStorage.getItem("Id")
-    console.log(id)
+
     let owner_id = ownerid.data.id
+
+
+
     function debtlist() {
-
         axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`).then(function (res) {
-
             console.log("res", res.data.data)
             let customer_detail = res.data.data
             dispatch(setapidata(customer_detail))
@@ -28,33 +31,28 @@ function DEBITLST() {
         })
     }
 
+
+
+
     useEffect(debtlist, [])
+
+
+
     useEffect(() => {
         const customerList = Debittotal(apidata)
-
         setdebit(customerList)
-
-
     }, []);
 
-    const credit=(id)=>{
 
+
+    const credit = (id) => {
         navigate(`/credit/${id}`)
            
         
           }
-// let debtors=debit.filter((d)=>)
-//    for(let i=0;i<debit.length;i++){
-//     let debt_list=debit[i].debits
-//     for(let i=0;i<debt_list.length;i++){
-//         console.log(debt_list[i])
-//     }
-   
-   //}
     return (
         <>
             <Common />
-
             < table class="table table-dark ">
                 <thead>
                     <tr>
@@ -64,34 +62,28 @@ function DEBITLST() {
                         <th>Date of  Last Debt</th>
                         <th>Due date</th>
                         <th>Credit</th>
+                        <th>Interest Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log("api", apidata)}
+                    {/* {console.log(debit)} */}
 
                     {debit.map((customer) => {
-                        if (customer.debit_total) {
+                        if (customer.amount) {
                             return (
                                 <tr>
                                     <td>{customer.id}</td>
                                     <td>{customer.name}</td>
-                                    <td>{customer.debit_total}</td>
+                                    <td>{customer.amount}</td>
                                     <td>{customer.debits[0].last_purchase_at}</td>
                                     <td>{customer.debits[0].due_date}</td>
-                                    <td><Button variant="outline-primary" onClick={()=>credit(customer.id)}>Credit</Button></td>
+                                    <td><Button variant="outline-primary" onClick={() => credit(customer.id)}>Credit</Button></td>
+                                    <td><Button variant="outline-primary" onClick={() => navigate(`/interest/${customer.id}`)}>Interest</Button></td>
                                 </tr>)
-
                         }
-
                     })}
-
-
                 </tbody>
             </table >
-            
-
-
-
         </>
     )
 }
