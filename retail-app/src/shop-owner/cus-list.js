@@ -91,7 +91,7 @@ useEffect(()=>
 {if(localStorage.getItem("Id")){
   axios({
     method: 'get',
-    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
 
   })
    

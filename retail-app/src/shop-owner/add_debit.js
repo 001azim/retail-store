@@ -63,7 +63,7 @@ function Sent() {
     formData.append("debit_amount",cdetails.due_amount)
     formData.append("due_date",cdetails.due_date)
     
-if(due_amount+Number(cdetails.due_amount) < 5000){
+if(due_amount+Number(cdetails.due_amount) <= 5000){
     axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
         console.log('response',response)
 

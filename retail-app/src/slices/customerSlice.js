@@ -5,10 +5,10 @@ export const customerSlice = createSlice({
   name: 'customer',
   initialState: {
     details: {
-      customer_name: "azim",
-      phone: "67646878",
-      Address: "fhachaauc",
-      email: "azim@gmail.com"
+      customer_name: "",
+      phone: "",
+      Address: "",
+      email: ""
 
     },
     due_details: {

@@ -27,4 +27,8 @@ position: absolute ;
 right: 49%;
 bottom: -28%;
 }
-   
+.logopositions{
+    position: absolute;
+    bottom: 80%;
+    right: 90%;
+    }   

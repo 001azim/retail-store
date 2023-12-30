@@ -15,3 +15,8 @@ h1{
     right: 65%;
     bottom: 25%;
 }
+.logoposition{
+position: absolute;
+bottom: 80%;
+right: 90%;
+}
