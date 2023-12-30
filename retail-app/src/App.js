@@ -19,7 +19,7 @@ import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
 import Home from './super-admin/home';
 import Credit from './shop-owner/credit';
-
+import Interest from './shop-owner/interest';
 
 function App() {
 
@@ -70,7 +70,10 @@ function App() {
       path: "/credit/:customerid",
       element: < Credit />
     },
-
+    {
+      path: "/interest/:customerid",
+      element: < Interest />
+    },
 
   ]);
   
