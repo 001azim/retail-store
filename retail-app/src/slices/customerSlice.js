@@ -22,33 +22,42 @@ export const customerSlice = createSlice({
     },
     apidata: [],
 
-    due_amount:0,
+    due_amount: 0,
+
+    credit_details: {
+      credit_date: "",
+      credit_amount: 0
+    }
 
   },
   reducers: {
     setdetails: (state, action) => {
       state.details = action.payload
     },
-    setduedetails :(state,action)=>{
-      state.due_details=action.payload
-  },
-    setcustomerid :(state,action)=>{
-      state.customer_id=action.payload
-  },
-    setapidata:(state,action)=>{
-    state.apidata=action.payload
-},
+    setduedetails: (state, action) => {
+      state.due_details = action.payload
+    },
+    setcustomerid: (state, action) => {
+      state.customer_id = action.payload
+    },
+    setapidata: (state, action) => {
+      state.apidata = action.payload
+    },
 
-    setdueamount:(state,action)=>{
-    state.due_amount=action.payload
-}
+    setdueamount: (state, action) => {
+      state.due_amount = action.payload
+    },
+
+    setcreditdetails: (state, action) => {
+      state.credit_details = action.payload
+    }
 
 
-   
+
   },
 })
 
 
-export const { setdetails,setduedetails,setcustomerid ,setapidata,setdueamount} = customerSlice.actions
+export const { setdetails, setduedetails, setcustomerid, setapidata, setdueamount, setcreditdetails } = customerSlice.actions
 
 export default customerSlice.reducer
