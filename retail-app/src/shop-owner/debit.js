@@ -44,7 +44,13 @@ function DEBITLST() {
         
           }
 // let debtors=debit.filter((d)=>)
-          
+//    for(let i=0;i<debit.length;i++){
+//     let debt_list=debit[i].debits
+//     for(let i=0;i<debt_list.length;i++){
+//         console.log(debt_list[i])
+//     }
+   
+   //}
     return (
         <>
             <Common />

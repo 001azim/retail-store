@@ -61,7 +61,7 @@ function CUSTOMERLST(props) {
         
     }, [])
   const [debit, setdebit] = useState([]);
-
+    console.log(debit)
   useEffect(() => {
   
   const customerList =  Debittotal(filteredItems)
