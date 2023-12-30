@@ -21,7 +21,7 @@ function Credit() {
     let formData = new FormData();
     formData.append("customer_id",customerid)
     formData.append("last_purchase_at",credit_details.credit_date)
-    formData.append("amount",-Number(credit_details.credit_amount))
+    formData.append("amount",credit_details.credit_amount)
     formData.append("due_date","")
     formData.append("type","credit")
     

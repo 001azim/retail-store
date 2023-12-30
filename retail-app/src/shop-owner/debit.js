@@ -7,9 +7,11 @@ import { setapidata } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
-import { Getdate } from "../components/debittotal";
+
 import moment from 'moment'
-function DEBITLST() {
+ 
+
+export default function DEBITLST() {
     const today = new Date()
     let navigate=useNavigate()
     let dispatch = useDispatch()
@@ -17,6 +19,13 @@ function DEBITLST() {
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
 
+    useEffect(() => {
+        const customerList = Debittotal(apidata)
+
+        setdebit(customerList)
+
+
+    }, []);
     function Getdate(apidata) {
     
         return apidata.map((item) => {
@@ -34,52 +43,57 @@ function DEBITLST() {
       }
 let all_customer_details=Getdate(apidata)      
 
-
+console.log(debit)
+console.log(all_customer_details)
 
 useEffect(
-    ()=>{
-        all_customer_details.map((item,i)=>{
-   
+    () => {
+        all_customer_details.map((item, i) => {
+            let interestcount = 0
 
-    if( item.udebit_date > moment().format('YYYY-MM-DD') && apidata.debit_total!=0 ){
-        let fineamount=apidata.debit_total+apidata.debit_total*2/100
-        let formData = new FormData();
-        formData.append("customer_id",item.customer_id)
-        formData.append("last_purchase_at",moment().format('YYYY-MM-DD') )
-        formData.append("amount",fineamount)
-        formData.append("due_date","")
-        formData.append("type","interest")
-        
-        axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
+            item.debits.map((debit_details) => {
+                if (debit_details.type == "interest") {
 
-        console.log('response',response)
+                    interestcount += 1
+
+                }
+                console.log(interestcount)
+                console.log("debit", debit)
+                if (interestcount == 0) {
+                    let total_debit_amount=0
+                    debit.map((debit_amount) => {
+                        total_debit_amount=debit_amount.amount
+                        console.log("amount", debit_amount.amount)
+                       })
+
+                        if (item.udebit_date > moment().format('YYYY-MM-DD') && total_debit_amount!= 0) {
+                            
+                            let fineamount = total_debit_amount + (total_debit_amount * 2 / 100)
+                            console.log("fine", Number(fineamount))
+                            let formData = new FormData();
+                            formData.append("customer_id", item.id)
+                            formData.append("last_purchase_at", moment().format('YYYY-MM-DD'))
+                            formData.append("amount", fineamount)
+                            formData.append("due_date", "")
+                            formData.append("type", "interest")
+
+                            axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
+
+                             console.log('response',response)
+                             }
+                              )
+
+
+                        }
+                    
+                }
+            }
+            )
+
         })
-
-
-    }
-})
-    },[]
+    }, []
 )
-
-
-
-    // const above3000= apidata.map((item)=>item.debits.map((debts)=>{if(debts.due_date > today){
-    //   return debts
-    // }}))
-          
-    // console.log("list",above3000)
-
-//   let x = apidata.map((item)=>{
-//     item.debits.map((debt)=>{
-//         if(debt.due_date == 'January 4, 2024'){
-//             return debt.due_date
-           
-//         }
-//     })
-//   })
-//   console.log("jj",x)
-
-
+  
     let owner_id = ownerid.data.id
     function debtlist() {
 
@@ -94,13 +108,7 @@ useEffect(
     }
 
     useEffect(debtlist, [])
-    useEffect(() => {
-        const customerList = Debittotal(apidata)
-
-        setdebit(customerList)
-
-
-    }, []);
+   
 
     const credit=(id)=>{
 
@@ -124,15 +132,14 @@ useEffect(
                     </tr>
                 </thead>
                 <tbody>
-                 
 
                     {debit.map((customer) => {
-                        if (customer.debit_total) {
+                        if (customer.amount) {
                             return (
                                 <tr>
                                     <td>{customer.id}</td>
                                     <td>{customer.name}</td>
-                                    <td>{customer.debit_total}</td>
+                                    <td>{customer.amount}</td>
                                     <td>{customer.debits[0].last_purchase_at}</td>
                                     <td>{customer.debits[0].due_date}</td>
                                     <td><Button variant="outline-primary" onClick={()=>credit(customer.id)}>Credit</Button></td>
@@ -157,4 +164,3 @@ useEffect(
 }
 
 
-export default DEBITLST
