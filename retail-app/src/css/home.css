@@ -22,22 +22,18 @@
 .quote{
     font-size: 60px;
 }
+
 .buttonone{
-    position: absolute;
-    left: 85%;
-    bottom: 92%;
-}
-.buttonsecond{
     position: absolute;
     left: 88.8%;
     bottom: 92%;
 }
-.buttonthird{
+.buttonsecond{
     position: absolute;
     left: 93%;
     bottom: 92%;
 }
-.buttonfourth{
+.buttonthird{
     position: absolute;
     left: 27%;
     top: 75%;

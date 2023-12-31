@@ -26,7 +26,7 @@ function LOGINSO() {
                 dispatch(setStatus(true))
                 navigate("/customerlist")
             } else {
-                navigate("/")
+                navigate("/shopownerlogin")
                 alert("check your email or password")
             }
         })
@@ -66,9 +66,9 @@ function LOGINSO() {
                     <div className='d-grid'>
                         <button type="button" className='btn btn-success' onClick={() => alldata()}>Sign In</button>
                     </div><br></br>
-                    <div className='d-grid'>
+                    {/* <div className='d-grid'>
                         <button type="button" className='btn btn-primary' onClick={() => navigate("/shopownerregister")}>Sign up</button>
-                    </div>
+                    </div> */}
 
                 </form>
                 </div>

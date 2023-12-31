@@ -27,7 +27,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LOGINSO />
+      element: <Home />
     },
     {
       path: "/msg",
@@ -63,8 +63,8 @@ function App() {
       element: < Ownerlist />
     },
     {
-      path:"/home",
-      element:<Home/>
+      path:"/shopownerlogin",
+      element:<LOGINSO/>
     },
     {
       path: "/credit/:customerid",

@@ -19,12 +19,9 @@ export default function Home(){
                 
             </Navbar>
             <div className='buttonone'>
-              <button id="sn" onClick={()=>navigate("/")}>sign in</button>
+            <button id="sn" onClick={()=>navigate("/shopownerlogin")}>sign in</button>
             </div>
             <div className='buttonsecond'>
-            <button id="sn" onClick={()=>navigate("/shopownerregister")}>sign up</button>
-            </div>
-            <div className='buttonthird'>
             <button id="sn"  onClick={()=>navigate("/")}>about !</button>
             </div>
                    
@@ -34,8 +31,8 @@ export default function Home(){
               <h1 className='quote'>To borrow</h1>
               <h1 className='quote'>is slow to pay</h1> 
             </div>
-            <div className='buttonfourth'>
-            <button className='btn btn-primary' onClick={()=>navigate("/")}>get start</button>
+            <div className='buttonthird'>
+            <button className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>get start</button>
             </div>
         </div>
     </div>
