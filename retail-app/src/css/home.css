@@ -1,0 +1,16 @@
+.bg{
+    background-image: url("../retailapp.avif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+
+
+}
+#sn{
+    background-color:rgb(113, 245, 205) ;
+    border-color:rgb(82, 234, 245) ;
+    
+    margin-right: 30px;
+    border-radius: 8px;
+}

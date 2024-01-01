@@ -45,7 +45,6 @@ function ADDAMOUNT() {
            } )
      
     }
-{console.log(ownerid)}
 
     return (
 
@@ -74,7 +73,7 @@ function ADDAMOUNT() {
                     required
                         aria-label="Username"
                         aria-describedby="basic-addon1"
-                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, mobile: e.target.value }))}
+                        onKeyUp={(e) => dispatch( setdetails({ ...cdetails, phone: e.target.value }))}
                     />
                 </InputGroup>
 
@@ -104,7 +103,6 @@ function ADDAMOUNT() {
                <Button Class="submit" variant="primary"  onClick={()=>Sent()}>register</Button>
             </Container>
 
-            {console.log('cus_details', cdetails)}
 
         </>
 
@@ -115,4 +113,3 @@ function ADDAMOUNT() {
 }
 
 export default ADDAMOUNT
-

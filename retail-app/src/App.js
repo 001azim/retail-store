@@ -17,7 +17,8 @@ import {
  import { Provider } from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
-
+import Home from './super-admin/home';
+import Credit from './shop-owner/credit';
 
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
   
     {
       path: "/superadminlogin",
-      element: <SALOGIN/>
+      element: < SALOGIN />
     },
     {
       path: "/shopownerregister",
@@ -61,7 +62,14 @@ function App() {
       path: "/ownerslist",
       element: < Ownerlist />
     },
-   
+    {
+      path:"/home",
+      element:<Home/>
+    },
+    {
+      path: "/credit/:customerid",
+      element: < Credit />
+    },
 
 
   ]);

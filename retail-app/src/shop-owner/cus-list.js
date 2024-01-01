@@ -9,14 +9,16 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
-
-function CUSTOMERLST() {
+import { useRef } from 'react';
+import Debittotal from '../components/debittotal';
+import Logout from '../components/logOut';
+function CUSTOMERLST(props) {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   let {userstatus}=useSelector((state)=> state.customer)
 
   // let [apidata, setapidata] = useState([])
-  const [debit, setdebit]=useState()
+  
 
   const [query, setQuery] = useState("")
 
@@ -41,7 +43,6 @@ function CUSTOMERLST() {
 
 
   useEffect(() => {
-    // axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=2`)
     axios({
       method: 'get',
       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
@@ -52,17 +53,57 @@ function CUSTOMERLST() {
         dispatch(setapidata(response.data.data))
         console.log(apidata)
         console.log(response.data.email)
+        
       })
   }, [])
+  const [debit, setdebit] = useState([]);
+
+  useEffect(() => {
+  
+  const customerList =  Debittotal(filteredItems)
+  //   let customerList = filteredItems.map((item) => {
+  //     let cus_tot = 0;
+  //     if(item.debits){
+  //       item.debits.map((c_d)=>{
+  //         cus_tot = cus_tot + c_d.debit_amount
+  //       }) 
+  //     }
+
+  //     return {...item,debit_total:cus_tot};
+  //   });
+    setdebit(customerList)
+
+
+  }, [filteredItems]);
+
 
   const adddue=(id)=>{
 
-   
 navigate(`/adddebit/${id}`)
    
 
   }
+console.log(debit.debit_total)
 
+let id=localStorage.getItem("Id")
+
+useEffect(()=>
+{if(localStorage.getItem("Id")){
+  axios({
+    method: 'get',
+    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+
+  })
+   
+  .then(function (response) {
+    console.log(response)
+    dispatch(setapidata(response.data.data))
+    console.log(apidata)
+    console.log(response.data.email)
+    })
+ }
+    
+}, [])
   return (
     <>
       <Common />
@@ -89,28 +130,36 @@ navigate(`/adddebit/${id}`)
               <th>phone</th>
               <th>Address</th>
               <th>Add due </th>
-              <th>Add due </th>
             </tr>
           </thead>
           <tbody >
 
-            {filteredItems.map((item, i) => (
+
+            {debit.map((item, i) => (
               <tr key={i}>
 
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
+               
                 <td>{item.address}</td>
-                <td>  <Button variant="outline-primary" onClick={()=>adddue(item.id)}>Add debt</Button></td>
-        <td>{item.debits.debitamount}</td>
+                <td>
+  {item.debit_total < 5000  ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+    </Button>
+  ) : (
+    <h4>debit limit reached</h4>
+  )}
+</td>
               </tr>
             ))}
 
           </tbody>
         </Table>
+      
         {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
-      </div>
+      <Logout/>
+             </div>
     </>
   );
 

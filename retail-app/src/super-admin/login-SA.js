@@ -35,7 +35,7 @@ const dispatch=useDispatch()
             
                 if(response.data.status=="success"){
 
-                alert("success")
+                // alert("success")
                 localStorage.setItem("loginstatus",true)
                 Navigate("/ownerslist")
             }

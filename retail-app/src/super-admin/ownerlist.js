@@ -19,7 +19,6 @@ function Ownerlist() {
       solist()
     },[])
 
-   let [counts,setcount]=useState([])
     function solist(){
         // if (localStorage.getItem("loginstatus"==true)){
         axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
@@ -38,30 +37,29 @@ function Ownerlist() {
       }
       
       
-       let no_customer=0
-      const usersid=(userid)=>{
-        axios({
-          method: 'get',
-          url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${userid}`,
     
-        })
+       
+      // const usersid=(userid)=>{
+      //   axios({
+      //     method: 'get',
+      //     url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${userid}`,
+    
+      //   })
          
-        .then(function(response){
-            console.log(response.data.data.length)
-            let countList=response.data.data.length
-            no_customer=countList
-            console.log(no_customer)
-            
+      //   .then(function(response){
+      //       // console.log(response.data.data.length)
+      //       let countList=response.data.data.length
+      //         no_customer= countList
             
 
-            setcount(response.data.data.length)
-            // console.log("count",counts)
+      //       // setcount(response.data.data.length)
+      //       // console.log("count",counts)
                 
 
-        })
+      //   })
 
         
-    }
+    
   
   return (
     <>
@@ -76,15 +74,10 @@ function Ownerlist() {
                 <td>id</td>
                 <td>name</td>
                 <td>email</td>
-                <td>password</td>
-                <td>aadhar</td>
-                <td>street</td>
-                <td>city</td>
-                <td>area</td>
                 <td>phone</td>
-                <td>pincode</td>
+                <td>area</td>
                 <td>shop_name</td>
-                <td>customers count</td>
+                <td>view </td>
                 <td>count</td>
 
             </tr>
@@ -93,33 +86,26 @@ function Ownerlist() {
         <tbody>
             {lists.map((data)=>{
             return(
+              <>
              <tr>
                 <td>{data.id}</td>
                 <td>{data.name}</td>
                 <td>{data.email}</td>
-                <td>{data.password}</td>
-                <td>{data.aadhar}</td>
-                <td>{data.street}</td>
-                <td>{data.city}</td>
-                <td>{data.area}</td>
                 <td>{data.phone}</td>
-                <td>{data.pincode}</td>
+                <td>{data.area}</td>
                 <td>{data.shop_name}</td>
                 <td><button onClick={()=> usersid(data.id)}>view</button></td>
                {/* <td>{data.id}</td>  */}
-               <td>
-                {counts.map((c)=>{
-                  return(
-                    c
-                  )
-                })}
-               </td>
+               {/* <td>{no_customer}</td> */}
                 </tr>
+                </>
              )
         })}
-        </tbody>
 
+        </tbody>
     </Table>
+    
+   
     {/* <button type="button" onClick={()=>getdata()}>button</button> */}
     </> 
   )
