@@ -18,13 +18,16 @@ const login=useSelector((state)=>state.user.loginValue)
 console.log(login)
 const Navigate=useNavigate()
 const dispatch=useDispatch()
-    const getdata=()=>{
-
+    
+           
         let formData=new FormData()
         formData.append("email",login.email)
         formData.append("password",login.password)
         console.log(formData)
+        
+        const getdata=()=>{
 
+        
         axios.post('https://agaram.academy/api/retail/index.php?request=super_admin_login',formData)
 
         .then(function(response){
@@ -32,7 +35,6 @@ const dispatch=useDispatch()
             
                 if(response.data.status=="success"){
 
-                alert("success")
                 localStorage.setItem("loginstatus",true)
                 Navigate("/ownerslist")
             }
@@ -41,7 +43,7 @@ const dispatch=useDispatch()
             }
 
         })
-    }
+        }
    
 
 return(

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import axios from 'axios'
@@ -61,6 +60,5 @@ useEffect(()=>{
     </div>
   )
 }
-
 
 export default Interest

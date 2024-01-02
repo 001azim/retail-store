@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import MESSAGELST from './message';
+import MESSAGELST from './shop-owner/message';
 import ADDAMOUNT from './shop-owner/credit-debitadd';
 import CUSTOMERLST from './shop-owner/cus-list';
 import DEBITLST from './shop-owner/debit';
@@ -12,7 +12,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
- import Common from './components/common';
  import store from './store'
  import { Provider } from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
