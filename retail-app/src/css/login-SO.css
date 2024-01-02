@@ -2,10 +2,21 @@
     background-image: url('../retailapp.avif');
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
 }
 input{
     opacity: 70%;
 }
 h1{
     text-align: center;
+}
+.positionchge{
+    position: absolute;
+    right: 65%;
+    bottom: 25%;
+}
+.logoposition{
+position: absolute;
+bottom: 80%;
+right: 90%;
 }

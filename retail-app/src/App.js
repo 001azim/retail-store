@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import MESSAGELST from './message'
+import MESSAGELST from './message';
 import ADDAMOUNT from './shop-owner/credit-debitadd';
 import CUSTOMERLST from './shop-owner/cus-list';
 import DEBITLST from './shop-owner/debit';
@@ -27,7 +27,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LOGINSO />
+      element: <Home />
     },
     {
       path: "/msg",
@@ -63,8 +63,8 @@ function App() {
       element: < Ownerlist />
     },
     {
-      path:"/home",
-      element:<Home/>
+      path:"/shopownerlogin",
+      element:<LOGINSO/>
     },
     {
       path: "/credit/:customerid",

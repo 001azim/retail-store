@@ -4,6 +4,8 @@ import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
+import Navbar from 'react-bootstrap/Navbar';
+import Logo from '../components/logos.png'
 
 
 
@@ -13,7 +15,6 @@ function LOGINSO() {
     let { userLogin,userstatus,ownerid } = useSelector((state) => state.shopOwnerLogin)
     console.log(userstatus)
     console.log(ownerid)
-    //console.log(ownerid.data.name)
    
     function alldata() {
         let formdata = new FormData()
@@ -21,41 +22,32 @@ function LOGINSO() {
         formdata.append("password", userLogin.password)
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
             if (response.data.status == "success") {
-                localStorage.setItem("authLog",true)
                 dispatch(setOwnerId(response.data))
-                dispatch(setStatus(true))   
-                localStorage.setItem("Id",response.data.data.id)
-                if (localStorage.getItem("Id")){
-                    dispatch(setOwnerId(response.data))
-                    dispatch(setStatus(true))
-                }
+                dispatch(setStatus(true))
+                localStorage.setItem('Id',response.data.data.id)
                 navigate("/customerlist")
             } else {
-                navigate("/")
+                navigate("/shopownerlogin")
                 alert("check your email or password")
             }
         })
 
     }
-    useEffect(()=>{
-       if(localStorage.getItem("Id")){
-        alldata()
-       }
-        
-    },[])
 
-// useEffect(()=>{
-//     if(ownerid.id!=0){
-//         navigate("/customerlist")
-//     }
-//     else{
-//         navigate('/')
-//     }
-// },[])
+
+
 
     return (
-        <><div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg' >
-            <div className='40-w p-5 child'>
+        <>
+        <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg' >
+            <div className='logoposition'>
+        <Navbar >
+        <Navbar.Brand href="#"><img src={Logo} alt='logo' width={90} id="logo"/></Navbar.Brand>
+            
+        </Navbar>
+        </div>
+            <div className='40-w p-5'>
+                <div className='positionchge'>
                 <form>
                     <h1>Sign In</h1>
                     <div className='mb-2'>
@@ -70,22 +62,17 @@ function LOGINSO() {
                         <input type="password" placeholder="Enter the password" className='form-control' onKeyUp={(e) => dispatch(setUserLogin({
                             ...userLogin,
                             password: e.target.value
-                        }))} />
-                    </div>
-                    <div className='mb-2'>
-                        <input type="checkbox" className='custom-control custom-checkbox' id="check" />
-                        <label htmlFor="check" className='custom-input-label'>
-                            remember me
-                        </label>
+                            }))} />
                     </div>
                     <div className='d-grid'>
                         <button type="button" className='btn btn-success' onClick={() => alldata()}>Sign In</button>
                     </div><br></br>
-                    <div className='d-grid'>
+                    {/* <div className='d-grid'>
                         <button type="button" className='btn btn-primary' onClick={() => navigate("/shopownerregister")}>Sign up</button>
-                    </div>
+                    </div> */}
 
                 </form>
+                </div>
             </div>
         </div>
         </>

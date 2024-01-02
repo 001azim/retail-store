@@ -11,6 +11,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Logo from './logos.png'
 
 
 export default function Common(){
@@ -37,7 +38,7 @@ let timeString = currentTime.toLocaleTimeString('en-US', options);
    
         <Navbar key={false} expand={false}  bg="primary" data-bs-theme="dark">
           <Container fluid>
-            <Navbar.Brand href="#"><img src='https://dragonflywellbeing.co.uk/wp-content/uploads/2021/02/Dragonfly-Wellbeing-Logo.png' alt='logo' width={130} id="logo"/></Navbar.Brand>
+            <Navbar.Brand href="#"><img src={Logo} alt='logo' width={90} id="logo"/></Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-false-${false}`} style={{borderColor: 'white'}}/>
             
             <Navbar.Offcanvas

@@ -68,7 +68,7 @@ function ADDAMOUNT() {
                 {/* mobile no input */}
                 
                 <InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1">Mobile</InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1">phone</InputGroup.Text>
                     <Form.Control
                     required
                         aria-label="Username"

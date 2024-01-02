@@ -9,7 +9,9 @@ import { updateDetails } from '../slices/registerSlice';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import Validation from './validation';
-import '../css/reg-SO.css'
+import '../css/reg-SO.css';
+import Navbar from 'react-bootstrap/Navbar';
+import Logo from '../components/logos.png'
 function SO_REG() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -72,7 +74,6 @@ function SO_REG() {
                 alert("Enter valid inputs")
             }
 
-            // seterror(Validation(ownerDetails))
         })
         //    navigate("/shopownerlogin");
         }
@@ -86,7 +87,14 @@ function SO_REG() {
     return (
         <>
             <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 bg'>
+            <div className='logopositions'>
+        <Navbar >
+        <Navbar.Brand href="#"><img src={Logo} alt='logo' width={90} id="logo"/></Navbar.Brand>
+            
+        </Navbar>
+        </div>
                 <div className='40-w p-5'>
+                    <div className='positionchange'>
                     <Form>
                         <h1 className='align-items-center'> Register </h1>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -189,6 +197,8 @@ function SO_REG() {
                         {console.log(ownerDetails)}
                     </Form>
                 </div>
+                </div>
+
             </div>
 
         </>
