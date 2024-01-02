@@ -46,4 +46,7 @@ function Debittotal(c_data) {
 
 }
 
+
 export default Debittotal
+
+ 
