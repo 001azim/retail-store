@@ -8,12 +8,6 @@
 
 
 }
-#sn{
-    background-color:rgb(113, 245, 205) ;
-    /* border-color:rgb(82, 234, 245) ; */
-    background-color:rgb(215, 218, 217) ;
-
-}
 .quotes{
     position: absolute;
     top: 35%;
@@ -25,7 +19,7 @@
 
 .buttonone{
     position: absolute;
-    left: 88.8%;
+    left: 86.8%;
     bottom: 92%;
 }
 .buttonsecond{
@@ -36,5 +30,10 @@
 .buttonthird{
     position: absolute;
     left: 27%;
-    top: 75%;
+    top: 78%;
+}
+.letter{
+    position: absolute;
+    left: 23%;
+    top: 73%;
 }

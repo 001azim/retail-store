@@ -13,8 +13,8 @@ function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     let { userLogin,userstatus,ownerid } = useSelector((state) => state.shopOwnerLogin)
-    console.log(userstatus)
-    console.log(ownerid)
+    console.log("userstatus",userstatus)
+    console.log("ownerid",ownerid)
    
     function alldata() {
         let formdata = new FormData()

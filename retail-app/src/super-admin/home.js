@@ -16,13 +16,14 @@ export default function Home(){
           <div className='backgroundhmge'>
             <Navbar >
             <Navbar.Brand href="#"><img src={Logo} alt='logo' width={90} id="logo"/></Navbar.Brand>
-                
+          
             </Navbar>
             <div className='buttonone'>
-            <button id="sn" onClick={()=>navigate("/shopownerlogin")}>sign in</button>
+            
+            <button className='btn btn-success' onClick={()=>navigate("/shopownerlogin")}>Sign in</button>
             </div>
             <div className='buttonsecond'>
-            <button id="sn"  onClick={()=>navigate("/")}>about !</button>
+            <button className='btn btn-success'  onClick={()=>navigate("/")}>About</button>
             </div>
                    
            
@@ -31,9 +32,13 @@ export default function Home(){
               <h1 className='quote'>To borrow</h1>
               <h1 className='quote'>is slow to pay</h1> 
             </div>
-            <div className='buttonthird'>
-            <button className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>get start</button>
+            <div className='letter'>
+            <h6>Not registered yet? click here</h6>
             </div>
+            <div className='buttonthird'>
+            <button className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>Get started</button>
+            </div>
+            
         </div>
     </div>
       </>
