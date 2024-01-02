@@ -14,7 +14,7 @@ function Logout(){
        
     
     }
-        // console.log("ownerid checking",ownerid)
+
         
     
     return(

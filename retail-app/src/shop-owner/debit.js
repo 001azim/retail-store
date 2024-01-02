@@ -111,12 +111,12 @@ useEffect(() => {
         console.log("debit check",iteam)
         console.log("customerid checking",iteam.id)
         if(iteam.amount<=0){
-            // console.log("customerid:",iteam.id)
-            // console.log("ownerid:",owner_id)
-            // let formData = new FormData();
-            // formData.append("owner_id",owner_id)
-            // formData.append("customer_id", iteam.id)
-            axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&customer_id=${iteam.id}&owner_id=${owner_id}` ).then(function (response) {
+            console.log("customerid:",iteam.id)
+            console.log("ownerid:",owner_id)
+            let formData = new FormData();
+            formData.append("owner_id",owner_id)
+            formData.append("customer_id", iteam.id)
+            axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit`,formData ).then(function (response) {
                         console.log('response:', response)
                     }
                     )
