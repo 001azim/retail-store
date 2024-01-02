@@ -71,7 +71,7 @@ function DEBITLST() {
 
     useEffect(
         () => {
-            all_customer_details.map((item, i) => {
+            all_customer_details.map((item) => {
                 let interestcount = 0
                 item.debits.map((debit_details) => {
                     if (debit_details.type == "interest") {
@@ -125,8 +125,6 @@ function DEBITLST() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {console.log(debit)} */}
-
                     {debit.map((customer) => {
                         if (customer.amount) {
                             return (
