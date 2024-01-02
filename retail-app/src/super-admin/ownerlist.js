@@ -27,13 +27,6 @@ function Ownerlist() {
         dispatch(adduser(user_list))
       })
   }
-
-  const getdata = () => {
-    axios.post('https://agaram.academy/api/retail/index.php?request=getAllCustomer&owner_id=2')
-      .then(function (response) {
-        console.log(response)
-      })
-  }
   
 
   return (
@@ -72,7 +65,6 @@ function Ownerlist() {
         </tbody>
 
       </Table>
-      <button type="button" onClick={() => getdata()}>button</button>
     </>
   )
 }

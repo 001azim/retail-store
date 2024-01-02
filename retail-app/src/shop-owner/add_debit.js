@@ -79,7 +79,7 @@ function Add_debit() {
         }
     }
 
-
+console.log(due_amount)
 
     return (
         <>

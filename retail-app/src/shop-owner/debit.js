@@ -8,7 +8,7 @@ import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
 import moment from "moment";
-
+import { setdueamount } from "../slices/customerSlice";
 
 
 function DEBITLST() {
@@ -23,7 +23,6 @@ function DEBITLST() {
 
     function debtlist() {
         axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`).then(function (res) {
-            console.log("res", res.data.data)
             let customer_detail = res.data.data
             dispatch(setapidata(customer_detail))
 
@@ -44,7 +43,8 @@ function DEBITLST() {
 
 
 
-    const credit = (id) => {
+    const credit = (id,amount) => {
+        dispatch(setdueamount(amount))
         navigate(`/credit/${id}`)
     }
 
@@ -77,7 +77,7 @@ function DEBITLST() {
                     if (debit_details.type == "interest") {
                         interestcount += 1
                     }
-                  
+
                     if (interestcount == 0) {
                         let total_debit_amount = 0
                         debit.map((debit_amount) => {
@@ -85,14 +85,13 @@ function DEBITLST() {
                         })
                         if (item.udebit_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
                             let fineamount = total_debit_amount + (total_debit_amount * 2 / 100)
-                            console.log("fine", Number(fineamount))
                             let formData = new FormData();
                             formData.append("customer_id", item.id)
                             formData.append("last_purchase_at", moment().format('YYYY-MM-DD'))
                             formData.append("amount", fineamount)
                             formData.append("due_date", "")
                             formData.append("type", "interest")
-                            axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
+                            axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function () {
                             }
                             )
                         }
@@ -106,7 +105,7 @@ function DEBITLST() {
     useEffect(() => {
         debit.map((iteam) => {
             if (iteam.amount <= 0) {
-                axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&customer_id=${iteam.id}&owner_id=${owner_id}`).then(function (response) {
+                axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&customer_id=${iteam.id}&owner_id=${owner_id}`).then(function () {
                 }
                 )
             }
@@ -115,11 +114,10 @@ function DEBITLST() {
 
 
 
-
     return (
         <>
             <Common />
-         
+
 
             < table class="table table-dark ">
                 <thead>
@@ -135,7 +133,9 @@ function DEBITLST() {
                 </thead>
                 <tbody>
                     {debit.map((customer) => {
+                       
                         if (customer.amount) {
+                         
                             return (
                                 <tr>
                                     <td>{customer.id}</td>
@@ -143,7 +143,7 @@ function DEBITLST() {
                                     <td>{customer.amount}</td>
                                     <td>{customer.debits[0].last_purchase_at}</td>
                                     <td>{customer.debits[0].due_date}</td>
-                                    <td><Button variant="outline-primary" onClick={() => credit(customer.id)}>Credit</Button></td>
+                                    <td><Button variant="outline-primary" onClick={() => credit(customer.id,customer.amount)}>Credit</Button></td>
                                     <td><Button variant="outline-primary" onClick={() => navigate(`/interest/${customer.id}`)}>Interest</Button></td>
                                 </tr>)
                         }

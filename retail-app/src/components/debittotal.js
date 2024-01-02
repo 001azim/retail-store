@@ -1,7 +1,6 @@
 function Debittotal(c_data) {
 
 
-
   return c_data.map((item) => {
 
     let deb_tot = 0;
