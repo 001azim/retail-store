@@ -29,12 +29,6 @@ export const customerSlice = createSlice({
       credit_amount: 0
     },
 
-    debit_details: {
-      debit: "",
-      credit: "",
-      total: ""
-    }
-
 
   },
   reducers: {
@@ -59,14 +53,12 @@ export const customerSlice = createSlice({
       state.credit_details = action.payload
     },
 
-    setdebtdetails: (state, action) => {
-      state.debit_details = action.payload
-    }
+    
 
   },
 })
 
 
-export const { setdetails, setduedetails, setcustomerid, setapidata, setdueamount, setcreditdetails ,setdebtdetails } = customerSlice.actions
+export const { setdetails, setduedetails, setcustomerid, setapidata, setdueamount, setcreditdetails  } = customerSlice.actions
 
 export default customerSlice.reducer
