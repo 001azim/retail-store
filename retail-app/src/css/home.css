@@ -1,5 +1,5 @@
 .backgroundhmge{
-    background-image: url("../retailapp.avif");
+    background-image: url("../images/retailapp.avif");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -29,11 +29,11 @@
 }
 .buttonthird{
     position: absolute;
-    left: 27%;
-    top: 78%;
+    left: 35%;
+    top: 120%;
 }
 .letter{
     position: absolute;
     left: 23%;
-    top: 73%;
+    top: 100%;
 }

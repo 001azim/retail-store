@@ -55,12 +55,9 @@
 
 .msgperson .perpersonmsg{
     display: flex;
-    /* background-color: aliceblue; */
     padding: 2%;
-     /* border: none; */
     border-bottom: 0.1px solid rgb(171, 173, 172) ;
     border-bottom-left-radius: 20px;
-    /* overflow: hidden; */
    
 }
 .msgperson .perpersonmsg span{
@@ -120,7 +117,6 @@
 
 .rightmsgbox .msglist{
     width: 100%;
-    /* overflow: scroll; */
 
 }
 

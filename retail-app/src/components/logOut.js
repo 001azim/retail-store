@@ -1,19 +1,22 @@
-import {setStatus,setOwnerId,setUserLogin} from "../slices/shopOwnerLoginSlice";
-import {useDispatch,useSelector} from "react-redux";
-import {useNavigate} from "react-router";
-function Logout(){
-    const dispatch=useDispatch()
-    const Navigate=useNavigate()
-    const logout=()=>{
-        dispatch(setOwnerId({}))
+import { setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice";
+import { useDispatch} from "react-redux";
+import { useNavigate } from "react-router";
+
+
+
+function Logout() {
+    const dispatch = useDispatch()
+    const Navigate = useNavigate()
+    let logout = () => {
         dispatch(setStatus(false))
-        Navigate("/")    
+        dispatch(setOwnerId({}))
+        Navigate('/')
     }
-    return(
+    return (
         <>
             <div>
-                    <button type="button" className='btn btn-danger' onClick={()=>logout()}>Sign out</button>
-                </div>
+                <button type="button" className='btn btn-danger' onClick={() => logout()}>Sign out</button>
+            </div>
         </>
     )
 }
