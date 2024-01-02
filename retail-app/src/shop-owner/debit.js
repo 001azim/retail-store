@@ -77,13 +77,11 @@ function DEBITLST() {
                     if (debit_details.type == "interest") {
                         interestcount += 1
                     }
-                    console.log(interestcount)
-                    console.log("debit", debit)
+                  
                     if (interestcount == 0) {
                         let total_debit_amount = 0
                         debit.map((debit_amount) => {
                             total_debit_amount = debit_amount.amount
-                            console.log("amount", debit_amount.amount)
                         })
                         if (item.udebit_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
                             let fineamount = total_debit_amount + (total_debit_amount * 2 / 100)
@@ -95,7 +93,6 @@ function DEBITLST() {
                             formData.append("due_date", "")
                             formData.append("type", "interest")
                             axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
-                                console.log('response', response)
                             }
                             )
                         }
@@ -106,29 +103,24 @@ function DEBITLST() {
         }, []
     )
 
-useEffect(() => {   
-    debit.map((iteam)=>{
-        console.log("debit check",iteam)
-        console.log("customerid checking",iteam.id)
-        if(iteam.amount<=0){
-            // console.log("customerid:",iteam.id)
-            // console.log("ownerid:",owner_id)
-            // let formData = new FormData();
-            // formData.append("owner_id",owner_id)
-            // formData.append("customer_id", iteam.id)
-            axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&customer_id=${iteam.id}&owner_id=${owner_id}` ).then(function (response) {
-                        console.log('response:', response)
-                    }
-                    )
-        }
-    })
- }, []);
+    useEffect(() => {
+        debit.map((iteam) => {
+            if (iteam.amount <= 0) {
+                axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&customer_id=${iteam.id}&owner_id=${owner_id}`).then(function (response) {
+                }
+                )
+            }
+        })
+    }, []);
+
 
 
 
     return (
         <>
             <Common />
+         
+
             < table class="table table-dark ">
                 <thead>
                     <tr>

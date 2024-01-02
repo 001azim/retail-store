@@ -1,17 +1,11 @@
 .backgroundhmge{
-    background-image: url("../retailapp.avif");
+    background-image: url("../images/retailapp.avif");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     height: 100vh;
     position: relative;
 
-
-}
-#sn{
-    background-color:rgb(113, 245, 205) ;
-    /* border-color:rgb(82, 234, 245) ; */
-    background-color:rgb(215, 218, 217) ;
 
 }
 .quotes{
@@ -25,7 +19,7 @@
 
 .buttonone{
     position: absolute;
-    left: 88.8%;
+    left: 86.8%;
     bottom: 92%;
 }
 .buttonsecond{
@@ -35,6 +29,11 @@
 }
 .buttonthird{
     position: absolute;
-    left: 27%;
-    top: 75%;
+    left: 35%;
+    top: 120%;
+}
+.letter{
+    position: absolute;
+    left: 23%;
+    top: 100%;
 }
