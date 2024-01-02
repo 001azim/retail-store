@@ -13,6 +13,7 @@ function LOGINSO() {
     let { userLogin,userstatus,ownerid } = useSelector((state) => state.shopOwnerLogin)
     console.log(userstatus)
     console.log(ownerid)
+    console.log(userLogin)
     //console.log(ownerid.data.name)
    
     function alldata() {

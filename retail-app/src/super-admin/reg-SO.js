@@ -29,51 +29,58 @@ function SO_REG() {
     //     seterror(Validation(data))
     //   }
 
+let validate=()=>{
+    //  ownerDetails.map((o_detail)=>
+    //     o_detail=="")
+    
+        }
+
+//console.log(validate())
     const register = () => {
         
-       
-        let formData = new FormData();
-        formData.append("request", "create_shopowner")
-        formData.append("name", ownerDetails.name)
-        formData.append("email", ownerDetails.email)
-        formData.append("password", ownerDetails.password)
-        formData.append("aadhar", ownerDetails.aadhar)
-        formData.append("street", ownerDetails.street)
-        formData.append("city", ownerDetails.city)
-        formData.append("area", ownerDetails.area)
-        formData.append("phone", ownerDetails.phone)
-        formData.append("pincode", ownerDetails.pincode)
-        formData.append("shop_name", ownerDetails.shop_name)
+        
+        // let formData = new FormData();
+        // formData.append("request", "create_shopowner")
+        // formData.append("name", ownerDetails.name)
+        // formData.append("email", ownerDetails.email)
+        // formData.append("password", ownerDetails.password)
+        // formData.append("aadhar", ownerDetails.aadhar)
+        // formData.append("street", ownerDetails.street)
+        // formData.append("city", ownerDetails.city)
+        // formData.append("area", ownerDetails.area)
+        // formData.append("phone", ownerDetails.phone)
+        // formData.append("pincode", ownerDetails.pincode)
+        // formData.append("shop_name", ownerDetails.shop_name)
 
-        console.log(formData)
-        //if(!ownerDetails.phone==null){
-            axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
-            console.log(response)
+        // console.log(formData)
+        // if(!ownerDetails==null){
+        //     axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
+        //     console.log(response)
 
-            if (response.data.status == "success") {
-                navigate("/");
-            }
-            else {
-                alert("Enter valid inputs")
-            }
+        //     if (response.data.status == "success") {
+        //         navigate("/");
+        //     }
+        //     else {
+        //         alert("Enter valid inputs")
+        //     }
 
-        })
-        alert('ok')
-        //    navigate("/shopownerlogin");
-        }
+        // })
+        // // alert('ok')
+        // //    navigate("/shopownerlogin");
+        // }
         // else{
         //     alert("Input shouldn't empty")
         // }
 
         
 
-    //}
+    }
     return (
         <>
             <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 bg'>
                 <div className='40-w p-5'>
                     <div className='positionchange'>
-                    <Form>
+                    <Form >
                         <h1 className='align-items-center'> Register </h1>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                             <Form.Label column sm="3">

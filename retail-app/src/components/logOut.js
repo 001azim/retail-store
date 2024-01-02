@@ -1,4 +1,4 @@
-import { setStatus } from "../slices/shopOwnerLoginSlice";
+import { setStatus,setOwnerId,setUserLogin } from "../slices/shopOwnerLoginSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 function Logout(){
@@ -6,6 +6,8 @@ function Logout(){
     const Navigate=useNavigate()
     let logout=()=>{
         dispatch(setStatus(false))
+        dispatch(setOwnerId({}))
+        dispatch(setUserLogin({}))
         localStorage.removeItem("Id")
         Navigate("/")
     }
