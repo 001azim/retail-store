@@ -13,7 +13,7 @@ function Interest (){
   let [debtlist,setdebtlist]=useState([])
   let [duedate,setduedate] = useState("")
   let [dueamount,setdueamount] = useState(0)
-  let [interest,setinterest] =useState("you have no intrest yet")
+  let [interest,setinterest] =useState("you have no interest yet")
   let totaldue = []
   
 

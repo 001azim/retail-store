@@ -67,6 +67,7 @@ function Ownerlist() {
         </tbody>
 
       </Table>
+    {/* <button type="button" onClick={() => getdata()}>button</button> */}
     </>
   )
 }

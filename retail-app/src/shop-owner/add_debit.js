@@ -64,6 +64,7 @@ function Add_debit() {
 
 
         if (due_amount + Number(cdetails.due_amount) <= 5000) {
+
             axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
                 console.log('response', response)
                 if (response.data.status == "success") {
@@ -75,7 +76,7 @@ function Add_debit() {
             })
         }
         else {
-            alert("You already have debt of", due_amount)
+            alert( "you already have debt of "+JSON.stringify(due_amount))
         }
     }
 

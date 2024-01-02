@@ -11,6 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
+import { setdueamount } from '../slices/customerSlice';
 
 function CUSTOMERLST() {
 
@@ -80,8 +81,8 @@ function CUSTOMERLST() {
 
 
 
-  const adddue = (id) => {
-
+  const adddue = (id,total) => {
+dispatch(setdueamount(total))
     navigate(`/adddebit/${id}`)
 
 
@@ -130,7 +131,7 @@ function CUSTOMERLST() {
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>
-                  {item.debit_total < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+                  {item.debit_total < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id,item.debit_total )}>  Add debt
                   </Button>
                   ) : (
                     <h4>debit limit reached</h4>

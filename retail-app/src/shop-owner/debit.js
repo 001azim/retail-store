@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Common from "../components/common"
 import React from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { setapidata } from "../slices/customerSlice"
+import { setapidata, setdueamount } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
@@ -65,9 +65,10 @@ function DEBITLST() {
 
 
 
-    let all_customer_details = Getdate(apidata)
+let all_customer_details = Getdate(apidata)
 
 
+// interest 
 
     useEffect(
         () => {
@@ -112,7 +113,6 @@ function DEBITLST() {
             }
         })
     }, []);
-
 
 
 
