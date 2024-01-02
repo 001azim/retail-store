@@ -17,7 +17,6 @@ import Logo from './logos.png'
 export default function Common(){
 
   const back = ()=>window.history.back()
-  
   const [file, setFile] = useState();
     function handleChange(e) {
         console.log(e.target.files);
