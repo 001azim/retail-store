@@ -40,7 +40,28 @@ function CUSTOMERLST(props) {
     })
   }, [apidata, query])
 
-
+  useEffect(()=>
+  {
+  
+    if(localStorage.getItem("Id")){
+    axios({
+      method: 'get',
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}`,
+  
+    })
+     
+    .then(function (response) {
+      console.log(response)
+      dispatch(setapidata(response.data.data))
+      console.log(apidata)
+      console.log(response.data)
+  
+      })
+   
+    
+  
+      
+  }}, [])
 
   useEffect(() => {
     axios({
@@ -61,16 +82,7 @@ function CUSTOMERLST(props) {
   useEffect(() => {
   
   const customerList =  Debittotal(filteredItems)
-  //   let customerList = filteredItems.map((item) => {
-  //     let cus_tot = 0;
-  //     if(item.debits){
-  //       item.debits.map((c_d)=>{
-  //         cus_tot = cus_tot + c_d.debit_amount
-  //       }) 
-  //     }
 
-  //     return {...item,debit_total:cus_tot};
-  //   });
     setdebit(customerList)
 
 
@@ -83,27 +95,11 @@ navigate(`/adddebit/${id}`)
    
 
   }
-console.log(debit.debit_total)
 
-let id=localStorage.getItem("Id")
 
-useEffect(()=>
-{if(localStorage.getItem("Id")){
-  axios({
-    method: 'get',
-    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+let ls_id=localStorage.getItem("Id")
 
-  })
-   
-  .then(function (response) {
-    console.log(response)
-    dispatch(setapidata(response.data.data))
-    console.log(apidata)
-    console.log(response.data.email)
-    })
- }
-    
-}, [])
+
   return (
     <>
       <Common />
@@ -121,7 +117,7 @@ useEffect(()=>
           </div>
         </div><br></br>
 
-        <h1>welcome {ownerid.data.name}</h1><br></br>
+        {/* <h1>welcome {ownerid.data.name}</h1><br></br> */}
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
@@ -159,7 +155,6 @@ useEffect(()=>
           </tbody>
         </Table>
       
-        {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
       <Logout/>
              </div>
     </>

@@ -6,12 +6,17 @@ function Logout(){
     const Navigate=useNavigate()
     const ownerid=useSelector((state) => state.shopOwnerLogin)
     let logout=()=>{
-        localStorage.removeItem("Id")
+       
+       
         dispatch(setStatus(false))
         dispatch(setOwnerId({}))
-        // console.log("ownerid checking",ownerid)
-        Navigate("/")
+      Navigate('/')
+       
+    
     }
+        // console.log("ownerid checking",ownerid)
+        
+    
     return(
         <>
             <div>
