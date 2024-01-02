@@ -12,7 +12,6 @@ import { setapidata } from "../slices/customerSlice"
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
 import { setdueamount } from '../slices/customerSlice';
-
 function CUSTOMERLST() {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
