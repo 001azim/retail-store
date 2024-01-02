@@ -1,6 +1,5 @@
 .box{
-    background-image: url('../blur.jpg');
-    /* background-image: url('https://c0.wallpaperflare.com/preview/288/244/904/blur-close-up-code-coding.jpg'); */
+    background-image: url('../images/blur.jpg');
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -13,7 +12,6 @@ h2{
     color: rgb(252, 249, 251);
 }
 #butt{
-    /* background-color: rgb(133, 204, 27); */
     background-color: rgb(226, 156, 5);
 
     color: black;

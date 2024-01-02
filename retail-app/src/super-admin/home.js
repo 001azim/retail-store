@@ -1,11 +1,7 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../css/home.css'
-import Logo from '../components/logos.png';
+import Logo from '../images/logos.png';
 
 export default function Home(){
   const navigate=useNavigate()
@@ -19,10 +15,10 @@ export default function Home(){
                 
             </Navbar>
             <div className='buttonone'>
-            <button id="sn" onClick={()=>navigate("/shopownerlogin")}>sign in</button>
+            <button className='btn btn-success' onClick={()=>navigate("/shopownerlogin")}>Sign in</button>
             </div>
             <div className='buttonsecond'>
-            <button id="sn"  onClick={()=>navigate("/")}>about !</button>
+            <button className='btn btn-success'  onClick={()=>navigate("/")}>About</button>
             </div>
                    
            
@@ -30,10 +26,15 @@ export default function Home(){
               <h1 className='quote'>He who is quick</h1>
               <h1 className='quote'>To borrow</h1>
               <h1 className='quote'>is slow to pay</h1> 
+              <div className='letter'>
+            <h6>Not registered yet? click here</h6>
             </div>
             <div className='buttonthird'>
-            <button className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>get start</button>
+            <button className='btn btn-primary' onClick={()=>navigate("/shopownerregister")}>Get started</button>
             </div>
+            </div>
+           
+            
         </div>
     </div>
       </>

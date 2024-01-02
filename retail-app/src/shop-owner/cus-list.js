@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux"
 import Form from 'react-bootstrap/Form';
@@ -9,30 +9,18 @@ import { useState, useEffect, useMemo } from 'react';
 import Common from '../components/common';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
-import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
 
-function CUSTOMERLST(props) {
+function CUSTOMERLST() {
 
   let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-  let {userstatus}=useSelector((state)=> state.customer)
-  // let [apidata, setapidata] = useState([])
-  
-
   const [query, setQuery] = useState("")
-
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
-
   const navigate = useNavigate()
-  // const home = () =>navigate("/")
-  // const back = ()=>window.history.back()
-  // const forward = () => window.history.forward
 
-  const add = () => {
-    alert("sucess")
-  }
+
 
   const filteredItems = useMemo(() => {
     return apidata.filter(item => {
@@ -40,28 +28,28 @@ function CUSTOMERLST(props) {
     })
   }, [apidata, query])
 
-  useEffect(()=>
-  {
-  
-    if(localStorage.getItem("Id")){
-    axios({
-      method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}`,
-  
-    })
-     
-    .then(function (response) {
-      console.log(response)
-      dispatch(setapidata(response.data.data))
-      console.log(apidata)
-      console.log(response.data)
-  
+
+
+  useEffect(() => {
+    if (localStorage.getItem("Id")) {
+      axios({
+        method: 'get',
+        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}`,
+
       })
-   
-    
-  
-      
-  }}, [])
+
+        .then(function (response) {
+          console.log(response)
+          dispatch(setapidata(response.data.data))
+          console.log(apidata)
+          console.log(response.data)
+
+        })
+
+    }
+  }, [])
+
+
 
   useEffect(() => {
     axios({
@@ -74,14 +62,16 @@ function CUSTOMERLST(props) {
         dispatch(setapidata(response.data.data))
         console.log(apidata)
         console.log(response.data.email)
-        
+
       })
   }, [])
   const [debit, setdebit] = useState([]);
 
+
+
   useEffect(() => {
-  
-  const customerList =  Debittotal(filteredItems)
+
+    const customerList = Debittotal(filteredItems)
 
     setdebit(customerList)
 
@@ -89,22 +79,23 @@ function CUSTOMERLST(props) {
   }, [filteredItems]);
 
 
-  const adddue=(id)=>{
 
-navigate(`/adddebit/${id}`)
-   
+  const adddue = (id) => {
+
+    navigate(`/adddebit/${id}`)
+
 
   }
 
 
-let ls_id=localStorage.getItem("Id")
+  let ls_id = localStorage.getItem("Id")
 
 
   return (
     <>
       <Common />
       <div className='boxs'>
-        <div className='form-flex'>                                                                                                                                                                                                                                 
+        <div className='form-flex'>
           <div className='left-form'>
             <Form>
               <InputGroup className='my-3 search'>
@@ -131,32 +122,26 @@ let ls_id=localStorage.getItem("Id")
             </tr>
           </thead>
           <tbody >
-
-
             {debit.map((item, i) => (
               <tr key={i}>
-
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
-               
                 <td>{item.address}</td>
                 <td>
-  {item.debit_total < 5000  ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
-    </Button>
-  ) : (
-    <h4>debit limit reached</h4>
-  )}
-</td>
+                  {item.debit_total < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+                  </Button>
+                  ) : (
+                    <h4>debit limit reached</h4>
+                  )}
+                </td>
               </tr>
             ))}
-
           </tbody>
         </Table>
-      
-      <Logout/>
-             </div>
+        <Logout />
+      </div>
     </>
   );
 
