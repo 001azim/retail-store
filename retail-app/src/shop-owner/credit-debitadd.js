@@ -66,7 +66,7 @@ function ADDAMOUNT() {
                 </InputGroup>
 
                 {/* mobile no input */}
-
+                
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Mobile</InputGroup.Text>
                     <Form.Control
@@ -102,7 +102,7 @@ function ADDAMOUNT() {
 
                <Button Class="submit" variant="primary"  onClick={()=>Sent()}>register</Button>
             </Container>
-
+{JSON.stringify(cdetails)}
 
         </>
 

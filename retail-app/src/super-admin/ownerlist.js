@@ -20,7 +20,6 @@ function Ownerlist() {
     },[])
 
     function solist(){
-        // if (localStorage.getItem("loginstatus"==true)){
         axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
         .then(function(response){
             console.log(response)
@@ -28,35 +27,13 @@ function Ownerlist() {
             console.log("user",user_list)
             dispatch(adduser(user_list))
         })
-        // }
-        // else{
-        //   alert("something wrong")
-            // Navigate("/superadminlogin")
-
-        // }
+        
       }
       
       
     
        
-      // const usersid=(userid)=>{
-      //   axios({
-      //     method: 'get',
-      //     url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${userid}`,
-    
-      //   })
-         
-      //   .then(function(response){
-      //       // console.log(response.data.data.length)
-      //       let countList=response.data.data.length
-      //         no_customer= countList
-            
-
-      //       // setcount(response.data.data.length)
-      //       // console.log("count",counts)
-                
-
-      //   })
+      
 
         
     
@@ -77,8 +54,7 @@ function Ownerlist() {
                 <td>phone</td>
                 <td>area</td>
                 <td>shop_name</td>
-                <td>view </td>
-                <td>count</td>
+                
 
             </tr>
 
@@ -94,9 +70,7 @@ function Ownerlist() {
                 <td>{data.phone}</td>
                 <td>{data.area}</td>
                 <td>{data.shop_name}</td>
-                <td><button onClick={()=> usersid(data.id)}>view</button></td>
-               {/* <td>{data.id}</td>  */}
-               {/* <td>{no_customer}</td> */}
+
                 </tr>
                 </>
              )
@@ -106,7 +80,6 @@ function Ownerlist() {
     </Table>
     
    
-    {/* <button type="button" onClick={()=>getdata()}>button</button> */}
     </> 
   )
 }
