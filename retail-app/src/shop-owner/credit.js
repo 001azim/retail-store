@@ -10,21 +10,7 @@ import axios from 'axios';
 import { setcreditdetails } from '../slices/customerSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
-
-
-
 function Credit() {
-  const { credit_details } = useSelector((state) => state.customer)
-  const { customerid } = useParams()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  function checkAmount(){
-    alert(1)
-    creditAmount()
-
-  }
-
 
   const { credit_details } = useSelector((state) => state.customer)
   const { customerid } = useParams()
@@ -70,6 +56,7 @@ function Credit() {
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 onChange={(e) => dispatch(setcreditdetails({ ...credit_details, credit_date: e.target.value }))}
+
               />
             </InputGroup>
             <InputGroup className="mb-3">
