@@ -75,7 +75,7 @@ function Add_debit() {
             })
         }
         else {
-            alert("You already have debt of", due_amount)
+            alert("You already have debt of"+" "+ due_amount)
         }
     }
 
