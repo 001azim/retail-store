@@ -11,7 +11,7 @@ import { setcreditdetails } from '../slices/customerSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
 function Credit() {
-
+let token=localStorage.getItem("ownertoken")
   const { credit_details } = useSelector((state) => state.customer)
   const { customerid } = useParams()
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ function Credit() {
     formData.append("type", "credit")
 
 
-    axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
+    axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (response) {
       console.log('response', response)
 
       if (response.data.status == "success") {

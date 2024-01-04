@@ -12,14 +12,14 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
- import store from './store'
- import { Provider } from 'react-redux';
+import store from './store'
+import { Provider, useDispatch } from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
 import Home from './super-admin/home';
 import Credit from './shop-owner/credit';
 import Interest from './shop-owner/interest';
-
+// import store from './store';
 function App() {
 
 
@@ -30,21 +30,21 @@ function App() {
     },
     {
       path: "/msg",
-      element: <MESSAGELST/>
+      element: <MESSAGELST />
     },
     {
       path: "/addcustomer",
-      element: <ADDAMOUNT/>
+      element: <ADDAMOUNT />
     },
     {
       path: "/customerlist",
-      element: <CUSTOMERLST/>
+      element: <CUSTOMERLST />
     },
     {
       path: "/debitlist",
-      element: <DEBITLST/>
+      element: <DEBITLST />
     },
-  
+
     {
       path: "/superadminlogin",
       element: < SALOGIN />
@@ -62,8 +62,8 @@ function App() {
       element: < Ownerlist />
     },
     {
-      path:"/shopownerlogin",
-      element:<LOGINSO/>
+      path: "/ShopOwnerLogin",
+      element: <LOGINSO />
     },
     {
       path: "/credit/:customerid",
@@ -75,16 +75,14 @@ function App() {
     },
 
   ]);
-  
 
   return (
 
 
     <Provider store={store}>
-
-    <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </Provider>
-    
+
   );
 }
 

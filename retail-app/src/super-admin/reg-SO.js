@@ -15,13 +15,13 @@ function SO_REG() {
     const dispatch = useDispatch();
 
     let { ownerDetails } = useSelector((state) => state.register);
-    let {ownlist}=useSelector((state)=> state.user)
-    let[mail,existMail]=useState([]);
+    let { ownlist } = useSelector((state) => state.user)
+    let [mail, existMail] = useState([]);
     console.log(mail)
     console.log(ownlist)
     const Change = (e) => {
         const value = (e.target.value);
-        
+
         dispatch(updateDetails({
             ...ownerDetails,
             [e.target.name]: value
@@ -30,20 +30,10 @@ function SO_REG() {
     };
 
     let [error, seterror] = useState({})
-    // let validate=()=>{
-    //     Object.keys(ownerDetails).forEach(function(key, index) {
-    //        if(ownerDetails[key]==""){
-    //         console.log(ownerDetails[index.name])
-    //         //alert(3)           
-    //     }
-    //        //console.log(ownerDetails[key])
-    //       });
-          
-    //    // console.log(ownerDetails)
-    // }
+
 
     const register = () => {
-        
+
         let formData = new FormData();
         formData.append("request", "create_shopowner")
         formData.append("name", ownerDetails.name)
@@ -56,47 +46,31 @@ function SO_REG() {
         formData.append("phone", ownerDetails.phone)
         formData.append("pincode", ownerDetails.pincode)
         formData.append("shop_name", ownerDetails.shop_name)
-        
+
         console.log(formData)
-        // axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
-        // .then(function (response) {
-        //     console.log(response.data.data)
-        //     let owner_data=response.data.data
-        //     let e_mail=owner_data.map((o_e)=>(
-        //         o_e.email
-        //     ))
-        //     existMail(e_mail)
-            
-         // })
-         
-       
-        let error=false
-        {Object.entries(ownerDetails).map(([key,value]) => {
-          
-            
-            if(value==""){
-                alert("enter values of",key)
-                console.log(key)
-                error=true
+
+        let error = false
+        {Object.entries(ownerDetails).map(([key, value]) => {
+            if (value == "") {
+                    alert("enter values of", key)
+                    console.log(key)
+                    error = true
+                }
+
+                if (error == false) {
+                    axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
+                        console.log(response)
+
+                        if (response.data.status == "success") {
+                            navigate("/shopownerlogin");
+                        }
+                    })
+                }
             }
-            
-                if(error==false){
-                axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
-                            console.log(response)
-                
-                            if (response.data.status == "success") {
-                                navigate("/shopownerlogin");
-                            }
-                            
-                
-                        })
-                    }
-            
+            )
         }
-        )
-    }
-        };
-    
+    };
+
     return (
         <>
             <div className='login template d-flex justify-content-center align-items-center 100-w vh-120 bg'>

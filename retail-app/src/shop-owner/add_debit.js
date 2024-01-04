@@ -21,9 +21,9 @@ function Add_debit() {
     let cdetails = useSelector((state) => state.customer.due_details)
     const navigate = useNavigate()
     const { customerid } = useParams()
+    let token = localStorage.getItem("ownertoken")
 
-
-
+// alert date
 
     useEffect(() => {
         if (cdetails.due_date) {
@@ -64,7 +64,7 @@ function Add_debit() {
 
 
         if (due_amount + Number(cdetails.due_amount) <= 5000) {
-            axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
+            axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (response) {
                 console.log('response', response)
                 if (response.data.status == "success") {
                     navigate('/customerlist')
