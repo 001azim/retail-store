@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Form from 'react-bootstrap/Form';
 import {useNavigate } from "react-router-dom";
@@ -7,15 +7,12 @@ import Button from 'react-bootstrap/Button';
 import { checklogin } from "../slices/userSlice";
 import  {useSelector, useDispatch } from "react-redux";
 import "../css/login-SA.css"
-import { addAdminID } from "../slices/userSlice";
 
 function SALOGIN(){
     
 const login=useSelector((state)=>state.user.loginValue)
-const adminId=useSelector((state)=>state.user.adminid)
 const Navigate=useNavigate()
 const dispatch=useDispatch()
-let [disable,setDisable]=useState(false)
            
         let formData=new FormData()
         formData.append("email",login.email)
@@ -29,12 +26,9 @@ let [disable,setDisable]=useState(false)
 
         .then(function(response){
             console.log("res",response)
-            setDisable(true)
-            // console.log("ID",response.data.data.id)
                 if(response.data.status=="success"){
 
                 localStorage.setItem("token",response.data.token)
-                dispatch(addAdminID(response.data.data.id))
                 
                 Navigate("/ownerslist")
             }
@@ -44,7 +38,12 @@ let [disable,setDisable]=useState(false)
 
         })
         }
-   
+        
+   useEffect(()=>{
+    if(localStorage.getItem("token")){
+        Navigate("/ownerslist")
+    }
+   },[])
 
 return(
     <>
@@ -73,7 +72,7 @@ return(
         <br></br>
        </Form.Group>
       <Form.Group className="d-grid" controlId="formBasicCheckbox">
-      <Button id="butt" type="button" disabled={disable} onClick={()=>getdata()} >
+      <Button id="butt" type="button" onClick={()=>getdata()} >
          LOGIN
        </Button>
        </Form.Group>

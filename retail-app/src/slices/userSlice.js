@@ -7,7 +7,6 @@ export const userSlice = createSlice({
         password:""
       },
       ownlist:[],
-      adminid:0
     },
     reducers: {
         checklogin:((state,action)=>{
@@ -16,9 +15,7 @@ export const userSlice = createSlice({
         adduser:((state,action)=>{
             state.ownlist=action.payload
         }),
-        addAdminID:((state,action)=>{
-          state.adminid=action.payload
-      })
+        
         
     }
 })

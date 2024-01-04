@@ -13,32 +13,11 @@ function Ownerlist() {
   const dispatch = useDispatch()
   let navigate=useNavigate()
   const lists = useSelector((state) => state.user.ownlist)
-  const adminId=useSelector((state)=>state.user.adminid)
-
 let token=localStorage.getItem("token")
 
   
 
-  useEffect(() => {
-    
-    Onload()
  
-  }, [adminId])
-
-
-  function Onload() {
-    let token = localStorage.getItem("token")
-    if (!adminId && localStorage.getItem("token")) {
-      axios.get(`https://agaram.academy/api/retail/index.php?request=getAllShopOwners&token=${token}`)
-      .then(function (response) {
-        console.log(response)
-        let user_list = response.data.data
-        dispatch(adduser(user_list))
-
-          
-        })
-      }
-  }
 
   useEffect(() => {
     solist()
@@ -52,6 +31,8 @@ let token=localStorage.getItem("token")
         let user_list = response.data.data
         dispatch(adduser(user_list))
       })
+      
+
     }
     else{
       alert("please login")
