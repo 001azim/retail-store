@@ -24,7 +24,6 @@ export default function Home(){
     let token = localStorage.getItem("ownertoken")
       axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
         .then(function (response) {
-          console.log(response)
           dispatch(setOwnerId(response))
           
         })

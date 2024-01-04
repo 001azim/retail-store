@@ -32,7 +32,6 @@ function Credit() {
     if (credit_details.credit_date.trim() != 0 && credit_details.credit_amount != 0) {
       setisdisable(true)
       axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (response) {
-        console.log('response', response)
 
         if (response.data.status == "success") {
           navigate('/debitlist')
@@ -52,13 +51,11 @@ function Credit() {
 
   }
 
-  console.log(due_amount)
 
   return (
     <>
       <>
         <Container>
-          {console.log(credit_details)}
           <br></br>
           <h2> Credit </h2>
           <Form>

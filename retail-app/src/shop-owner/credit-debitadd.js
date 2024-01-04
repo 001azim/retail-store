@@ -36,7 +36,6 @@ if(cdetails.customer_name.trim()!='' && cdetails.email.trim()!='' && cdetails.Ad
     // disable button when click
 setisdisable(true)
     axios.post('https://agaram.academy/api/retail/index.php?request=create_customer', formData).then(function (response) {
-        console.log('response', response.data.status)
         if (response.data.status == "success") {
             navigate('/customerlist')
         }
