@@ -17,6 +17,7 @@ function SO_REG() {
     let { ownerDetails } = useSelector((state) => state.register);
     let { ownlist } = useSelector((state) => state.user)
     let [mail, existMail] = useState([]);
+    let [isdisable,setdisable]=useState(false)
     console.log(mail)
     console.log(ownlist)
     const Change = (e) => {
@@ -60,14 +61,13 @@ function SO_REG() {
                 if (error == false) {
                     axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
                         console.log(response)
-
+                        setdisable(true)
                         if (response.data.status == "success") {
                             navigate("/shopownerlogin");
                         }
                     })
                 }
-            }
-            )
+            })
         }
     };
 
@@ -178,7 +178,7 @@ function SO_REG() {
                                 </Form.Group>
                             </div>
                             <div className='align-items-center'>
-                                <button className='btn btn-success' type='button' onClick={() => register()}>Register</button>
+                                <button className='btn btn-success' type='button' disabled={isdisable} onClick={() => register()}>Register</button>
 
                             </div>
                         </Form>
