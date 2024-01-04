@@ -141,6 +141,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import { useRef } from 'react';
 import Debittotal from '../components/debittotal';
+import Logout from '../components/logOut';
+
 
 function CUSTOMERLST(props) {
 
@@ -182,12 +184,13 @@ function CUSTOMERLST(props) {
         console.log(response)
         dispatch(setapidata(response.data.data))
         console.log(apidata)
-        console.log(response.data.email)
         
       })
   }, [])
   const [debit, setdebit] = useState([]);
 
+
+  
   useEffect(() => {
   
   const customerList =  Debittotal(filteredItems)
@@ -213,8 +216,27 @@ navigate(`/adddebit/${id}`)
    
 
   }
-console.log(debit.debit_total)
+// console.log(debit.debit_total)
 
+let id=localStorage.getItem("Id")
+
+useEffect(()=>
+{if(localStorage.getItem("Id")){
+  axios({
+    method: 'get',
+    url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${id}`,
+
+  })
+   
+  .then(function (response) {
+    console.log(response)
+    dispatch(setapidata(response.data.data))
+    console.log(apidata)
+    // console.log(response.data.email)
+    })
+ }
+    
+}, [])
   return (
     <>
       <Common />
@@ -277,8 +299,10 @@ console.log(debit.debit_total)
 
           </tbody>
         </Table>
+      
         {/* <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button> */}
-      </div>
+      <Logout/>
+             </div>
     </>
   );
 

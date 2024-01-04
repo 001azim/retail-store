@@ -10,7 +10,7 @@ import moment from 'moment'
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router';
-import Debittotal from '../components/debittotal';
+import Logout from '../components/logOut'
 
 function Add_debit() {
     let [alertdate,setalertdate]=useState('')
@@ -67,7 +67,7 @@ function Sent() {
 if(due_amount+Number(cdetails.due_amount) < 5000){
     axios.post('https://agaram.academy/api/retail/index.php?request=create_debit',formData).then(function(response){
         console.log('response',response)
-
+        
         if(response.data.status=="success"){
             navigate('/customerlist')
         }
@@ -142,6 +142,7 @@ else{
 
      </Form>
  </Container>
+ <Logout/>
  </>
     )
 }

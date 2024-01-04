@@ -18,6 +18,7 @@ function ADDAMOUNT() {
     const dispatch=useDispatch()
     let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
     let cdetails=useSelector((state)=>state.customer.details)
+  
     
     
   const  navigate=useNavigate()
@@ -32,6 +33,7 @@ function ADDAMOUNT() {
         formData.append("email",cdetails.email)
         formData.append("address",cdetails.Address)
         formData.append("phone",cdetails.phone)
+        
        
 
        
@@ -39,6 +41,9 @@ function ADDAMOUNT() {
             console.log('response',response.data.status)
             if(response.data.status=="success"){
                 navigate('/customerlist')
+            }
+            else {
+                alert("error")
             }
            } )
      
@@ -111,5 +116,3 @@ function ADDAMOUNT() {
 }
 
 export default ADDAMOUNT
-
-
