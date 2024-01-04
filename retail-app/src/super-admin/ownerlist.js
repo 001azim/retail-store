@@ -102,7 +102,7 @@ let token=localStorage.getItem("token")
         </tbody>
 
       </Table>
-      <button type="button" variant="danger" onClick={()=>logout_SA()}>signout</button>
+      <Button type="button" variant="danger" onClick={()=>logout_SA()}>sign out</Button>
     </>
   )
 }

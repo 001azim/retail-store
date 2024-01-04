@@ -74,7 +74,7 @@ return(
        </Form.Group>
       <Form.Group className="d-grid" controlId="formBasicCheckbox">
       <Button id="butt" type="button" disabled={disable} onClick={()=>getdata()} >
-         Submit
+         LOGIN
        </Button>
        </Form.Group>
      
