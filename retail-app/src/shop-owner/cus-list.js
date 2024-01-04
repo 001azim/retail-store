@@ -19,7 +19,7 @@ function CUSTOMERLST() {
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-
+  
 
 
   const filteredItems = useMemo(() => {

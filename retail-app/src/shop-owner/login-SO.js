@@ -22,7 +22,7 @@ function LOGINSO() {
             if (response.data.status == "success") {
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
-                localStorage.setItem('Id', response.data.data.id)
+                localStorage.setItem('ownertoken', response.data.token)
                 navigate("/customerlist")
             } else {
                 navigate("/shopownerlogin")
