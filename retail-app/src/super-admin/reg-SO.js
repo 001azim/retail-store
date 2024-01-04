@@ -17,8 +17,6 @@ function SO_REG() {
     let { ownerDetails } = useSelector((state) => state.register);
     let { ownlist } = useSelector((state) => state.user)
     let [mail, existMail] = useState([]);
-    console.log(mail)
-    console.log(ownlist)
     const Change = (e) => {
         const value = (e.target.value);
 
@@ -47,19 +45,16 @@ function SO_REG() {
         formData.append("pincode", ownerDetails.pincode)
         formData.append("shop_name", ownerDetails.shop_name)
 
-        console.log(formData)
 
         let error = false
         {Object.entries(ownerDetails).map(([key, value]) => {
             if (value == "") {
                     alert("enter values of", key)
-                    console.log(key)
                     error = true
                 }
 
                 if (error == false) {
                     axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
-                        console.log(response)
 
                         if (response.data.status == "success") {
                             navigate("/shopownerlogin");

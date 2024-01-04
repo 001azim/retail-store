@@ -23,7 +23,7 @@ function Add_debit() {
     const { customerid } = useParams()
     let token = localStorage.getItem("ownertoken")
 
-// alert date
+    // alert date
 
     useEffect(() => {
         if (cdetails.due_date) {
@@ -62,10 +62,8 @@ function Add_debit() {
         formData.append("type", "debit")
 
 
-
-        if (due_amount + Number(cdetails.due_amount) <= 5000) {
+        if (cdetails.due_amount!=0 && cdetails.Last_purchase_at!=""&& cdetails.due_date!="") {
             axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (response) {
-                console.log('response', response)
                 if (response.data.status == "success") {
                     navigate('/customerlist')
                 }
@@ -73,13 +71,12 @@ function Add_debit() {
                     alert("failed")
                 }
             })
-        }
-        else {
-            alert("You already have debt of"+" "+ due_amount)
+
+        }else{
+            alert ("fill all details")
         }
     }
 
-console.log(due_amount)
 
     return (
         <>
@@ -105,7 +102,15 @@ console.log(due_amount)
                             required
                             aria-label="Username"
                             aria-describedby="basic-addon1"
-                            onKeyUp={(e) => dispatch(setduedetails({ ...cdetails, due_amount: e.target.value }))} />
+                            onKeyUp={(e) => {
+                                if (Number(due_amount) + Number(e.target.value) <= 5000) {
+                                    dispatch(setduedetails({ ...cdetails, due_amount: e.target.value }))
+                                }
+                                else {
+                                    alert("limit reached" + "" + due_amount);
+                                    e.target.value = 0
+                                }
+                            }} />
                     </InputGroup>
                     {/* due date  */}
                     <InputGroup className="mb-3">
