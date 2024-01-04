@@ -1,8 +1,8 @@
 import axios from "axios"
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Common from "../components/common"
 import React from "react";
-import { ReactReduxContext, useDispatch, useSelector } from "react-redux"
+import {  useDispatch, useSelector } from "react-redux"
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
@@ -14,9 +14,10 @@ import { setdueamount } from "../slices/customerSlice";
 function DEBITLST() {
     let navigate = useNavigate()
     let dispatch = useDispatch()
-    let { ownerid } = useSelector((state) => state.shopOwnerLogin)
+    let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
+
     let owner_id = ownerid.data.id
     let token = localStorage.getItem("ownertoken")
 
@@ -76,7 +77,7 @@ function DEBITLST() {
 
     function Getdate(apidata) {
         return apidata.map((item) => {
-            let cus_tot = "";
+            let cus_tot = "";   
             if (item.debits) {
                 item.debits.map((c_d) => {
 

@@ -10,10 +10,9 @@ import Logo from '../images/logos.png'
 function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    let { userLogin, userstatus, ownerid } = useSelector((state) => state.shopOwnerLogin)
+    let { userLogin, userstatus, ownerid } = useSelector((state) => state.ShopOwnerLogin)
     console.log(userstatus)
     console.log(ownerid)
-
     function alldata() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
@@ -25,7 +24,7 @@ function LOGINSO() {
                 localStorage.setItem('ownertoken', response.data.token)
                 navigate("/customerlist")
             } else {
-                navigate("/shopownerlogin")
+                navigate("/ShopOwnerLogin")
                 alert("check your email or password")
             }
         })
