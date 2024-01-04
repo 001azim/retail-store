@@ -74,9 +74,6 @@ function DEBITLST() {
    
 
 
-
-    
-
     function setinterest() {
         apidata.map((item) => {
             let interestcount = 0
