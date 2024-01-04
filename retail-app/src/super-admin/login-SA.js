@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Form from 'react-bootstrap/Form';
 import {useNavigate } from "react-router-dom";
@@ -7,18 +7,15 @@ import Button from 'react-bootstrap/Button';
 import { checklogin } from "../slices/userSlice";
 import  {useSelector, useDispatch } from "react-redux";
 import "../css/login-SA.css"
-
-
-
-
+import { addAdminID } from "../slices/userSlice";
 
 function SALOGIN(){
     
 const login=useSelector((state)=>state.user.loginValue)
-console.log(login)
+const adminId=useSelector((state)=>state.user.adminid)
 const Navigate=useNavigate()
 const dispatch=useDispatch()
-    
+let [disable,setDisable]=useState(false)
            
         let formData=new FormData()
         formData.append("email",login.email)
@@ -31,11 +28,14 @@ const dispatch=useDispatch()
         axios.post('https://agaram.academy/api/retail/index.php?request=super_admin_login',formData)
 
         .then(function(response){
-            console.log(response)
-            
+            console.log("res",response)
+            setDisable(true)
+            // console.log("ID",response.data.data.id)
                 if(response.data.status=="success"){
 
-                localStorage.setItem("loginstatus",true)
+                localStorage.setItem("token",response.data.token)
+                dispatch(addAdminID(response.data.data.id))
+                
                 Navigate("/ownerslist")
             }
             else{
@@ -73,7 +73,7 @@ return(
         <br></br>
        </Form.Group>
       <Form.Group className="d-grid" controlId="formBasicCheckbox">
-      <Button id="butt" type="button" onClick={()=>getdata()} >
+      <Button id="butt" type="button" disabled={disable} onClick={()=>getdata()} >
          Submit
        </Button>
        </Form.Group>

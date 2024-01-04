@@ -1,69 +1,94 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import { useEffect } from "react";
+import {useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import {adduser} from "../slices/userSlice";
-import {useNavigate } from "react-router-dom";
+import { adduser } from "../slices/userSlice";
 import 'bootstrap/dist/css/bootstrap.css';
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button';
 
 function Ownerlist() {
-  const dispatch=useDispatch()
-  const Navigate=useNavigate()
+  const dispatch = useDispatch()
+  let navigate=useNavigate()
+  const lists = useSelector((state) => state.user.ownlist)
+  const adminId=useSelector((state)=>state.user.adminid)
 
-    const lists=useSelector((state)=>state.user.ownlist)
-    console.log("list",lists)
+let token=localStorage.getItem("token")
 
-    useEffect(()=>{
-      solist()
-    },[])
-
-    function solist(){
-        axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
-        .then(function(response){
-            console.log(response)
-            let user_list=response.data.data
-            console.log("user",user_list)
-            dispatch(adduser(user_list))
-        })
-        
-      }
-      
-      
-    
-       
-      
-
-        
-    
   
+
+  useEffect(() => {
+    
+    Onload()
+ 
+  }, [adminId])
+
+
+  function Onload() {
+    let token = localStorage.getItem("token")
+    if (!adminId && localStorage.getItem("token")) {
+      axios.get(`https://agaram.academy/api/retail/index.php?request=getAllShopOwners&token=${token}`)
+      .then(function (response) {
+        console.log(response)
+        let user_list = response.data.data
+        dispatch(adduser(user_list))
+
+          
+        })
+      }
+  }
+
+  useEffect(() => {
+    solist()
+  }, [])
+
+  function solist() {
+    if (localStorage.getItem("token")){
+    axios.get(`https://agaram.academy/api/retail/index.php?request=getAllShopOwners&token=${token}`)
+      .then(function (response) {
+        console.log(response)
+        let user_list = response.data.data
+        dispatch(adduser(user_list))
+      })
+    }
+    else{
+      alert("please login")
+      navigate("/superadminlogin")
+      
+    }
+  }
+
+  const logout_SA=()=>{
+    localStorage.removeItem("token")
+    navigate("/superadminlogin")
+  }
+  
+
   return (
     <>
 
-    
-    
-    <h1>shop owners list</h1>
-    
-     <Table striped bordered hover size="sm" variant="dark">
-        <thead>
-            <tr>
-                <td>id</td>
-                <td>name</td>
-                <td>email</td>
-                <td>phone</td>
-                <td>area</td>
-                <td>shop_name</td>
-                
+      <h1>shop owners list</h1>
 
-            </tr>
+      <Table striped bordered hover size="sm" variant="dark">
+        <thead>
+          <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>email</td>
+            <td>phone</td>
+            <td>area</td>
+            <td>shop_name</td>
+            
+
+          </tr>
 
         </thead>
         <tbody>
-            {lists.map((data)=>{
-            return(
-              <>
-             <tr>
+          {lists.map((data) => {
+            return (
+              <tr>
                 <td>{data.id}</td>
                 <td>{data.name}</td>
                 <td>{data.email}</td>
@@ -71,16 +96,14 @@ function Ownerlist() {
                 <td>{data.area}</td>
                 <td>{data.shop_name}</td>
 
-                </tr>
-                </>
-             )
-        })}
-
+              </tr>
+            )
+          })}
         </tbody>
-    </Table>
-    
-   
-    </> 
+
+      </Table>
+      <button type="button" variant="danger" onClick={()=>logout_SA()}>signout</button>
+    </>
   )
 }
 
