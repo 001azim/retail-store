@@ -16,9 +16,10 @@ function CUSTOMERLST() {
 
 let [data,setdata]=useState();
 
-  const getcustomers = async ()=>{
+let token=localStorage.getItem("ownertoken")
+  const getcustomers =  ()=>{
   
-const response = await axios.get( `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`)
+const response =  axios.get( `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`)
 let data= response.data
 setdata(data)   
 
@@ -39,7 +40,7 @@ console.log("data",data)
     })
   }, [apidata, query])
 
-  let token=localStorage.getItem("ownertoken")
+
 
 
   // useEffect(() => {

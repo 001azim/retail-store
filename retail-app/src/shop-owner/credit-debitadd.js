@@ -50,13 +50,6 @@ else{
 }
 
 
-
-        axios.post(`https://agaram.academy/api/retail/index.php?request=create_customer&token=${token}`, formData).then(function (response) {
-            console.log('response', response.data.status)
-            if (response.data.status == "success") {
-                navigate('/customerlist')
-            }
-        })
     }
 
     return (

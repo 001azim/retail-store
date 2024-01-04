@@ -11,8 +11,6 @@ import { setcreditdetails } from '../slices/customerSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-
-
 function Credit() {
   let [isdisable, setisdisable] = useState()
   const { credit_details, due_amount } = useSelector((state) => state.customer)
@@ -30,8 +28,6 @@ function Credit() {
     formData.append("type", "credit")
 
 
-    axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
-      console.log('response', response)
 
     if (credit_details.credit_date.trim() != 0 && credit_details.credit_amount != 0) {
       setisdisable(true)
@@ -50,9 +46,13 @@ function Credit() {
     else {
       alert("Enter valid details")
     }
-  })}
 
 
+
+
+  }
+
+  console.log(due_amount)
 
   return (
     <>
