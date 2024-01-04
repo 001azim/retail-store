@@ -17,7 +17,7 @@ function DEBITLST() {
     let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
-    let [isdisable, setisdisable] = useState()
+    let [isdisable, setisdisable] = useState(false)
     let owner_id = ownerid.data.id
     let token = localStorage.getItem("ownertoken")
 
@@ -101,7 +101,7 @@ function DEBITLST() {
                     })
                     if (item.udebit_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
                         setisdisable(true)
-                        let fineamount = total_debit_amount + (total_debit_amount * 2 / 100)
+                        let fineamount = (total_debit_amount * 0.02 )
                         let formData = new FormData();
                         formData.append("customer_id", item.id)
                         formData.append("last_purchase_at", moment().format('YYYY-MM-DD'))
@@ -109,7 +109,6 @@ function DEBITLST() {
                         formData.append("due_date", "")
                         formData.append("type", "interest")
                         axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (res) {
-                            setisdisable(false)
 
                         }
                         )
@@ -120,8 +119,8 @@ function DEBITLST() {
         })
     }
 
-    useEffect(
-        () => setinterest(), [apidata, isdisable==false]
+    useEffect(()=>{if (isdisable==false){
+        setinterest()}}, [apidata]
     )
 
 
