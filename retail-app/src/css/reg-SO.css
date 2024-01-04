@@ -1,5 +1,5 @@
 .bg{
-    background-image: url('../retailapp.avif');
+    background-image: url('../images/retailapp.avif');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -27,4 +27,8 @@ position: absolute ;
 right: 49%;
 bottom: -28%;
 }
-   
+.logopositions{
+    position: absolute;
+    bottom: 80%;
+    right: 90%;
+    }   

@@ -1,9 +1,3 @@
- /* .menubox button{
-    padding: 30px;
-    margin-left: 20px;
-    border-radius: 50%;
-    border: 0;whi
-} */
 .menubox{
    background-color: white;
    width: 900px;
@@ -18,31 +12,24 @@
    box-shadow: 0 0 10px rgb(71, 71, 38);
    margin: 20px;
 }
-
 .menubox button{
    border: none;
 }
-
 .menubox i{
    padding: 20px 50px;
 }
-
 .menubox button,i:hover{
    background-color:rgb(205, 191, 191) ;
 }
-
 .menubox img{
    width: 30px;
-   /* padding: 25px 50px; */
 }
 .menubox span{
    padding: 20px 50px;
 }
-
 .menubox span:hover{
    background-color: rgb(205, 191, 191);
 }
-
 #logo {
    margin-left: 50px;
 
@@ -57,5 +44,4 @@
    top: 35%;
    transform: translateX(-50%);
    z-index: 2;
-   /* background-color: white; */
 }
