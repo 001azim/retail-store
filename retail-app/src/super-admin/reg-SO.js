@@ -5,7 +5,7 @@ import React from 'react';
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { updateDetails } from '../slices/registerSlice';
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import '../css/reg-SO.css';
 import Navbar from 'react-bootstrap/Navbar';
@@ -24,7 +24,7 @@ function SO_REG() {
 
     };
 
-    let [error, seterror] = useState({})
+    // let [error, seterror] = useState({})
 
 
     const register = () => {
@@ -48,7 +48,7 @@ function SO_REG() {
             console.log(response)
 
             if (response.data.status == "success") {
-                navigate("/shopownerlogin");
+                navigate("/ShopOwnerLogin");
             }
             else {
                 alert("Enter valid inputs")
@@ -80,7 +80,7 @@ function SO_REG() {
                                 </Form.Label>
                                 <Col sm="10">
                                     <Form.Control type="text" name='name' placeholder="UserName" className='detail' required onChange={Change} />
-                                    {error.Username && <span style={{ color: "red" }}>{error.Username}</span>}
+                                    {/* {error.Username && <span style={{ color: "red" }}>{error.Username}</span>} */}
                                 </Col>
                             </Form.Group>
 
@@ -99,7 +99,7 @@ function SO_REG() {
                                     </Form.Label>
                                     <Col sm="9">
                                         <Form.Control type="email" name='email' placeholder="email" className='detail' required onChange={Change} />
-                                        {error.email && <span style={{ color: "red" }}>{error.email}</span>}
+                                        {/* {error.email && <span style={{ color: "red" }}>{error.email}</span>} */}
                                     </Col>
                                 </Form.Group>
 
@@ -109,7 +109,7 @@ function SO_REG() {
                                     </Form.Label>
                                     <Col sm="8">
                                         <Form.Control type="password" name='password' placeholder="Password" className='detail' required onChange={Change} />
-                                        {error.password && <span style={{ color: "red" }}>{error.password}</span>}
+                                        {/* {error.password && <span style={{ color: "red" }}>{error.password}</span>} */}
                                     </Col>
                                 </Form.Group>
                             </div>

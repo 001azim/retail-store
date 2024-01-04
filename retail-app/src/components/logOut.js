@@ -10,6 +10,7 @@ function Logout() {
     let logout = () => {
         dispatch(setStatus(false))
         dispatch(setOwnerId({}))
+        localStorage.removeItem("ownertoken")
         Navigate('/')
     }
     return (

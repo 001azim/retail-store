@@ -3,12 +3,35 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import { useNavigate } from 'react-router-dom';
 import '../css/home.css'
 import Logo from '../images/logos.png';
+import { useEffect } from 'react';
+import { setOwnerId } from '../slices/shopOwnerLoginSlice';
+import { useDispatch,useSelector } from 'react-redux';
+import axios from 'axios';
 
 export default function Home(){
   const navigate=useNavigate()
+  let dispatch = useDispatch()
+  let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
 
+  useEffect(() => {
+    if (!ownerid && localStorage.getItem("ownertoken")) {
+    Onreload()
+  }
+  }, [ownerid])
+
+
+  function Onreload() {
+    let token = localStorage.getItem("ownertoken")
+      axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+        .then(function (response) {
+          console.log(response)
+          dispatch(setOwnerId(response))
+          
+        })
+   
+  }
     return(
-        <>
+        <>  
         <div className='bg'>
           <div className='backgroundhmge'>
             <Navbar >
@@ -16,7 +39,7 @@ export default function Home(){
             </Navbar>
             <div className='buttonone'>
             <NavDropdown title="Sign In" id="nav-dropdown">
-          <NavDropdown.Item onClick={()=>navigate("/shopownerlogin")}>shop owner</NavDropdown.Item>
+          <NavDropdown.Item onClick={()=>navigate("/ShopOwnerLogin")}>shop owner</NavDropdown.Item>
           <NavDropdown.Item onClick={()=>navigate("/superadminlogin")}>admin</NavDropdown.Item>
         </NavDropdown>
             </div>

@@ -14,7 +14,7 @@ import Logout from '../components/logOut';
 
 function CUSTOMERLST() {
 
-  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+  let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
   const [query, setQuery] = useState("")
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
@@ -28,33 +28,34 @@ function CUSTOMERLST() {
     })
   }, [apidata, query])
 
+  let token=localStorage.getItem("ownertoken")
 
 
-  useEffect(() => {
-    if (localStorage.getItem("Id")) {
-      axios({
-        method: 'get',
-        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}`,
+  // useEffect(() => {
+  //   if (localStorage.getItem("ownertoken")) {
+  //     axios({
+  //       method: 'get',
+  //       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}&token=${token}`,
 
-      })
+  //     })
 
-        .then(function (response) {
-          console.log(response)
-          dispatch(setapidata(response.data.data))
-          console.log(apidata)
-          console.log(response.data)
+  //       .then(function (response) {
+  //         console.log(response)
+  //         dispatch(setapidata(response.data.data))
+  //         console.log(apidata)
+  //         console.log(response.data)
 
-        })
+  //       })
 
-    }
-  }, [])
+  //   }
+  // }, [])
 
 
 
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}`,
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
 
     })
       .then(function (response) {
@@ -74,7 +75,7 @@ function CUSTOMERLST() {
     const customerList = Debittotal(filteredItems)
 
     setdebit(customerList)
-
+console.log("checking",customerList)
 
   }, [filteredItems]);
 
@@ -88,7 +89,15 @@ function CUSTOMERLST() {
   }
 
 
-  let ls_id = localStorage.getItem("Id")
+   
+  // function Onreload() {
+  //   let token = localStorage.getItem("ownertoken")
+  //     axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+  //       .then(function (response) {
+  //         console.log("checking api",response)
+  //       })
+  // }
+
 
 
   return (
@@ -130,7 +139,7 @@ function CUSTOMERLST() {
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>
-                  {item.debit_total < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
                   </Button>
                   ) : (
                     <h4>debit limit reached</h4>
@@ -141,6 +150,7 @@ function CUSTOMERLST() {
           </tbody>
         </Table>
         <Logout />
+        {/* <button onClick={()=>Onreload()}>api</button> */}
       </div>
     </>
   );
