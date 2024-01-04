@@ -1,8 +1,8 @@
 
 import React, { useState, useTransition, use } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import icon1 from '../debit.png'
-import icon2 from '../credit.png'
+import icon1 from '../images/debit.png'
+import icon2 from '../images/credit.png'
 import "../css/common.css"
 import { Link, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
@@ -48,29 +48,43 @@ export default function Common() {
     console.log(formState)
   };
 
-  const serviceId = 'service_z08nwwc'
-    const templateId = 'template_zh2yccg'
-    const publicKey = '1E3EtlJD8BKYRI7Jn'
+  // const serviceId = 'service_z08nwwc'
+  //   const templateId = 'template_zh2yccg'
+  //   const publicKey = '1E3EtlJD8BKYRI7Jn'
 
   const handleclick = (event) => {
+
+    const handleclick = (event) => {
+      event.preventDefault();
+  
+      window.Email.send({
+        SecureToken: "27d68705-c0fb-42ce-9398-0a80e7930099 ",
+        To: "ja84don@gmail.com",
+        From: `${formState.email}`,
+        Subject: "This is the Feedback",
+        Body: `${formState.fedMessage}`,
+      }).then(() => alert("msg send sucessfully"));
+  
+    }
     // event.preventDefault();
 
-    const templateParams = {
-      from_name: 'retail shop',
-      from_email: formState.email,
-      to_name: ownerid.data.name,
-      message: formState.fedMessage ,
-    };
+    // const templateParams = {
+    //   from_name: 'retail shop',
+    //   from_email: formState.email,
+    //   to_name: ownerid.data.name,
+    //   message: formState.fedMessage ,
+    // };
 
-    // Send the email using EmailJS
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
-      .then((response) => {
-        console.log('Email sent successfully!', response);
+    // // Send the email using EmailJS
+    // emailjs.send(serviceId, templateId, templateParams, publicKey)
+    //   .then((response) => {
+    //     console.log('Email sent successfully!', response);
         
-      })
-      .catch((error) => {
-        console.error('Error sending email:', error) 
-      });
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error sending email:', error) 
+    //   });
+
 
 
   }

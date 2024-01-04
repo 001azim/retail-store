@@ -1,9 +1,12 @@
 .bg{
-    background-image: url('../retailapp.avif');
+    background-image: url('../images/retailapp.avif');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow:scroll;
+    position: relative;
+    height: 100vh;
+
 }
 .detail{
    opacity: 70%; 
@@ -19,4 +22,13 @@
     vertical-align: top;
     margin-left: -5px;
 }
-
+.positionchange{
+position: absolute ;
+right: 49%;
+bottom: -28%;
+}
+.logopositions{
+    position: absolute;
+    bottom: 80%;
+    right: 90%;
+    }   

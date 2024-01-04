@@ -8,7 +8,8 @@ export const shopOwnerLoginSlice = createSlice({
             password:""
         },
         userstatus:false,
-        ownerid:{}
+        ownerid:{},
+        onlyownerid : ""
     },
     reducers: {
         setUserLogin :(state,action)=>{
@@ -19,12 +20,16 @@ export const shopOwnerLoginSlice = createSlice({
       },
       setOwnerId:(state,action)=>{
         state.ownerid=action.payload
+      },
+      setonlyownerid: (state, action) => {
+        state.onlyownerid = action.payload
       }
      
     },
   })
   
   
-  export const { setUserLogin,setStatus,setOwnerId } = shopOwnerLoginSlice.actions
+  export const { setUserLogin,setStatus,setOwnerId, setonlyownerid} = shopOwnerLoginSlice.actions
   
   export default shopOwnerLoginSlice.reducer
+

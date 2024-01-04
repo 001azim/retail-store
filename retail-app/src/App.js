@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import MESSAGELST from './message'
+import MESSAGELST from './shop-owner/message';
 import ADDAMOUNT from './shop-owner/credit-debitadd';
 import CUSTOMERLST from './shop-owner/cus-list';
 import DEBITLST from './shop-owner/debit';
@@ -12,22 +12,46 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
- import Common from './components/common';
  import store from './store'
- import { Provider } from 'react-redux';
+ import { Provider, useSelector,useDispatch } from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
 import Home from './super-admin/home';
 import Credit from './shop-owner/credit';
+import Interest from './shop-owner/interest';
+// import { UseSelector, Provider } from 'react-redux';
+import { useEffect } from 'react';
+import axios from 'axios';
+
+
 
 
 function App() {
 
+//   const dispatch = useDispatch();
+//   let token = localStorage.getItem("apitoken")
+  
+// let onlyid = useSelector((state)=> state.shopOwnerLogin.onlyownerid)
+
+// useEffect(()=>{
+//   if(!onlyid && token){
+//     axios({
+//       method: 'get',
+//       url: `https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&${token}`,
+
+//     })
+//       .then(function (response) {
+//         console.log(response)
+//         // console.log(response.data.email)
+
+//       })
+//   }
+// },[])
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LOGINSO />
+      element: <Home />
     },
     {
       path: "/msg",
@@ -63,27 +87,32 @@ function App() {
       element: < Ownerlist />
     },
     {
-      path:"/home",
-      element:<Home/>
+      path:"/shopownerlogin",
+      element:<LOGINSO/>
     },
     {
       path: "/credit/:customerid",
       element: < Credit />
     },
-
+    {
+      path: "/interest/:customerid",
+      element: < Interest />
+    },
 
   ]);
   
 
   return (
 
-
-    <Provider store={store}>
-
-    <RouterProvider router={router}/>
-    </Provider>
+<>
+<RouterProvider router={router}/>
+</>
+    
+    
+    
     
   );
 }
 
 export default App;
+
