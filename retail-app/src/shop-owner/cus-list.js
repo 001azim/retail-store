@@ -57,7 +57,7 @@ function CUSTOMERLST() {
   //   }
   // }, [])
 
-
+  const [debit, setdebit] = useState([]);
 
   useEffect(() => {
     axios({
@@ -67,11 +67,12 @@ function CUSTOMERLST() {
     })
       .then(function (response) {
         dispatch(setapidata(response.data.data))
-     
+     console.log(response)
         
       })
   }, [])
-  const [debit, setdebit] = useState([]);
+  
+  console.log(debit)
 
   useEffect(() => {
 

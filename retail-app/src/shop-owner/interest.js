@@ -8,19 +8,20 @@ import Common from '../components/common'
 
 
 function Interest (){
-
+  
   let { apidata } = useSelector((state) => state.customer)
   let [debtlist,setdebtlist]=useState([])
   let [duedate,setduedate] = useState("")
   let [dueamount,setdueamount] = useState(0)
   let [interest,setinterest] =useState("you have no interest yet")
-  let totaldue = []
+  let totaldue = 0
   
 
 let id = useParams()
 
 useEffect(()=>{
   apidata.map((data)=>{
+    console.log(apidata)
     data.debits.map((debit)=>{
 
       if(debit.customer_id==id.customerid && debit.type=="credit"){
@@ -36,7 +37,7 @@ useEffect(()=>{
       if(debit.customer_id==id.customerid && debit.type=="debit"){
         setduedate(debit.due_date)  
         setdueamount(Number(dueamount+debit.amount))
-        totaldue.push(debit.amount)   
+        totaldue = Number(totaldue)+ dueamount+ Number(interest)  
       }
      
     })
@@ -51,7 +52,7 @@ useEffect(()=>{
       {id.customerid}
       <h1>Total Due : {totaldue}</h1>
       <h1>Due Date :{duedate}</h1>
-      <h1>Due Amount : {dueamount}</h1>
+      <h1>Due Amount : {Number(dueamount)}</h1>
       <h1>Interest Amount : {interest}</h1>
     </div>
   )
