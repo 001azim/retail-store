@@ -30,7 +30,7 @@ console.log("data",data)
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-
+  
 
 
   const filteredItems = useMemo(() => {
@@ -39,6 +39,7 @@ console.log("data",data)
     })
   }, [apidata, query])
 
+  let token=localStorage.getItem("ownertoken")
 
 
   // useEffect(() => {
@@ -73,19 +74,17 @@ console.log("data",data)
         dispatch(setapidata(response.data.data))
         console.log(apidata)
         console.log(response.data.email)
-
+        
       })
   }, [])
   const [debit, setdebit] = useState([]);
-
-
 
   useEffect(() => {
 
     const customerList = Debittotal(filteredItems)
 
     setdebit(customerList)
-
+console.log("checking",customerList)
 
   }, [filteredItems]);
 
@@ -120,7 +119,7 @@ console.log("filteredItems",filteredItems)
           </div>
         </div><br></br>
 
-        {/* <h1>welcome {ownerid.data.name}</h1><br></br> */}
+        <h1>welcome {ownerid.data.name}</h1><br></br>
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
@@ -153,6 +152,7 @@ console.log("filteredItems",filteredItems)
           </tbody>
         </Table>
         <Logout />
+        {/* <button onClick={()=>Onreload()}>api</button> */}
       </div>
     </>
   );

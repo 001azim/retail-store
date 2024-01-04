@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useLayoutEffect, useState } from "react"
 import Common from "../components/common"
 import React from "react";
-import { ReactReduxContext, useDispatch, useSelector } from "react-redux"
+import {  useDispatch, useSelector } from "react-redux"
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
@@ -14,23 +14,30 @@ import { setdueamount } from "../slices/customerSlice";
 function DEBITLST() {
     let navigate = useNavigate()
     let dispatch = useDispatch()
-    let { ownerid } = useSelector((state) => state.shopOwnerLogin)
+    let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
-    let owner_id = ownerid.data.id
 
-// debit list
+    let owner_id = ownerid.data.id
+    let token = localStorage.getItem("ownertoken")
 
     const debitlist = async () => {
-        const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`)
+        const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}&token=${token}`)
         let customer_detail = response.data.data
         dispatch(setapidata(customer_detail))
 
+// debit list
 
 
     };
 
+
+
+
+
     useEffect(() => {
+
+
         debitlist()
     }, [])
 
@@ -49,18 +56,19 @@ function DEBITLST() {
     }
 
 
-    const deletecustomer =  () => {
+    const deletecustomer = () => {
 
-         debit.map(async (iteam)  => {
-           if (iteam.amount == 0 && iteam.debits[0]) {
+        debit.map((iteam) => {
+            if (iteam.amount == 0 && iteam.debits[0]) {
                 alert(iteam.id)
                 console.log("amount")
                 let formData = new FormData();
                 formData.append("owner_id", owner_id)
                 formData.append("customer_id", iteam.id)
-                const response=  await axios.post('https://agaram.academy/api/retail/index.php?request=delete_debit', formData)
-                 console.log(response.data)
-                
+                axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&token=${token}`, formData).then(function (response) {
+                    console.log('response:', response)
+                }
+                )
             }
         })
     }
@@ -71,7 +79,7 @@ function DEBITLST() {
 
     function Getdate(apidata) {
         return apidata.map((item) => {
-            let cus_tot = "";
+            let cus_tot = "";   
             if (item.debits) {
                 item.debits.map((c_d) => {
 
@@ -106,7 +114,7 @@ function DEBITLST() {
                         formData.append("amount", fineamount)
                         formData.append("due_date", "")
                         formData.append("type", "interest")
-                        axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (res) {
+                        axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (res) {
                             console.log(res)
                         }
                         )
@@ -154,7 +162,7 @@ function DEBITLST() {
                                     <td>{customer.debits[0].last_purchase_at}</td>
                                     <td>{customer.debits[0].due_date}</td>
                                     <td><Button variant="outline-primary" onClick={() => credit(customer.id, customer.amount)}>Credit</Button></td>
-                                    <td><Button variant="outline-primary" onClick={() => navigate(`interest/${customer.id}`)}>Interest</Button></td>
+                                    <td><Button variant="outline-primary" onClick={() => navigate(`/interest/${customer.id}`)}>Interest</Button></td>
                                 </tr>)
                         }
                     })}
@@ -162,7 +170,7 @@ function DEBITLST() {
             </table >
         </>
     )
-}
+                }
 
 
 export default DEBITLST

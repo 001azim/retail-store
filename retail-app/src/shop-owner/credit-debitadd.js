@@ -14,12 +14,12 @@ import { useState } from "react";
 
 
 function ADDAMOUNT() {
-    
+
     let[isdisabled,setisdisable]=useState(false)
     const dispatch = useDispatch()
-    let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
+    let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
     let cdetails = useSelector((state) => state.customer.details)
-
+    let token = localStorage.getItem("ownertoken")
 
     const navigate = useNavigate()
     //    post details to API
@@ -48,9 +48,17 @@ setisdisable(true)
 else{
     alert("fill all details")
 }
-}
 
-     
+
+
+        axios.post(`https://agaram.academy/api/retail/index.php?request=create_customer&token=${token}`, formData).then(function (response) {
+            console.log('response', response.data.status)
+            if (response.data.status == "success") {
+                navigate('/customerlist')
+            }
+        })
+    }
+
     return (
 
         <>

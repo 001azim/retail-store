@@ -12,20 +12,7 @@ function Ownerlist() {
 
   const lists = useSelector((state) => state.user.ownlist)
 
-// useEffect(()=>{
-// if(localStorage.getItem("token")){
-
-//   axios.get(`https://agaram.academy/api/retail/index.php?request=getSuperAdminDetails&token=${token}`)
-//   .then(function (response) {
-//     console.log(response)
-//     // let user_list = response.data.data
-//     // console.log("user", user_list)
-//     // dispatch(adduser(user_list))
-//   })
-// }
-
-// })
-let token = localStorage.getItem('token')
+let token = localStorage.getItem("token")
   useEffect(() => {
     solist()
   }, [])
@@ -40,6 +27,8 @@ let token = localStorage.getItem('token')
         dispatch(adduser(user_list))
       })
   }
+
+  
   
 
   return (
