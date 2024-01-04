@@ -16,13 +16,12 @@ import Logout from '../components/logOut';
 import { setdueamount } from '../slices/customerSlice';
 function CUSTOMERLST() {
 
-  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
-  let onlyid = useSelector((state)=> state.shopOwnerLogin.onlyownerid)
+  let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
   const [query, setQuery] = useState("")
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-
+  
 
 
   const filteredItems = useMemo(() => {
@@ -31,13 +30,19 @@ function CUSTOMERLST() {
     })
   }, [query])
 
-// console.log('CGFG',filteredItems)
+  let token=localStorage.getItem("ownertoken")
 
   // useEffect(() => {
   //   if (localStorage.getItem("Id")) {
   //     axios({
   //       method: 'get',
   //       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}`,
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("ownertoken")) {
+  //     axios({
+  //       method: 'get',
+  //       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}&token=${token}`,
 
   //     })
 
@@ -57,20 +62,16 @@ function CUSTOMERLST() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${onlyid}`,
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
 
     })
       .then(function (response) {
-        console.log(response)
         dispatch(setapidata(response.data.data))
-        console.log(apidata)
-        // console.log(response.data.email)
-
+     
+        
       })
   }, [])
   const [debit, setdebit] = useState([]);
-
-
 
   useEffect(() => {
 
@@ -78,20 +79,28 @@ function CUSTOMERLST() {
 
     setdebit(customerList)
 
-
   }, [filteredItems]);
 
 
 
-  const adddue = (id,total) => {
-dispatch(setdueamount(total))
+  const adddue = (id, amount) => {
+    dispatch(setdueamount(amount))
+   
     navigate(`/adddebit/${id}`)
 
 
   }
 
 
-  let ls_id = localStorage.getItem("Id")
+   
+  // function Onreload() {
+  //   let token = localStorage.getItem("ownertoken")
+  //     axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+  //       .then(function (response) {
+  //         console.log("checking api",response)
+  //       })
+  // }
+
 
 
   return (
@@ -111,7 +120,7 @@ dispatch(setdueamount(total))
           </div>
         </div><br></br>
 
-        {/* <h1>welcome {ownerid.data.name}</h1><br></br> */}
+        <h1>welcome {ownerid.data.name}</h1><br></br>
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
@@ -133,7 +142,7 @@ dispatch(setdueamount(total))
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>
-                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id,item.debit_total )}>  Add debt
+                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id, item.amount)}>  Add debt
                   </Button>
                   ) : (
                     <h4>debit limit reached</h4>
@@ -144,6 +153,7 @@ dispatch(setdueamount(total))
           </tbody>
         </Table>
         <Logout />
+        {/* <button onClick={()=>Onreload()}>api</button> */}
       </div>
     </>
   );

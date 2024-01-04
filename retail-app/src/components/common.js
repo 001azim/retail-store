@@ -20,7 +20,6 @@ import emailjs from '@emailjs/browser';
 
 export default function Common() {
 
-  let ownerid = useSelector((state) => state.shopOwnerLogin.ownerid)
   const [value, setValue] = React.useState(0);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -29,13 +28,10 @@ export default function Common() {
 
 
   const back = () => window.history.back()
-
-  // const [file, setFile] = useState();
-  // function handleChange(e) {
-  //   console.log(e.target.files);
-  //   setFile(URL.createObjectURL(e.target.files[0]));
-  // }
-
+  const [file, setFile] = useState();
+  function handleChange(e) {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
   let currentTime = new Date();
   let options = { timeStyle: 'short', hour12: true };
   let timeString = currentTime.toLocaleTimeString('en-US', options);
@@ -220,7 +216,7 @@ export default function Common() {
         <Link to={`/addcustomer`}><span><img src={icon1} alt='icon' /></span></Link>
         <Link to={`/customerlist`}><i class="fa-solid fa-rectangle-list"></i></Link>
         <Link to={`/`}><i class="fa-solid fa-house"></i></Link>
-        <Link to={`/msg`}><i class="fa-solid fa-message" ></i></Link>
+        <Link to={`/msg`}><i class="fa-solid fa-message"></i></Link>
         <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
         <button onClick={() => window.history.forward()} style={{ backgroundColor: 'white' }}><i class="fa-solid fa-arrow-right"></i></button>
 

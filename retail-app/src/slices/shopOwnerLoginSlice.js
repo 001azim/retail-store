@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const shopOwnerLoginSlice = createSlice({
-    name: 'shopOwnerLogin',
+export const ShopOwnerLoginSlice = createSlice({
+    name: 'ShopOwnerLogin',
     initialState: {
         userLogin:{
             email:"",
@@ -29,7 +29,6 @@ export const shopOwnerLoginSlice = createSlice({
   })
   
   
-  export const { setUserLogin,setStatus,setOwnerId, setonlyownerid} = shopOwnerLoginSlice.actions
+  export const { setUserLogin,setStatus,setOwnerId ,setonlyownerid} = ShopOwnerLoginSlice.actions
   
-  export default shopOwnerLoginSlice.reducer
-
+  export default ShopOwnerLoginSlice.reducer

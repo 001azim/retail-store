@@ -15,8 +15,11 @@ function SO_REG() {
     const dispatch = useDispatch();
 
     let { ownerDetails } = useSelector((state) => state.register);
+    let { ownlist } = useSelector((state) => state.user)
+    let [mail, existMail] = useState([]);
     const Change = (e) => {
-        const value = e.target.value;
+        const value = (e.target.value);
+
         dispatch(updateDetails({
             ...ownerDetails,
             [e.target.name]: value
@@ -42,24 +45,26 @@ function SO_REG() {
         formData.append("pincode", ownerDetails.pincode)
         formData.append("shop_name", ownerDetails.shop_name)
 
-        console.log(formData)
 
-        axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
-            console.log(response)
+        let error = false
+        {Object.entries(ownerDetails).map(([key, value]) => {
+            if (value == "") {
+                    alert("enter values of", key)
+                    error = true
+                }
 
-            if (response.data.status == "success") {
-                navigate("/shopownerlogin");
+                if (error == false) {
+                    axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
+
+                        if (response.data.status == "success") {
+                            navigate("/shopownerlogin");
+                        }
+                    })
+                }
             }
-            else {
-                alert("Enter valid inputs")
-            }
-
-        })
-    }
-
-
-
-
+            )
+        }
+    };
 
     return (
         <>
@@ -80,7 +85,7 @@ function SO_REG() {
                                 </Form.Label>
                                 <Col sm="10">
                                     <Form.Control type="text" name='name' placeholder="UserName" className='detail' required onChange={Change} />
-                                    {error.Username && <span style={{ color: "red" }}>{error.Username}</span>}
+                                    {/* {error.Username && <span style={{ color: "red" }}>{error.Username}</span>} */}
                                 </Col>
                             </Form.Group>
 
@@ -99,7 +104,7 @@ function SO_REG() {
                                     </Form.Label>
                                     <Col sm="9">
                                         <Form.Control type="email" name='email' placeholder="email" className='detail' required onChange={Change} />
-                                        {error.email && <span style={{ color: "red" }}>{error.email}</span>}
+                                        {/* {error.email && <span style={{ color: "red" }}>{error.email}</span>} */}
                                     </Col>
                                 </Form.Group>
 
@@ -109,7 +114,7 @@ function SO_REG() {
                                     </Form.Label>
                                     <Col sm="8">
                                         <Form.Control type="password" name='password' placeholder="Password" className='detail' required onChange={Change} />
-                                        {error.password && <span style={{ color: "red" }}>{error.password}</span>}
+                                        {/* {error.password && <span style={{ color: "red" }}>{error.password}</span>} */}
                                     </Col>
                                 </Form.Group>
                             </div>

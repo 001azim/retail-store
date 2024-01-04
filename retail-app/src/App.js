@@ -12,20 +12,14 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
- import store from './store'
- import { Provider, useSelector,useDispatch } from 'react-redux';
+import store from './store'
+import { Provider, useDispatch } from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
 import Home from './super-admin/home';
 import Credit from './shop-owner/credit';
 import Interest from './shop-owner/interest';
-// import { UseSelector, Provider } from 'react-redux';
-import { useEffect } from 'react';
-import axios from 'axios';
-
-
-
-
+// import store from './store';
 function App() {
 
 //   const dispatch = useDispatch();
@@ -55,21 +49,21 @@ function App() {
     },
     {
       path: "/msg",
-      element: <MESSAGELST/>
+      element: <MESSAGELST />
     },
     {
       path: "/addcustomer",
-      element: <ADDAMOUNT/>
+      element: <ADDAMOUNT />
     },
     {
       path: "/customerlist",
-      element: <CUSTOMERLST/>
+      element: <CUSTOMERLST />
     },
     {
       path: "/debitlist",
-      element: <DEBITLST/>
+      element: <DEBITLST />
     },
-  
+
     {
       path: "/superadminlogin",
       element: < SALOGIN />
@@ -87,8 +81,8 @@ function App() {
       element: < Ownerlist />
     },
     {
-      path:"/shopownerlogin",
-      element:<LOGINSO/>
+      path: "/ShopOwnerLogin",
+      element: <LOGINSO />
     },
     {
       path: "/credit/:customerid",
@@ -100,17 +94,14 @@ function App() {
     },
 
   ]);
-  
 
   return (
 
-<>
-<RouterProvider router={router}/>
-</>
-    
-    
-    
-    
+
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+
   );
 }
 
