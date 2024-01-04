@@ -31,11 +31,11 @@ const dispatch=useDispatch()
         axios.post('https://agaram.academy/api/retail/index.php?request=super_admin_login',formData)
 
         .then(function(response){
-            console.log(response)
+            console.log(response.data.token)
             
                 if(response.data.status=="success"){
 
-                localStorage.setItem("loginstatus",true)
+                localStorage.setItem("token",response.data.token)
                 Navigate("/ownerslist")
             }
             else{

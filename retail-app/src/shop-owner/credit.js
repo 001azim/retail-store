@@ -10,10 +10,9 @@ import axios from 'axios';
 import { setcreditdetails } from '../slices/customerSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
-
 function Credit() {
 
-  const { credit_details, due_amount } = useSelector((state) => state.customer)
+  const { credit_details } = useSelector((state) => state.customer)
   const { customerid } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -27,30 +26,19 @@ function Credit() {
     formData.append("type", "credit")
 
 
+    axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
+      console.log('response', response)
 
-    if (due_amount-Number(credit_details.credit_amount) >= 0) {
-      axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
-        console.log('response', response)
-
-        if (response.data.status == "success") {
-          navigate('/debitlist')
-        }
-        else {
-          alert("failed")
-        }
-      })
-
-    }
-    else {
-      alert("You have debit of "+" "+JSON.stringify(due_amount)+" "+"only")
-    }
-
-
-
-
+      if (response.data.status == "success") {
+        navigate('/debitlist')
+      }
+      else {
+        alert("failed")
+      }
+    })
   }
 
-  console.log(due_amount)
+
 
   return (
     <>

@@ -12,14 +12,27 @@ function Ownerlist() {
 
   const lists = useSelector((state) => state.user.ownlist)
 
+// useEffect(()=>{
+// if(localStorage.getItem("token")){
 
+//   axios.get(`https://agaram.academy/api/retail/index.php?request=getSuperAdminDetails&token=${token}`)
+//   .then(function (response) {
+//     console.log(response)
+//     // let user_list = response.data.data
+//     // console.log("user", user_list)
+//     // dispatch(adduser(user_list))
+//   })
+// }
+
+// })
+let token = localStorage.getItem('token')
   useEffect(() => {
     solist()
   }, [])
 
 
   function solist() {
-    axios.get('https://agaram.academy/api/retail/index.php?request=getAllShopOwners')
+    axios.get(`https://agaram.academy/api/retail/index.php?request=getAllShopOwners&token=${token}`)
       .then(function (response) {
         console.log(response)
         let user_list = response.data.data
