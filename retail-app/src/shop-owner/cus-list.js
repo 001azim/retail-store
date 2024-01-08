@@ -115,7 +115,7 @@ console.log("checking",customerList)
           </div>
         </div><br></br>
 
-        <h1>welcome {ownerid.data.name}</h1><br></br>
+        {/* <h1>welcome {ownerid.data.name}</h1><br></br> */}
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>

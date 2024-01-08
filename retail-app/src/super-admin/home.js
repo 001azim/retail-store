@@ -13,23 +13,28 @@ export default function Home(){
   let dispatch = useDispatch()
   let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
 
-  useEffect(() => {
-    if (!ownerid && localStorage.getItem("ownertoken")) {
-    Onreload()
-  }
-  }, [ownerid])
+  
 
 
   function Onreload() {
     let token = localStorage.getItem("ownertoken")
-      axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+    if(!ownerid){
+      if(localStorage.getItem("ownertoken")){
+        axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
         .then(function (response) {
           console.log(response)
-          dispatch(setOwnerId(response))
-          
-        })
-   
-  }
+          dispatch(setOwnerId(response.data))
+          })
+        }
+    }
+      }
+
+      useEffect(() => {
+    
+        Onreload()
+      
+      }, [ownerid])
+
     return(
         <>  
         <div className='bg'>
