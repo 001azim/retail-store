@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { json, useParams } from 'react-router'
 import axios from 'axios'
-import {  useSelector } from "react-redux"
+import {  useDispatch,useSelector } from "react-redux"
 import Common from '../components/common'
 
 
@@ -9,40 +9,32 @@ import Common from '../components/common'
 
 function Interest (){
 
-  let { apidata } = useSelector((state) => state.customer)
+  let { apidata ,interest_details} = useSelector((state) => state.customer)
   let [debtlist,setdebtlist]=useState([])
   let [duedate,setduedate] = useState("")
   let [dueamount,setdueamount] = useState(0)
   let [interest,setinterest] =useState("you have no interest yet")
   let totaldue = []
   
-
 let id = useParams()
+console.log("customerid",id.customerid)
+console.log("apidata",apidata)
 
-useEffect(()=>{
-  apidata.map((data)=>{
-    data.debits.map((debit)=>{
+apidata.map((item)=>{
+  if(item.id==id.customerid){
+    alert(1)
+    let interest_amount=0
+    item.debits.map((eachdebit)=>{
+      if( eachdebit.type=="interest"){
+        interest_amount += 0
+        
 
-      if(debit.customer_id==id.customerid && debit.type=="credit"){
       }
-      
-      if(debit.customer_id==id.customerid && debit.type=="interest"){
-        setinterest(Number(debit.amount*.02).toFixed(2))
-      
-
-         
-      }
-
-      if(debit.customer_id==id.customerid && debit.type=="debit"){
-        setduedate(debit.due_date)  
-        setdueamount(Number(dueamount+debit.amount))
-        totaldue.push(debit.amount)   
-      }
-     
     })
-  })
-},[])
+
+  }
   
+})
 
 
   return (

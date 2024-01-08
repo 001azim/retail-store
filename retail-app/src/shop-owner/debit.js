@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
 import moment from "moment";
 import { setdueamount } from "../slices/customerSlice";
-
+import { setinterestdetails } from "../slices/customerSlice";
 
 function DEBITLST() {
     let navigate = useNavigate()
@@ -71,25 +71,8 @@ function DEBITLST() {
         deletecustomer()
     }, [apidata]);
 
-    function Getdate(apidata) {
-        return apidata.map((item) => {
-            let cus_tot = "";
-            if (item.debits) {
-                item.debits.map((c_d) => {
-
-                    cus_tot = c_d.due_date
-                })
-            }
-            return { ...item, udebit_date: cus_tot }
-        });
-    }
-
-
-
-    let all_customer_details = Getdate(apidata)
-
     function setinterest() {
-        all_customer_details.map((item) => {
+        apidata.map((item) => {
             let interestcount = 0
             item.debits.map((debit_details) => {
                 if (debit_details.type == "interest") {
@@ -100,7 +83,8 @@ function DEBITLST() {
                     debit.map((debit_amount) => {
                         total_debit_amount = debit_amount.amount
                     })
-                    if (item.udebit_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
+                    console.log("oo",item.debits[0].due_date)
+                    if (item.debits[0].due_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
                         setisdisable(true)
                         let fineamount = (total_debit_amount * 0.02 )
                         let formData = new FormData();
