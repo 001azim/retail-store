@@ -24,11 +24,9 @@ useEffect(()=>{
     data.debits.map((debit)=>{
 
       if(debit.customer_id==id.customerid && debit.type=="credit"){
-        console.log('credit',debit)
       }
       
       if(debit.customer_id==id.customerid && debit.type=="interest"){
-        console.log("intrest",debit)
         setinterest(Number(debit.amount*.02).toFixed(2))
       
 
@@ -36,7 +34,6 @@ useEffect(()=>{
       }
 
       if(debit.customer_id==id.customerid && debit.type=="debit"){
-        console.log("debit",debit)
         setduedate(debit.due_date)  
         setdueamount(Number(dueamount+debit.amount))
         totaldue.push(debit.amount)   
@@ -46,7 +43,6 @@ useEffect(()=>{
   })
 },[])
   
-  console.log(debtlist)
 
 
   return (

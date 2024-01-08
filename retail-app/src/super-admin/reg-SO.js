@@ -48,13 +48,11 @@ function SO_REG() {
         formData.append("pincode", ownerDetails.pincode)
         formData.append("shop_name", ownerDetails.shop_name)
 
-        console.log(formData)
 
         let error = false
         {Object.entries(ownerDetails).map(([key, value]) => {
             if (value == "") {
                     alert("enter values of", key)
-                    console.log(key)
                     error = true
                 }
 

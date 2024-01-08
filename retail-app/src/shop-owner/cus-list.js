@@ -11,7 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
-
+import { setdueamount } from '../slices/customerSlice';
 function CUSTOMERLST() {
 
   let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
@@ -19,7 +19,7 @@ function CUSTOMERLST() {
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-
+  
 
 
   const filteredItems = useMemo(() => {
@@ -59,10 +59,8 @@ function CUSTOMERLST() {
 
     })
       .then(function (response) {
-        console.log(response)
         dispatch(setapidata(response.data.data))
-        console.log(apidata)
-        console.log(response.data.email)
+     
         
       })
   }, [])
@@ -73,14 +71,14 @@ function CUSTOMERLST() {
     const customerList = Debittotal(filteredItems)
 
     setdebit(customerList)
-console.log("checking",customerList)
 
   }, [filteredItems]);
 
 
 
-  const adddue = (id) => {
-
+  const adddue = (id, amount) => {
+    dispatch(setdueamount(amount))
+   
     navigate(`/adddebit/${id}`)
 
 
@@ -137,7 +135,7 @@ console.log("checking",customerList)
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>
-                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
+                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id, item.amount)}>  Add debt
                   </Button>
                   ) : (
                     <h4>debit limit reached</h4>
