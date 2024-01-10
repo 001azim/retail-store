@@ -21,19 +21,15 @@ function DEBITLST() {
     let owner_id = ownerid.data.id
     let token = localStorage.getItem("ownertoken")
 
-    const debitlist = async () => {
-        const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}&token=${token}`)
-        let customer_detail = response.data.data
-        dispatch(setapidata(customer_detail))
-    };
-
-
-
-
+   
 
     useEffect(() => {
-
-
+        const debitlist = async () => {
+            const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}&token=${token}`)
+            let customer_detail = response.data.data
+            dispatch(setapidata(customer_detail))
+        };
+    
         debitlist()
     }, [])
 
@@ -105,7 +101,7 @@ function DEBITLST() {
     }
 
     useEffect(()=>{if (isdisable==false){
-        setinterest()}}, [apidata]
+        setinterest()}}, [apidata.debits]
     )
 
 

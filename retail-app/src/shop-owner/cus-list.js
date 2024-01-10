@@ -11,90 +11,68 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
-import { setdueamount } from '../slices/customerSlice';
-function CUSTOMERLST() {
+import { setOwnerId } from '../slices/shopOwnerLoginSlice';
 
+function CUSTOMERLST() {
   let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
   const [query, setQuery] = useState("")
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-  
 
-
+// search bar
   const filteredItems = useMemo(() => {
     return apidata.filter(item => {
       return item.name.toLowerCase().includes(query.toLowerCase())
     })
   }, [apidata, query])
 
-  let token=localStorage.getItem("ownertoken")
 
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("ownertoken")) {
-  //     axios({
-  //       method: 'get',
-  //       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}&token=${token}`,
-
-  //     })
-
-  //       .then(function (response) {
-  //         console.log(response)
-  //         dispatch(setapidata(response.data.data))
-  //         console.log(apidata)
-  //         console.log(response.data)
-
-  //       })
-
-  //   }
-  // }, [])
-
-
-
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
-
-    })
-      .then(function (response) {
-        dispatch(setapidata(response.data.data))
-     
-        
-      })
-  }, [])
   const [debit, setdebit] = useState([]);
+
 
   useEffect(() => {
 
     const customerList = Debittotal(filteredItems)
 
     setdebit(customerList)
+    console.log("checking", customerList)
 
   }, [filteredItems]);
 
 
 
-  const adddue = (id, amount) => {
-    dispatch(setdueamount(amount))
-   
+  const adddue = (id) => {
     navigate(`/adddebit/${id}`)
-
-
   }
 
 
-   
-  // function Onreload() {
-  //   let token = localStorage.getItem("ownertoken")
-  //     axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
-  //       .then(function (response) {
-  //         console.log("checking api",response)
-  //       })
-  // }
+  useEffect(() => {
+    let token = localStorage.getItem("ownertoken")
+    if(ownerid?.data?.id && token){
+      axios({
+        method: 'get',
+        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
+  
+      })
+        .then(function (response) {
+          console.log(response)
+          dispatch(setapidata(response.data.data))
+          console.log(apidata)
+          console.log(response.data.email)
+  
+        })
 
+    }else if( token){
+      axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+      .then(function (response) {
+        console.log("checking datas:", response.data)
+        dispatch(setOwnerId(response.data))
 
+      })
+    }
+  }, [ownerid.data])
+  
 
   return (
     <>
@@ -113,7 +91,7 @@ function CUSTOMERLST() {
           </div>
         </div><br></br>
 
-        <h1>welcome {ownerid.data.name}</h1><br></br>
+        {/* <h1>welcome {ownerid.data.data.name}</h1><br></br> */}
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
@@ -135,7 +113,7 @@ function CUSTOMERLST() {
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>
-                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id, item.amount)}>  Add debt
+                  {item.amount < 5000 ? (<Button variant="outline-primary" onClick={() => adddue(item.id)}>  Add debt
                   </Button>
                   ) : (
                     <h4>debit limit reached</h4>
@@ -146,7 +124,6 @@ function CUSTOMERLST() {
           </tbody>
         </Table>
         <Logout />
-        {/* <button onClick={()=>Onreload()}>api</button> */}
       </div>
     </>
   );
