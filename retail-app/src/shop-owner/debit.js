@@ -8,6 +8,7 @@ import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
 import moment from "moment";
+import { setOwnerId } from "../slices/shopOwnerLoginSlice";
 
 
 
@@ -18,105 +19,95 @@ function DEBITLST() {
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
     let owner_id = ownerid.data.id
-
-
-
-    function debtlist() {
-        axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}`).then(function (res) {
-            console.log("res", res.data.data)
-            let customer_detail = res.data.data
-            dispatch(setapidata(customer_detail))
-
-        })
-    }
-
-
-
-
-    useEffect(debtlist, [])
-
-
-
-    useEffect(() => {
-        const customerList = Debittotal(apidata)
-        setdebit(customerList)
-    }, []);
-
-
-
+    let token = localStorage.getItem("ownertoken")
+    let [isdisable, setisdisable] = useState(false)
     const credit = (id) => {
         navigate(`/credit/${id}`)
     }
 
+    const debitlist = async () => {
+        const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}&token=${token}`)
+        let customer_detail = response.data.data
+        dispatch(setapidata(customer_detail))
+        const customerList = Debittotal(apidata)
+        setdebit(customerList)
+    };
 
 
-    function Getdate(apidata) {
-        return apidata.map((item) => {
-            let cus_tot = "";   
-            if (item.debits) {
-                item.debits.map((c_d) => {
 
-                    cus_tot = c_d.due_date
+    useEffect(() => {
+        if (ownerid?.data?.id && token) {
+            debitlist()
+        } else if (token) {
+            axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+                .then(function (response) {
+                    console.log("checking datas:", response.data)
+                    dispatch(setOwnerId(response.data))
+
                 })
+        }
+        else if (isdisable == false) {
+
+            setinterest()
+        }
+
+        else if (ownerid.data.id && token) {
+            deletecustomer()
+        }
+
+    }, [ownerid, apidata])
+
+    
+
+    function setinterest() {
+        apidata.map((item) => {
+            let interestcount = 0
+            item.debits.map((debit_details) => {
+                if (debit_details.type == "interest") {
+                    interestcount += 1
+                }
+                if (interestcount == 0) {
+                    let total_debit_amount = 0
+                    debit.map((debit_amount) => {
+                        total_debit_amount = debit_amount.amount
+                    })
+                    if (item.debits[0].due_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
+                        setisdisable(true)
+                        let fineamount = (total_debit_amount * 0.02)
+                        let formData = new FormData();
+                        formData.append("customer_id", item.id)
+                        formData.append("last_purchase_at", moment().format('YYYY-MM-DD'))
+                        formData.append("amount", fineamount)
+                        formData.append("due_date", "")
+                        formData.append("type", "interest")
+                        axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (res) {
+
+                        }
+                        )
+                    }
+                }
             }
-            return { ...item, udebit_date: cus_tot }
-        });
+            )
+        })
     }
 
 
+    const deletecustomer = () => {
 
-    let all_customer_details = Getdate(apidata)
-
-
-
-    useEffect(
-        () => {
-            all_customer_details.map((item) => {
-                let interestcount = 0
-                item.debits.map((debit_details) => {
-                    if (debit_details.type == "interest") {
-                        interestcount += 1
-                    }
-                  
-                    if (interestcount == 0) {
-                        let total_debit_amount = 0
-                        debit.map((debit_amount) => {
-                            total_debit_amount = debit_amount.amount
-                        })
-                        if (item.udebit_date > moment().format('YYYY-MM-DD') && total_debit_amount != 0) {
-                            let fineamount = total_debit_amount + (total_debit_amount * 2 / 100)
-                            console.log("fine", Number(fineamount))
-                            let formData = new FormData();
-                            formData.append("customer_id", item.id)
-                            formData.append("last_purchase_at", moment().format('YYYY-MM-DD'))
-                            formData.append("amount", fineamount)
-                            formData.append("due_date", "")
-                            formData.append("type", "interest")
-                            axios.post('https://agaram.academy/api/retail/index.php?request=create_debit', formData).then(function (response) {
-                            }
-                            )
-                        }
-                    }
+        debit.map((iteam) => {
+            if (iteam.amount == 0 && iteam.debits[0]) {
+                alert(iteam.id)
+                let formData = new FormData();
+                formData.append("owner_id", owner_id)
+                formData.append("customer_id", iteam.id)
+                axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&token=${token}`, formData).then(function (response) {
                 }
                 )
-            })
-        }, []
-    )
+            }
+        })
+    }
 
-    // useEffect(() => {   
-    //     debit.map((iteam)=>{
-    //         if(iteam.amount<=0){
-    //             console.log("amount",iteam.amount)
-    //             let formData = new FormData();
-    //             formData.append("owner_id",owner_id)
-    //             formData.append("customer_id", iteam.id)
-    //             axios.post('https://agaram.academy/api/retail/index.php?request=delete_debit',formData ).then(function (response) {
-    //                         console.log('response:', response)
-    //                     }
-    //                     )
-    //         }
-    //     })
-    //  }, []);
+
 
 
 
@@ -124,7 +115,7 @@ function DEBITLST() {
     return (
         <>
             <Common />
-         
+
 
             < table class="table table-dark ">
                 <thead>

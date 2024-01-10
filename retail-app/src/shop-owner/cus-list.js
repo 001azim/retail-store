@@ -11,15 +11,16 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { setapidata } from "../slices/customerSlice"
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
+import { setOwnerId } from '../slices/shopOwnerLoginSlice';
 
 function CUSTOMERLST() {
-
+  // let [isuser, setisuser] = useState(false)
   let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
   const [query, setQuery] = useState("")
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-
+  // let owner_id = ownerid.data.id
 
 
   const filteredItems = useMemo(() => {
@@ -28,46 +29,14 @@ function CUSTOMERLST() {
     })
   }, [apidata, query])
 
-  let token=localStorage.getItem("ownertoken")
-
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("ownertoken")) {
-  //     axios({
-  //       method: 'get',
-  //       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}&token=${token}`,
-
-  //     })
-
-  //       .then(function (response) {
-  //         console.log(response)
-  //         dispatch(setapidata(response.data.data))
-  //         console.log(apidata)
-  //         console.log(response.data)
-
-  //       })
-
-  //   }
-  // }, [])
 
 
 
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
 
-    })
-      .then(function (response) {
-        console.log(response)
-        dispatch(setapidata(response.data.data))
-        console.log(apidata)
-        console.log(response.data.email)
 
-      })
-  }, [])
+
+ 
   const [debit, setdebit] = useState([]);
-
 
 
   useEffect(() => {
@@ -75,7 +44,7 @@ function CUSTOMERLST() {
     const customerList = Debittotal(filteredItems)
 
     setdebit(customerList)
-console.log("checking",customerList)
+    console.log("checking", customerList)
 
   }, [filteredItems]);
 
@@ -89,19 +58,50 @@ console.log("checking",customerList)
   }
 
 
-   
+
   // function Onreload() {
   //   let token = localStorage.getItem("ownertoken")
   //     axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
   //       .then(function (response) {
-  //         console.log("checking api",response)
+  //         console.log("checking api",response.data)
   //       })
   // }
 
 
 
+
+ 
+
+  useEffect(() => {
+    let token = localStorage.getItem("ownertoken")
+    if(ownerid?.data?.id && token){
+      axios({
+        method: 'get',
+        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
+  
+      })
+        .then(function (response) {
+          console.log(response)
+          dispatch(setapidata(response.data.data))
+          console.log(apidata)
+          console.log(response.data.email)
+  
+        })
+
+    }else if( token){
+      axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+      .then(function (response) {
+        console.log("checking datas:", response.data)
+        dispatch(setOwnerId(response.data))
+
+      })
+    }
+  }, [ownerid.data])
+  
+
   return (
     <>
+      {/* <button onClick={() => { Onreload() }}>iiiiii</button> */}
       <Common />
       <div className='boxs'>
         <div className='form-flex'>
@@ -117,7 +117,7 @@ console.log("checking",customerList)
           </div>
         </div><br></br>
 
-        <h1>welcome {ownerid.data.name}</h1><br></br>
+        {/* <h1>welcome {ownerid.data.data.name}</h1><br></br> */}
 
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
 import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../images/logos.png'
+import { useEffect } from 'react'
 
 
 function LOGINSO() {
@@ -19,6 +20,7 @@ function LOGINSO() {
         formdata.append("email", userLogin.email)
         formdata.append("password", userLogin.password)
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
+            console.log("data checking",response.data)
             if (response.data.status == "success") {
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
@@ -32,7 +34,11 @@ function LOGINSO() {
         })
 
     }
-
+    useEffect(()=>{
+        if (localStorage.getItem("ownertoken")){
+            navigate("/customerlist")
+        }
+    })
 
 
 
