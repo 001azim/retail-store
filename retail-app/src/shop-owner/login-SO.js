@@ -1,9 +1,8 @@
-
 import '../css/login-SO.css'
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { setUserLogin, setStatus, setOwnerId,setonlyownerid } from "../slices/shopOwnerLoginSlice"
+import { setUserLogin, setStatus, setOwnerId } from "../slices/shopOwnerLoginSlice"
 import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../images/logos.png'
 
@@ -16,13 +15,14 @@ function LOGINSO() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
         formdata.append("password", userLogin.password)
+        console.log(formdata)
         axios.post('https://agaram.academy/api/retail/index.php?request=shop_owner_login', formdata).then(function (response) {
-            console.log('onlyid',response.data.data.id)
             if (response.data.status == "success") {
-                dispatch(setOwnerId(response.data))
+                console.log(response)
+                dispatch(setOwnerId(response.data.data.id))
                 dispatch(setStatus(true))
                 localStorage.setItem('ownertoken', response.data.token)
-                navigate("/customerlist")
+                navigate(`/customerlist`)
             } else {
                 navigate("/ShopOwnerLogin")
                 alert("check your email or password")

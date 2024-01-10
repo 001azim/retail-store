@@ -207,7 +207,7 @@ export default function Common() {
       </Modal>
 
 
-      {localStorage.getItem("authLog") ? <div className='menubox'
+       <div className='menubox'
         style={
           { position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)' }
         } >
@@ -220,7 +220,7 @@ export default function Common() {
         <Link to={`/debitlist`}><span><img src={icon2} alt='icon' /></span></Link>
         <button onClick={() => window.history.forward()} style={{ backgroundColor: 'white' }}><i class="fa-solid fa-arrow-right"></i></button>
 
-      </div> : null}
+      </div> 
     </>
   )
 }

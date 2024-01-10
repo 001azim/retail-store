@@ -7,40 +7,26 @@ import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import store from './store'
-import { Provider, useDispatch } from 'react-redux';
+// import store from './store'
+import {useDispatch ,useSelector} from 'react-redux';
 import Add_debit from './shop-owner/add_debit';
 import Ownerlist from './super-admin/ownerlist';
 import Home from './super-admin/home';
 import Credit from './shop-owner/credit';
 import Interest from './shop-owner/interest';
+import { useEffect } from 'react';
+import {setOwnerId} from './slices/shopOwnerLoginSlice'
+import {setapidata} from './slices/customerSlice'
+
 // import store from './store';
 function App() {
-
-//   const dispatch = useDispatch();
-//   let token = localStorage.getItem("apitoken")
   
-// let onlyid = useSelector((state)=> state.shopOwnerLogin.onlyownerid)
-
-// useEffect(()=>{
-//   if(!onlyid && token){
-//     axios({
-//       method: 'get',
-//       url: `https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&${token}`,
-
-//     })
-//       .then(function (response) {
-//         console.log(response)
-//         // console.log(response.data.email)
-
-//       })
-//   }
-// },[])
 
   const router = createBrowserRouter([
     {
@@ -98,12 +84,11 @@ function App() {
   return (
 
 
-    <Provider store={store}>
+    
       <RouterProvider router={router} />
-    </Provider>
+    
 
   );
 }
 
 export default App;
-

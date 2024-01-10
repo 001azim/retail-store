@@ -1,5 +1,3 @@
-
-
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
@@ -14,6 +12,9 @@ import { setapidata } from "../slices/customerSlice"
 import Debittotal from '../components/debittotal';
 import Logout from '../components/logOut';
 import { setdueamount } from '../slices/customerSlice';
+import moment from "moment";
+
+
 function CUSTOMERLST() {
 
   let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
@@ -28,15 +29,10 @@ function CUSTOMERLST() {
     return apidata.filter(item => {
       return item.name.toLowerCase().includes(query.toLowerCase())
     })
-  }, [query])
+  }, [apidata, query])
 
   let token=localStorage.getItem("ownertoken")
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("Id")) {
-  //     axios({
-  //       method: 'get',
-  //       url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ls_id}`,
 
   // useEffect(() => {
   //   if (localStorage.getItem("ownertoken")) {
@@ -57,22 +53,21 @@ function CUSTOMERLST() {
   //   }
   // }, [])
 
-  const [debit, setdebit] = useState([]);
+
 
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
+      url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid}&token=${token}`,
 
     })
       .then(function (response) {
         dispatch(setapidata(response.data.data))
-     console.log(response)
+     
         
       })
   }, [])
-  
-  console.log(debit)
+  const [debit, setdebit] = useState([]);
 
   useEffect(() => {
 
@@ -108,6 +103,10 @@ function CUSTOMERLST() {
     <>
       <Common />
       <div className='boxs'>
+        <div className='introprofile' style={{display:'flex',justifyContent:'space-between'}}>
+          <h3>Owner : {ownerid}</h3>
+          <h3>{moment().format('D-MM-YYYY')}</h3>
+        </div>
         <div className='form-flex'>
           <div className='left-form'>
             <Form>
@@ -119,10 +118,7 @@ function CUSTOMERLST() {
           <div className='right-form d-flex'>
             <Button variant="success" onClick={() => navigate('/addcustomer')} > Add Customer</Button>
           </div>
-        </div><br></br>
-
-        <h1>welcome {ownerid.data.name}</h1><br></br>
-
+        </div>
         <Table responsive striped bordered hover variant="light" className='cus-table'>
           <thead>
             <tr>
@@ -135,7 +131,9 @@ function CUSTOMERLST() {
             </tr>
           </thead>
           <tbody >
-            {debit.map((item, i) => (
+            {debit.map((item, i) => {
+              // if (item.name!=""){
+              return(
               <tr key={i}>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
@@ -150,7 +148,9 @@ function CUSTOMERLST() {
                   )}
                 </td>
               </tr>
-            ))}
+            )
+            // }
+            })}
           </tbody>
         </Table>
         <Logout />

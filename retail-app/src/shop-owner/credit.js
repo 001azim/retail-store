@@ -78,8 +78,7 @@ function Credit() {
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 onKeyUp={(e) => {
-                  console.log("ii",Number(due_amount) - Number(e.target.value))
-                  if (Number(due_amount) - Number(e.target.value) >= 0) {
+                  if ((due_amount) - e.target.value >= 0) {
                     dispatch(setcreditdetails({ ...credit_details, credit_amount: e.target.value }))
                   }
                   else {

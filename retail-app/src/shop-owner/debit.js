@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Common from "../components/common"
 import React from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -8,7 +8,7 @@ import Debittotal from "../components/debittotal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router'
 import moment from "moment";
-// import { setdueamount } from "../slices/customerSlice";
+import { setdueamount } from "../slices/customerSlice";
 
 
 function DEBITLST() {
@@ -18,15 +18,14 @@ function DEBITLST() {
     let { apidata } = useSelector((state) => state.customer)
     const [debit, setdebit] = useState([]);
     let [isdisable, setisdisable] = useState(false)
-    let owner_id = ownerid.data.id
+    // let owner_id = ownerid.data.id
     let token = localStorage.getItem("ownertoken")
 
     const debitlist = async () => {
-        const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${owner_id}&token=${token}`)
+        const response = await axios.get(`https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid}&token=${token}`)
         let customer_detail = response.data.data
         dispatch(setapidata(customer_detail))
     };
-
 
 
 
@@ -47,7 +46,7 @@ function DEBITLST() {
 
 
     const credit = (id, amount) => {
-        // dispatch(setdueamount(amount))
+        dispatch(setdueamount(amount))
         navigate(`/credit/${id}`)
     }
 
@@ -58,7 +57,7 @@ function DEBITLST() {
             if (iteam.amount == 0 && iteam.debits[0]) {
                 alert(iteam.id)
                 let formData = new FormData();
-                formData.append("owner_id", owner_id)
+                formData.append("owner_id", ownerid)
                 formData.append("customer_id", iteam.id)
                 axios.post(`https://agaram.academy/api/retail/index.php?request=delete_debit&token=${token}`, formData).then(function (response) {
                 }
@@ -115,7 +114,6 @@ function DEBITLST() {
 
     return (
         <>
-        
             <Common />
 
 
@@ -151,9 +149,8 @@ function DEBITLST() {
                 </tbody>
             </table >
         </>
-        
     )
-                }
+}
 
 
 export default DEBITLST
