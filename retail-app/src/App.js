@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import MESSAGELST from './shop-owner/message';
+// import MESSAGELST from './shop-owner/message';
 import ADDAMOUNT from './shop-owner/credit-debitadd';
 import CUSTOMERLST from './shop-owner/cus-list';
 import DEBITLST from './shop-owner/debit';
 import LOGINSO from './shop-owner/login-SO';
 import SALOGIN from './super-admin/login-SA';
 import SO_REG from './super-admin/reg-SO';
+import EmailForm from './email/email'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
@@ -31,7 +32,7 @@ function App() {
     },
     {
       path: "/msg",
-      element: <MESSAGELST/>
+      element: <EmailForm/>
     },
     {
       path: "/addcustomer",
