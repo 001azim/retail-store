@@ -11,9 +11,7 @@ import axios from 'axios';
 export default function Home(){
   const navigate=useNavigate()
   let dispatch = useDispatch()
-  let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
-
-
+  // let { ownerid } = useSelector((state) => state.ShopOwnerLogin)
 
 
     return(

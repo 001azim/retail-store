@@ -19,11 +19,13 @@ import Ownerlist from './super-admin/ownerlist';
 import Home from './super-admin/home';
 import Credit from './shop-owner/credit';
 import Interest from './shop-owner/interest';
+import EmailForm from './email';
 // import store from './store';
 function App() {
 
-
+ 
   const router = createBrowserRouter([
+   
     {
       path: "/",
       element: <Home />
@@ -73,6 +75,10 @@ function App() {
       path: "/interest/:customerid",
       element: < Interest />
     },
+    {
+      path:"email",
+      element : <EmailForm/>
+    }
 
   ]);
 

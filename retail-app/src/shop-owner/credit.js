@@ -7,15 +7,20 @@ import { useParams } from 'react-router';
 import Logout from '../components/logOut'
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { setOwnerId } from '../slices/shopOwnerLoginSlice';
 import { setcreditdetails } from '../slices/customerSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 function Credit() {
 let token=localStorage.getItem("ownertoken")
-  const { credit_details } = useSelector((state) => state.customer)
+  const { credit_details,customer_id } = useSelector((state) => state.customer)
   const { customerid } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+
+
   function creditAmount() {
 
     let formData = new FormData();

@@ -12,7 +12,6 @@ const Contactus = () => {
   const [value, setValue] = React.useState("");
   const onChange = (event) => setValue(event.target.value);
   let apidata = useSelector((state) => state.customer.apidata)
-  console.log(apidata)
   let [isdisplay,setisdisplay] = useState(false);
 
   React.useLayoutEffect(() => {

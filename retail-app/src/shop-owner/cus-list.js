@@ -14,28 +14,19 @@ import Logout from '../components/logOut';
 import { setOwnerId } from '../slices/shopOwnerLoginSlice';
 
 function CUSTOMERLST() {
-  // let [isuser, setisuser] = useState(false)
   let ownerid = useSelector((state) => state.ShopOwnerLogin.ownerid)
   const [query, setQuery] = useState("")
   const dispatch = useDispatch()
   let apidata = useSelector((state) => state.customer.apidata)
   const navigate = useNavigate()
-  // let owner_id = ownerid.data.id
 
-
+// search bar
   const filteredItems = useMemo(() => {
     return apidata.filter(item => {
       return item.name.toLowerCase().includes(query.toLowerCase())
     })
   }, [apidata, query])
 
-
-
-
-
-
-
- 
   const [debit, setdebit] = useState([]);
 
 
@@ -51,23 +42,36 @@ function CUSTOMERLST() {
 
 
   const adddue = (id) => {
-
     navigate(`/adddebit/${id}`)
-
-
   }
 
 
+  useEffect(() => {
+    let token = localStorage.getItem("ownertoken")
+    if(ownerid?.data?.id && token){
+      axios({
+        method: 'get',
+        url: `https://agaram.academy/api/retail/index.php?request=getAllCustomers&owner_id=${ownerid.data.id}&token=${token}`,
+  
+      })
+        .then(function (response) {
+          console.log(response)
+          dispatch(setapidata(response.data.data))
+          console.log(apidata)
+          console.log(response.data.email)
+  
+        })
 
-  // function Onreload() {
-  //   let token = localStorage.getItem("ownertoken")
-  //     axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
-  //       .then(function (response) {
-  //         console.log("checking api",response.data)
-  //       })
-  // }
+    }else if( token){
+      axios.post(`https://agaram.academy/api/retail/index.php?request=getShopOwnerDetailsByToken&token=${token}`)
+      .then(function (response) {
+        console.log("checking datas:", response.data)
+        dispatch(setOwnerId(response.data))
 
-
+      })
+    }
+  }, [ownerid.data])
+  
 
 
  
@@ -150,7 +154,6 @@ function CUSTOMERLST() {
           </tbody>
         </Table>
         <Logout />
-        {/* <button onClick={()=>Onreload()}>api</button> */}
       </div>
     </>
   );

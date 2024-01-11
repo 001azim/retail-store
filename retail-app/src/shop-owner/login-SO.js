@@ -12,9 +12,6 @@ function LOGINSO() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     let { userLogin, userstatus, ownerid } = useSelector((state) => state.ShopOwnerLogin)
-    console.log(userstatus)
-    console.log(ownerid)
-
     function alldata() {
         let formdata = new FormData()
         formdata.append("email", userLogin.email)
@@ -25,7 +22,6 @@ function LOGINSO() {
                 dispatch(setOwnerId(response.data))
                 dispatch(setStatus(true))
                 localStorage.setItem('ownertoken', response.data.token)
-
                 navigate("/customerlist")
             } else {
                 navigate("/ShopOwnerLogin")

@@ -15,7 +15,6 @@ import "../css/login-SA.css"
 function SALOGIN(){
     
 const login=useSelector((state)=>state.user.loginValue)
-console.log(login)
 const Navigate=useNavigate()
 const dispatch=useDispatch()
     
@@ -23,7 +22,6 @@ const dispatch=useDispatch()
         let formData=new FormData()
         formData.append("email",login.email)
         formData.append("password",login.password)
-        console.log(formData)
         
         const getdata=()=>{
 
@@ -31,7 +29,6 @@ const dispatch=useDispatch()
         axios.post('https://agaram.academy/api/retail/index.php?request=super_admin_login',formData)
 
         .then(function(response){
-            console.log(response)
             
                 if(response.data.status=="success"){
 

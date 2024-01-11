@@ -5,7 +5,7 @@ import React from 'react';
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { updateDetails } from '../slices/registerSlice';
-// import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import '../css/reg-SO.css';
 import Navbar from 'react-bootstrap/Navbar';
@@ -15,8 +15,11 @@ function SO_REG() {
     const dispatch = useDispatch();
 
     let { ownerDetails } = useSelector((state) => state.register);
+    let { ownlist } = useSelector((state) => state.user)
+    let [mail, existMail] = useState([]);
     const Change = (e) => {
-        const value = e.target.value;
+        const value = (e.target.value);
+
         dispatch(updateDetails({
             ...ownerDetails,
             [e.target.name]: value
@@ -24,7 +27,7 @@ function SO_REG() {
 
     };
 
-    // let [error, seterror] = useState({})
+    let [error, seterror] = useState({})
 
 
     const register = () => {
@@ -42,24 +45,26 @@ function SO_REG() {
         formData.append("pincode", ownerDetails.pincode)
         formData.append("shop_name", ownerDetails.shop_name)
 
-        console.log(formData)
 
-        axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
-            console.log(response)
+        let error = false
+        {Object.entries(ownerDetails).map(([key, value]) => {
+            if (value == "") {
+                    alert("enter values of", key)
+                    error = true
+                }
 
-            if (response.data.status == "success") {
-                navigate("/ShopOwnerLogin");
+                if (error == false) {
+                    axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
+
+                        if (response.data.status == "success") {
+                            navigate("/shopownerlogin");
+                        }
+                    })
+                }
             }
-            else {
-                alert("Enter valid inputs")
-            }
-
-        })
-    }
-
-
-
-
+            )
+        }
+    };
 
     return (
         <>
