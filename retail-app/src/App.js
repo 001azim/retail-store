@@ -31,7 +31,7 @@ function App() {
     {
       path: "/msg",
       element: <MESSAGELST />
-    },
+    },                                                                                                                                              
     {
       path: "/addcustomer",
       element: <ADDAMOUNT />
