@@ -59,6 +59,7 @@ function CUSTOMERLST() {
 
     })
       .then(function (response) {
+        console.log(response)
         dispatch(setapidata(response.data.data))
      
         

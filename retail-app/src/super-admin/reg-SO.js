@@ -54,10 +54,10 @@ function SO_REG() {
                 }
 
                 if (error == false) {
-                    axios.post('https://agaram.academy/api/retail/index.php?request=create_shopowner', formData).then(function (response) {
+                    axios.post('https://gnanlinrenishagr.pythonanywhere.com/register', formData).then(function (response) {
 
                         if (response.data.status == "success") {
-                            navigate("/shopownerlogin");
+                            // navigate("/shopownerlogin");
                         }
                     })
                 }

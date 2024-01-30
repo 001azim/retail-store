@@ -26,9 +26,6 @@ function Credit() {
     formData.append("amount", credit_details.credit_amount)
     formData.append("due_date", "")
     formData.append("type", "credit")
-
-
-
     if (credit_details.credit_date.trim() != 0 && credit_details.credit_amount != 0) {
       setisdisable(true)
       axios.post(`https://agaram.academy/api/retail/index.php?request=create_debit&token=${token}`, formData).then(function (response) {
@@ -86,7 +83,6 @@ function Credit() {
                     e.target.value = 0
                   }
                 }}
-              // onKeyUp={(e) => dispatch(setcreditdetails({ ...credit_details, credit_amount: e.target.value }))}
               />
             </InputGroup>
             <Button Class="submit" variant="primary" disabled={isdisable} onClick={() => creditAmount()}>submit</Button>
